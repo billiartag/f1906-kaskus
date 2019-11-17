@@ -238,7 +238,7 @@
 				<div class="row">
 				  <div class="col-md-12 ">
 					<div class="thumbnail ">
-					 <img src="{{ URL::to('/kaskustv.png') }}" style='width: 100%;height: 20px;'>
+					 <a href="https://tv.kaskus.co.id"><img src="{{ URL::to('/kaskustv.png') }}" style='width: 100%;height: 20px;'></a>
 					  <div class="caption">
 						<p> <video width="330" height="220" controls>
 							  <source src="Shaun Martin - Yellow Jacket (7 Summers).mp4" type="video/mp4">
