@@ -15,11 +15,8 @@
     </style>
 </head>
 <body>
-    {{-- @extends('layouts.navbar') --}}
-    @yield("isi")
- 
+    @yield("isi") 
 </head>
 <body>
-    @extends('layouts.navbar')
 </body>
 </html>
