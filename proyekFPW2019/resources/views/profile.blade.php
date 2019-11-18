@@ -1,7 +1,7 @@
 @extends('layouts.page')
 @section('judul_page',"Home | Kaskus")
 
-@section('konten')
+@section('isi')
 <style type='text/css'>
     #jumlah{
         font-size: 20px;

@@ -33,3 +33,5 @@ Route::get('/daftar', [
 ]);
 
 Route::view("/post","post");
+Route::view("/createpost","createpost");
+Route::view("/profile","profile");
