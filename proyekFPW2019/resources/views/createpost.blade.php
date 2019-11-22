@@ -1,6 +1,15 @@
-@extends('layouts.page')
+{{-- @extends('layouts.page')
 @section('judul_page',"Create Post | Kaskus")
-@section('isi')
+@section('isi') --}}
+
+
+<link   href="{{ asset ('css/bootstrap.min.css') }}" rel="stylesheet">
+<link   href="{{ asset ('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+<link   href="{{ asset ('css/mystyle.css') }}" rel="stylesheet" type="text/css">
+<link   href="{{ asset ('css/summernote-bs4.css') }}" rel="stylesheet">
+<script src ="{{ asset ('js/jquery.js') }}"></script>
+<script src ="{{ asset ('js/bootstrap.min.js') }}"></script>
+<script src ="{{ asset ('js/jquery.dataTables.min.js') }}"></script>	
 	<div class="container">
 		<div style="width:40%;height:75%;position:absolute;margin-left:5%;background-color:white">
 			<div class="container mt-3">
@@ -378,4 +387,4 @@
 		</div>
 		
   </div>
-@endsection
+{{-- @endsection --}}
