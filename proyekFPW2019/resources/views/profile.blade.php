@@ -18,7 +18,7 @@
         left:0;
         bottom:0;
         position: absolute;
-        margin-left : 5%;
+        margin-left : 6%;
         margin-bottom : 2%;
     }
 </style>
@@ -30,30 +30,44 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-12" style='height:auto;border:1px solid black;'>
+                    <div class="container bg-dark" style="height:280px;padding:2%;margin-top:1.5%;">
+                        <div class="row" >
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-10">
 
-                    <div class="row" style='height:220px;background-color:greenyellow;'>
-                        <div class="row">
-                            <div class="col-md-10"></div>
-                            <div class="col-md-2">
-                                <button class='btn btn-primary' style='margin:2%;'>Ubah Background</button>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class='btn btn-sm btn-outline-primary' style='margin:4%;'>Ubah Background</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <hr style='font-weight:bold;'>
-                    
-                    <div class="col-md-2 col-md-push-3">
-                        <h4>User</h4> Kaskuser
-                        <p id='followerUser'></p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-2">
+                                <h4>User</h4> Kaskuser
+                                <p id='followerUser'></p>
+                            </div>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-2">
+                                <button class="btn btn-md btn-outline-primary" style='margin:2%;'>Show QR Code</button>
+                            </div>
+
+                            <div class="col-md-2">
+                                <button class="btn btn-md btn-outline-primary" style='margin:2%;'>Edit profile</button>
+                            </div>
+
+                        </div>
                     </div>
                     
-                    <div class="col-md-2 col-md-push-6">
-                        <button class="btn btn-lg btn-info" style='margin:2%;'>Show QR Code</button>
-                    </div>
                     
-                    <div class="col-md-2 col-md-push-6">
-                        <button class="btn btn-lg btn-info" style='margin:2%;'>Edit profile</button>
-                    </div>
-                    <img src='https://upload.wikimedia.org/wikipedia/commons/c/c4/Surabaya_Montage_2.jpg' id='fotoProfil' class='img-circle'>
+                    
+                    
+                    <img src='https://upload.wikimedia.org/wikipedia/commons/c/c4/Surabaya_Montage_2.jpg' id='fotoProfil' class="rounded-circle">
                 </div>
             </div>
         </div>
