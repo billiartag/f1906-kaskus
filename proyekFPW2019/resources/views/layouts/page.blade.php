@@ -8,12 +8,11 @@
     {{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"> --}}
-      
 	<link   href="{{ asset ('css/bootstrap.min.css') }}" rel="stylesheet">
 	<link   href="{{ asset ('css/jquery.dataTables.min.css') }}" rel="stylesheet">
 	<link   href="{{ asset ('css/mystyle.css') }}" rel="stylesheet" type="text/css">
 
-	<script src ="{{ aexi) }}"></script>
+	<script src ="{{ asset ('js/jquery.js') }}"></script>
 	<script src ="{{ asset ('js/bootstrap.min.js') }}"></script>
 	<script src ="{{ asset ('js/jquery.dataTables.min.js') }}"></script>	
     <style>
