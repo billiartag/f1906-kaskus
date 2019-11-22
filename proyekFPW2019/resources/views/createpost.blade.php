@@ -6,11 +6,12 @@
 	<link   href="{{ asset ('css/bootstrap.min.css') }}" rel="stylesheet">
 	<link   href="{{ asset ('css/jquery.dataTables.min.css') }}" rel="stylesheet">
 	<link   href="{{ asset ('css/mystyle.css') }}" rel="stylesheet" type="text/css">
-
+	<link   href="{{ asset ('css/summernote-bs4.css') }}" rel="stylesheet">
 	<script src ="{{ asset ('js/jquery.js') }}"></script>
 	<script src ="{{ asset ('js/bootstrap.min.js') }}"></script>
 	<script src ="{{ asset ('js/jquery.dataTables.min.js') }}"></script>	
 <head>
+
 {{ Form::open(array('url' => 'dashboard')) }}
 	<nav class="navbar navbar-default" style="background-color:white">
 		<div class="container-fluid">
@@ -48,12 +49,12 @@
 		</nav>
 	<div class="navbar navbar-default" style="margin-top:-20px;height:10px ;background-color: #1998ed;">
 		 <ul class="nav navbar-nav ">
-				<li class="dropdown" style="margin-left:90px">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kategori <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">Separated link</a></li>
-					</ul>
-				</li>
+			<li class="dropdown" style="margin-left:90px">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kategori <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Separated link</a></li>
+				</ul>
+			</li>
 		</ul>
 		<ul class="nav navbar-nav" style="color:white;">
 			<li><a href="#" style="margin-right:10px;margin-left:25px;"><strong>STORY</strong></a></li>
@@ -70,14 +71,26 @@
 	</div>
 	<div class="container">
 		<div style="width:40%;height:75%;position:absolute;margin-left:5%;background-color:white">
-			<img src="{{ URL::to('/nama.jpg') }}" style='width: 100%; height: 65px;'>
+			<div class="container mt-3">
+			  <div class="media border p-3">
+				<img src="{{ URL::to('/pic.png') }}" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+				<div class="media-body">
+				  <h4>John Doe <small><i>Hari ini, 18:00</i></small></h4>
+				</div>
+			  </div>
+			</div>
 			<div class="form-group"style="width:100%;">
 				<input type="text" class="form-control" placeholder="Isi judul thread">
 			</div>
-			<div class="form-group">
-			  <textarea class="form-control" rows="18" placeholder="Mulai Menulis"></textarea>
-			</div>
-			<img src="{{ URL::to('/toolbar.jpg') }}" style='width: 100%; height: 30px;'>
+				<textarea id="summernote">
+			
+				</textarea>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+			<script src ="{{ asset ('js/summernote-bs4.js') }}"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+			<script>
+				$('#summernote').summernote();
+			</script>
 		</div>
 		<div style="width:20%;height:75%;position:absolute;margin-top:-1%;margin-left:50%;>
 			<a href="#"><span class="btn btn-info"><img src="https://s.kaskus.id/assets/web_1.0/images/ic-jualbeli.svg"> Mau Bikin Lapak? Klik dimari Gan!</span></a>
