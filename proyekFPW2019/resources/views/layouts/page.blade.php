@@ -57,28 +57,28 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
         </nav>
-    <div class="navbar navbar-default" style="margin-top:-20px;height:10px ;background-color: #1998ed;">
-            <ul class="nav navbar-nav ">
-                <li class="dropdown" style="margin-left:90px">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kategori <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </li>
-        </ul>
-        <ul class="nav navbar-nav" style="color:white;">
-            <li><a href="#" style="margin-right:10px;margin-left:25px;"><strong>STORY</strong></a></li>
-            <li><a href="#" style="margin-right:10px;"><strong>HOBBY</strong></a></li>
-            <li><a href="#" style="margin-right:10px;"><strong>GAMES</strong></a></li>
-            <li><a href="#" style="margin-right:10px;"><strong>ENTERTAINMENT</strong></a></li>
-            <li><a href="#" style="margin-right:10px;"><strong>FEMALE</strong></a></li>
-            <li><a href="#" style="margin-right:10px;"><strong>TECH</strong></a></li>
-            <li><a href="#" style="margin-right:10px;"><strong>AUTOMOTIVE</strong></a></li>
-            <li><a href="#" style="margin-right:10px;"><strong>SPORTS</strong></a></li>
-            <li><a href="#" style="margin-right:10px;"><strong>FOOD & TRAVEL</strong></a></li>
-            <li><a href="#"><strong>NEWS</strong></a></li>              
-        </ul>
-    </div>
+        <div class="navbar navbar-default" style="margin-top:-20px;height:10px ;background-color: #1998ed;">
+		 <ul class="nav navbar-nav ">
+				<li class="dropdown" style="margin-left:90px">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white"role="button" aria-haspopup="true" aria-expanded="false">Kategori <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Separated link</a></li>
+					</ul>
+				</li>
+		</ul>
+		<ul class="nav navbar-nav" style="color:white;">
+			<li><a href="#" style="margin-right:10px;margin-left:25px; "><strong style="color:white">STORY</strong></a></li>
+			<li><a href="#" style="margin-right:10px;"><strong style="color:white">HOBBY</strong></a></li>
+			<li><a href="#" style="margin-right:10px;"><strong style="color:white">GAMES</strong></a></li>
+			<li><a href="#" style="margin-right:10px;"><strong style="color:white">ENTERTAINMENT</strong></a></li>
+			<li><a href="#" style="margin-right:10px;"><strong style="color:white">FEMALE</strong></a></li>
+			<li><a href="#" style="margin-right:10px;"><strong style="color:white">TECH</strong></a></li>
+			<li><a href="#" style="margin-right:10px;"><strong style="color:white">AUTOMOTIVE</strong></a></li>
+			<li><a href="#" style="margin-right:10px;"><strong style="color:white">SPORTS</strong></a></li>
+			<li><a href="#" style="margin-right:10px;"><strong style="color:white">FOOD & TRAVEL</strong></a></li>
+			<li><a href="#"><strong style="color:white">NEWS</strong></a></li>              
+		</ul>
+	</div>
     {{ Form::close() }}
     @yield("isi") 
 </head>
