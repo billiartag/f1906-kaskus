@@ -8,8 +8,9 @@
         color:aqua;
     }
     #gambarMejeng{
-        height:100%;
-        width:100%;
+        margin : 5%;
+        height:70px;
+        width:70px;
         border : 1px solid black;
     }
     #fotoProfil{
@@ -76,7 +77,7 @@
                 <!-- profil 1 -->
                 <div class="col-md-12" style='border:1px solid black;'>
                     <div class="row">
-                        <div class="col-md-10" style='margin:2%;width:98%;'>
+                        <div class="col-md-12">
                             <br><br>
                             <hr>
                             <div class="row">
@@ -123,9 +124,9 @@
                 <div class="col-md-12" style='border:1px solid black;margin-top:6%;'>
                     <h3>Aktif Mejeng di </h3>
                     <hr>
-                        <div class="row" style='height:45px;'>
-                            <div class="col-md-3" style='height:45px;'>
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Surabaya_Montage_2.jpg" class="img-circle" id='gambarMejeng'>
+                        <div class="row" style='height:auto;'>
+                            <div class="col-md-3" style='height:auto;'>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Surabaya_Montage_2.jpg" class="rounded-circle" id='gambarMejeng'>
                                 </div>
                             <div class="col-md-9 align-middle" style='height:50px;'>
                                 <h4>Surabaya</h4>
@@ -149,11 +150,4 @@
 
 
 </div>
-
-
-
-      
-
-
-
 @endsection
