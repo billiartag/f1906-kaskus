@@ -1,18 +1,9 @@
-<html lang="en">
-<head>
-<link rel="icon" href="images/favicon.ico" type="image/ico">
-<meta charset="utf-8">
-	<title>KASKUS - Berbagi Hobi,Berkomunitas</title>
-	<link   href="{{ asset ('css/bootstrap.min.css') }}" rel="stylesheet">
-	<link   href="{{ asset ('css/jquery.dataTables.min.css') }}" rel="stylesheet">
-	<link   href="{{ asset ('css/mystyle.css') }}" rel="stylesheet" type="text/css">
 
-	<script src ="{{ asset ('js/jquery.js') }}"></script>
-	<script src ="{{ asset ('js/bootstrap.min.js') }}"></script>
-	<script src ="{{ asset ('js/jquery.dataTables.min.js') }}"></script>	
-<head>
+@extends('layouts.page')
+@section('judul_page',"Daftar | Kaskus")
+@section('isi')
 {{ Form::open(array('url' => 'daftar')) }}
-<div class="row">
+{{-- <div class="row">
 	<div class="col-md-12">
 		<div class="modal" tabindex="-1" role="dialog">
 		  <div class="modal-dialog" role="document">
@@ -34,5 +25,30 @@
 		  </div>
 		</div>
 	</div>
+</div> --}}
+<style>
+.kotak{
+	background-color: white;
+	padding:20px;
+	border-radius: 3px;
+}
+</style>
+<div id="container" class="container">
+	<div class="col-md-3"></div>
+	<div class="col-md-6 kotak">
+		<p>
+		<h2>Daftar</h2>
+		<p class="text-danger">Semua field harus diisi untuk membuat akun.</p>	
+		</p>
+			{{Form::label("u","Username")}}<br>
+			{{Form::text("username","",array("class"=>"form-control"))}}<br>
+			{{Form::label("p","Password")}}<br>
+			{{Form::password("password",array("class"=>"form-control"))}}<br>
+			{{Form::label("cp","Confirm Password")}}<br>
+			{{Form::password("cpassword",array("class"=>"form-control"))}}<br>
+			{{Form::submit("Daftar",array("class"=>"form-control btn-primary"))}}
+	</div>
+	<div class="col-md-3"><div>
 </div>
 {{ Form::close() }}
+@endsection
