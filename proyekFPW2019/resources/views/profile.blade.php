@@ -1,4 +1,4 @@
-@extends('layouts.page')
+@extends('layouts.pageUser')
 @section('judul_page',"Home | Kaskus")
 
 @section('isi')

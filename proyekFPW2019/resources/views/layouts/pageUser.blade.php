@@ -42,9 +42,9 @@
 				</form>
 			</div>
 			<ul class="nav navbar-nav" style="margin-top:10px">
-				<li ><p class="navbar-text">BUAT THREAD</p></li>
+			<li ><p class="navbar-text"><a href="{{url('/createpost	')}}">BUAT THREAD</a></p></li>
 				<li><button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span>	</button></li>
-				<li><a href="#" data-toggle="modal" data-target="#exampleModal"><strong>MASUK</strong></a></li>
+			<li><a href="{{url('/profile')}}" style="display:inline"><img src="{{URL::to('/profile.jpg')}}" style="height:45px;width:45px"></a></li>
 			</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
