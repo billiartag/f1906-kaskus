@@ -1,4 +1,4 @@
-@extends('layouts.page')
+@extends('layouts.pageUser')
 @section('judul_page',"Home | Kaskus")
 
 @section('isi')
@@ -26,50 +26,39 @@
 <div class="row" >
     <div class="col-md-2"></div>
     <!-- isi konten -->
-    <div class="col-md-8" >
-        <!-- FOTO -->
+    <div class="col-md-8" > 
         <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-12" style='height:auto;border:1px solid black;'>
-                    <div class="container bg-dark" style="height:280px;padding:2%;margin-top:1.5%;">
-                        <div class="row" >
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-10">
-
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button class='btn btn-sm btn-outline-primary' style='margin:4%;'>Ubah Background</button>
-                                    </div>
+            <div class="col-md-12" style='border:1px solid black;'>
+                <div class="col-md-12" style="height:280px;padding:2%;margin-top:1.5%; background-color:black">
+                    <div class="row" >
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-10">
+                                </div>
+                                <div class="col-md-2">
+                                    <button class='btn btn-sm btn-outline-primary'>Ubah Background</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <hr style='font-weight:bold;'>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-3"></div>
-                            <div class="col-md-2">
-                                <h4>User</h4> Kaskuser
-                                <p id='followerUser'></p>
-                            </div>
-                            <div class="col-md-3"></div>
-                            <div class="col-md-2">
-                                <button class="btn btn-md btn-outline-primary" style='margin:2%;'>Show QR Code</button>
-                            </div>
-
-                            <div class="col-md-2">
-                                <button class="btn btn-md btn-outline-primary" style='margin:2%;'>Edit profile</button>
-                            </div>
-
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <img src='https://upload.wikimedia.org/wikipedia/commons/c/c4/Surabaya_Montage_2.jpg' id='fotoProfil' class="rounded-circle">
                 </div>
+                <hr style='font-weight:bold;'>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-1" style="margin-left:20px">
+                            <h4>User</h4> Kaskuser
+                            <p id='followerUser'></p>
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-5">
+                            <button class="btn btn-md btn-outline-primary" style='margin:2%;margin-left:30px'>Show QR Code</button>
+                            <button class="btn btn-md btn-outline-primary" style='margin:2%;margin-left:40px'>Edit profile</button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+                <img src='https://upload.wikimedia.org/wikipedia/commons/c/c4/Surabaya_Montage_2.jpg' id='fotoProfil' class="rounded-circle">
             </div>
         </div>
         <div class="row">
@@ -145,9 +134,5 @@
         
     </div>
     <div class="col-md-2"></div>
-    
-
-
-
 </div>
 @endsection

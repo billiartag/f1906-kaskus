@@ -11,7 +11,6 @@
         margin-bottom: 25px;
     }
     #kontainer_kiri{
-        width: 60%
     }
     #reply-box{
         background-color: #484848
@@ -29,14 +28,14 @@
         margin-right: 5px;
     }
 </style>
-    <div id="kontainer-besar" class="row">
-        <div class="col-2"></div>
-        <div id="kontainer_kiri" class="col-5">            
+    <div id="kontainer-besar" class="row container">
+        <div class="col-md-2"></div>
+        <div id="kontainer_kiri" class="col-md-7">            
             <div name="kontainer-thread" class="kotak mx-auto">
                 <div id="poster_thread" class="small d-inline">
                     <p>
-                        <img src="https://i.pravatar.cc/50" id="gambar_poster" class="float-left rounded-circle">
-                        <span class="float-right">
+                        <img src="https://i.pravatar.cc/50" id="gambar_poster" class="pull-left img-circle">
+                        <span class="pull-right">
                             <span id="report_thread"><a href="#"><i class="material-icons">menu</i></a></span>
                         </span>
                         <span>
@@ -70,15 +69,15 @@
                 </div>
                 <div class="post_liker">
                     <span>
-                        <img src="https://i.pravatar.cc/20" class="rounded-circle">
-                        <img src="https://i.pravatar.cc/21" class="rounded-circle">
-                        <img src="https://i.pravatar.cc/19" class="rounded-circle">
+                        <img src="https://i.pravatar.cc/20" class="img-circle">
+                        <img src="https://i.pravatar.cc/21" class="img-circle">
+                        <img src="https://i.pravatar.cc/19" class="img-circle">
                         <span>Liked this</span>
                     </span>
                 </div>
                 <hr>
                 <div class="post_footer">
-                        <div class="interact float-right">
+                        <div class="interact pull-right">
                             <a href="">Kutip</a>
                             <a href="">Balas</a>
                         </div>
@@ -100,10 +99,10 @@
                 <div id="post1" class="">
                     <div id="poster_reply" class="small d-inline">
                         <p>
-                            <img src="https://i.pravatar.cc/49" id="gambar_poster" class="float-left rounded-circle">
-                            <span class="float-right">
+                            <img src="https://i.pravatar.cc/49" id="gambar_poster" class="pull-left img-circle">
+                            <span class="pull-right">
                                 <span id="nomor_reply"><a href="#">#1</a></span>
-                                <span id="report_reply"><a href="#" class="float-right"><i class="material-icons">menu</i></a></span>
+                                <span id="report_reply"><a href="#" class="pull-right"><i class="material-icons">menu</i></a></span>
                             </span>
                             <span>
                                 <span id="nama_reply" class="nama"><a href="#">Nama poster</a></span>
@@ -123,13 +122,13 @@
                     </div>
                     <div class="post_liker">
                         <span>
-                            <img src="https://i.pravatar.cc/22" class="rounded-circle">
+                            <img src="https://i.pravatar.cc/22" class="img-circle">
                             <span>Liked this</span>
                         </span>
                     </div>
                     <hr>
                     <div class="post_footer">
-                            <div class="interact float-right">
+                            <div class="interact pull-right">
                                 <a href="">Kutip</a>
                                 <a href="">Balas</a>
                             </div>
@@ -144,10 +143,10 @@
                 </div>
             </div>
         </div>
-        <div id="kontainer_kanan" class="col-3">
+        <div id="kontainer_kanan" class="col-md-3">
             <div id="kontainer_kategori" class="kotak">
                 <span>
-                    <i class="material-icons float-left">emoji_food_beverage</i>
+                    <i class="material-icons pull-left">emoji_food_beverage</i>
                     <h4>The Lounge</h4>
                 </span>
                 <p>
@@ -159,23 +158,23 @@
             </div>
             <div id="kontainer_rekomendasi" class="kotak">
                 <span>
-                    <i class="material-icons float-left">thumb_up</i>
+                    <i class="material-icons pull-left">thumb_up</i>
                     <h4>Thread Rekomendasi</h4>
                 </span>
                 <div class="post_rekomen">
-                    <img src="https://picsum.photos/60" class="float-right">
+                    <img src="https://picsum.photos/60" class="pull-right">
                     <p>Judul rekomendasi</p>
                     <a href="#">The Lounge</a>  
                     <br>   
                 </div><hr>
                 <div class="post_rekomen">
-                    <img src="https://picsum.photos/61" class="float-right">
+                    <img src="https://picsum.photos/61" class="pull-right">
                     <p>Judul rekomendasi</p>
                     <a href="#">Komputer</a>  
                     <br>   
                 </div><hr>
                 <div class="post_rekomen">
-                    <img src="https://picsum.photos/59" class="float-right">
+                    <img src="https://picsum.photos/59" class="pull-right">
                     <p>Judul rekomendasi</p>
                     <a href="#">The Lounge</a>  
                     <br>   
@@ -183,23 +182,23 @@
             </div>
             <div id="kontainer_hot" class="kotak">
                 <span>
-                    <i class="material-icons float-left">fireplace</i>
+                    <i class="material-icons pull-left">fireplace</i>
                     <h4>Thread Hot!</h4>
                 </span>
                 <div class="post_hot">
-                    <img src="https://picsum.photos/60" class="float-right">
+                    <img src="https://picsum.photos/60" class="pull-right">
                     <p>Judul hot1</p>
                     <a href="#">The Lounge</a>  
                     <br>   
                 </div><hr>
                 <div class="post_hot">
-                    <img src="https://picsum.photos/61" class="float-right">
+                    <img src="https://picsum.photos/61" class="pull-right">
                     <p>Judul hot2</p>
                     <a href="#">Surabaya</a>  
                     <br>   
                 </div><hr>
                 <div class="post_hot">
-                    <img src="https://picsum.photos/59" class="float-right">
+                    <img src="https://picsum.photos/59" class="pull-right">
                     <p>Judul hot3</p>
                     <a href="#">Jakarta</a>  
                     <br>   
@@ -208,20 +207,18 @@
             <div id="kontainer_moderator" class="kotak">
                 <h4>Moderator</h4>
                 <span class="kategori_mod">
-                    <img src="https://picsum.photos/15" class="rounded-circle">
+                    <img src="https://picsum.photos/15" class="img-rounded">
                     Admin
                 </span>
                 <span class="kategori_mod">
-                    <img src="https://picsum.photos/14" class="rounded-circle">
+                    <img src="https://picsum.photos/14" class="img-rounded">
                     Peter
                 </span>
                 <span class="kategori_mod">
-                    <img src="https://picsum.photos/13" class="rounded-circle">
+                    <img src="https://picsum.photos/13" class="img-rounded">
                     Amaaank
                 </span>
             </div>
         </div>
-        
-        <div class="col-2"></div>
     </div>
 @endsection

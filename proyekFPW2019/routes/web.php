@@ -31,7 +31,9 @@ Route::get('/dashboard', [
 Route::get('/daftar', [
 	'uses' => 'GuestController@daftar'
 ]);
+Route::get('/profile', [
+	'uses' => 'UserController@toProfile'
+]);
 
 Route::view("/post","post");
 Route::view("/createpost","createpost");
-Route::view("/profile","profile");
