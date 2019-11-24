@@ -18,11 +18,6 @@ class GuestController extends BaseController
 		return view("dashboard");  
 	}
 	
-	public function dashboard() 
-	{
-		return view("dashboard");
-	}
-
 	public function story() 
 	{
 		return view("story");
@@ -51,5 +46,27 @@ class GuestController extends BaseController
 			$negara_user,$provinsi_user,$ctr_post,$join_date,$jabatan_user); 
 		}
 		return view("daftar");
+	}
+
+	public function dashboard(Request $request){
+		if($request->btnlogin)
+		{
+			$dbuser			= new user(); 
+			$username 		= $request->txtusername; 
+			$password 		= $request->txtpassword;
+			$jumbar 		= $dbuser->ceklogin($username,$password); 
+
+			if($jumbar == 0) {
+				$data['message'] = "gagal";
+				return view("daftar", $data);
+			}
+			else {
+				$data['message'] = "sukses"; 
+				return view("profile", $data);
+			}
+		}
+		else {
+			return view("dashboard");
+		}
 	}
 }

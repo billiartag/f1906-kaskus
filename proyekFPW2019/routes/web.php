@@ -18,15 +18,15 @@ Route::get('/', [
 Route::match(array('GET','POST'),'daftar',[
 	'uses' => 'GuestController@daftar'
 ]);
+Route::match(array('GET','POST'),'dashboard',[
+	'uses' => 'GuestController@dashboard'
+]);
 
 Route::get('/home', [
 	'uses' => 'GuestController@home'
 ]);
 Route::get('/story', [
 	'uses' => 'GuestController@story'
-]);
-Route::get('/dashboard', [
-	'uses' => 'GuestController@dashboard'
 ]);
 Route::get('/profile', [
 	'uses' => 'UserController@toProfile'

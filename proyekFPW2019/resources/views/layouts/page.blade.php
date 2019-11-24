@@ -21,7 +21,6 @@
     </style>
 </head>
 <body>
-    {{ Form::open(array('url' => 'dashboard')) }}
     <nav class="navbar navbar-default" style="background-color:white">
 		<div class="container-fluid">
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1;">
@@ -71,37 +70,36 @@
 			<li><a href="#"><strong style="color:white">NEWS</strong></a></li>              
 		</ul>
 	</div>
-	<div class="col-md-12 ">
-		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header" style="background-color:white">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<div class="col-md-6 ">
-							<h3 style="margin-top:50px;color:blue">Masuk</h3>
-						</div>
-						<div class="col-md-6" style="margin-top:40px;">
-							<a style="margin-top:50px;color:black">atau</a>
-						<a style="color:blue" href="{{url('/daftar')}}">Daftar</a>
-						</div>
+    {{ Form::open(array('url' => 'dashboard')) }}
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color:white">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<div class="col-md-6 ">
+						<h3 style="margin-top:50px;color:blue">Masuk</h3>
 					</div>
-					<div class="modal-body">
-						<h5>Username / email :</h5>
-						{{ Form::text('txtusername', '', ['class'=>'form-control', 'id'=>'txtusername']) }}	
-						<h5>Password:</h5>
-						{{ Form::text('txtpassword', '', ['class'=>'form-control', 'id'=>'txtpassword']) }}
-						<br><br>	
-						{{ Form::submit('Masuk', ['name'=>'btnmasuk', 'id'=>'btnlogin', 'class'=>'form-control btn btn-primary']) }}
-						<br><br>
-						<h5 style="color:blue;">Lupa Password?</h5>
+					<div class="col-md-6" style="margin-top:40px;">
+						<a style="margin-top:50px;color:black">atau</a>
+					<a style="color:blue" href="{{url('/daftar')}}">Daftar</a>
 					</div>
-					<div class="modal-footer" style="background-color:white">
-						<button type="button" class="btn btn-primary" >Facebook</button>
-						<button type="button" class="btn btn-primary">Google</button>
-						<button type="button" class="btn btn-primary">Twitter</button>
-					</div>
+				</div>
+				<div class="modal-body">
+					<h5>Username :</h5>
+					{{ Form::text('txtusername', '', ['class'=>'form-control', 'id'=>'txtusername']) }}	
+					<h5>Password:</h5>
+					{{Form::password("txtpassword",array("class"=>"form-control", 'id'=>'txtpassword'))}}
+					<br><br>	
+					{{ Form::submit('Masuk', ['name'=>'btnlogin', 'id'=>'btnlogin', 'class'=>'form-control btn btn-primary']) }}
+					<br><br>
+					<h5 style="color:blue;">Lupa Password?</h5>
+				</div>
+				<div class="modal-footer" style="background-color:white">
+					<button type="button" class="btn btn-primary" >Facebook</button>
+					<button type="button" class="btn btn-primary">Google</button>
+					<button type="button" class="btn btn-primary">Twitter</button>
 				</div>
 			</div>
 		</div>
