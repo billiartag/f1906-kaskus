@@ -11,6 +11,7 @@
         margin : 5%;
         height:70px;
         width:70px;
+        border-radius :100px 100px;
         border : 1px solid black;
     }
     #fotoProfil{
@@ -21,6 +22,7 @@
         position: absolute;
         margin-left : 6%;
         margin-bottom : 2%;
+        border-radius :100px 100px;
     }
 </style>
 <div class="row" >
@@ -71,17 +73,17 @@
                             <hr>
                             <div class="row">
                                 <div class="col-md-3 text-center">
-                                    <p id="jumlah">10</p>
+                                    <p id="jumlah" style="color:black">10</p>
                                     <p>Posts</p>
                                 </div>
                                 <div class="col-md-1"></div>
                                 <div class="col-md-3 text-center">
-                                    <p id="jumlah">10</p>
+                                    <p id="jumlah" style="color:black">10</p>
                                     <p>Mengikuti</p>
                                 </div>
                                 <div class="col-md-1"></div>
                                 <div class="col-md-3 text-center">
-                                    <p id="jumlah">10</p>
+                                    <p id="jumlah" style="color:black">10</p>
                                     <p>Pengikut</p>
                                 </div>
                             </div>
@@ -94,17 +96,17 @@
                     <hr>
                         <div class="row">
                             <div class="col-md-3 text-center">
-                                <p id="jumlah">10</p>
+                                <p id="jumlah" style="color:black">10</p>
                                 <p>Thread</p>
                             </div>
                             <div class="col-md-1"></div>
                             <div class="col-md-3 text-center">
-                                <p id="jumlah">10</p>
+                                <p id="jumlah" style="color:black">10</p>
                                 <p>Video</p>
                             </div>
                             <div class="col-md-1"></div>
                             <div class="col-md-3 text-center">
-                                <p id="jumlah">10</p>
+                                <p id="jumlah" style="color:black">10</p>
                                 <p>Lapak</p>
                             </div>
                         </div>
