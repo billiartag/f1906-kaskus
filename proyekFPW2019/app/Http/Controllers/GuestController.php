@@ -55,13 +55,14 @@ class GuestController extends BaseController
 			$username 		= $request->txtusername; 
 			$password 		= $request->txtpassword;
 			$jumbar 		= $dbuser->ceklogin($username,$password); 
-
+			
 			if($jumbar == 0) {
 				$data['message'] = "gagal";
 				return view("daftar", $data);
 			}
 			else {
 				$data['message'] = "sukses"; 
+				session()->put('namelogin',$username);
 				return view("profile", $data);
 			}
 		}
