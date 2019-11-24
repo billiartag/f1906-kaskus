@@ -38,15 +38,40 @@
 	<div class="col-md-6 kotak">
 		<p>
 		<h2>Daftar</h2>
-		<p class="text-danger">Semua field harus diisi untuk membuat akun.</p>	
+		<p class="text-danger">Perhatian, semua field harus diisi untuk membuat akun.</p>	
 		</p>
+			{{Form::label("labelemail","Email")}}<br>
+			{{Form::text("email","",array("class"=>"form-control"))}}<br>
 			{{Form::label("u","Username")}}<br>
 			{{Form::text("username","",array("class"=>"form-control"))}}<br>
 			{{Form::label("p","Password")}}<br>
 			{{Form::password("password",array("class"=>"form-control"))}}<br>
-			{{Form::label("labelemail","Email")}}<br>
-			{{Form::text("email","",array("class"=>"form-control"))}}<br>
 			{{Form::submit("Daftar",array("name"=>"btndaftar", "class"=>"form-control btn-primary"))}}
+		@if($errors->any())
+		<p>
+			<div class="alert alert-danger">
+				<ul>
+					@foreach ($errors->all() as $error)
+						<li>{{ $error }}</li>
+					@endforeach
+				</ul>
+			</div>
+		</p>
+		@endif
+		@if(Session::has('berhasil'))
+		<p>
+			<div class="alert alert-success">
+				{{Session::get("berhasil")}}
+			</div>
+		</p>
+		@endif
+		@if(Session::has('gagal'))
+		<p>
+			<div class="alert alert-danger">
+				{{Session::get("gagal")}}
+			</div>
+		</p>
+		@endif
 	</div>
 	<div class="col-md-3"><div>
 </div>

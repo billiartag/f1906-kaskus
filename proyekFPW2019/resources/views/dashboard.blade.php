@@ -1,4 +1,4 @@
-@extends('layouts.page')
+@extends(Session::has("namelogin")?"layouts/pageUser":"layouts/page")
 @section('judul_page',"KASKUS - Berbagi Hobi, Berkomunitas")
 @section('isi')
 {{ Form::open(array('url' => 'dashboard')) }}

@@ -11,6 +11,7 @@
 |
 */
 // Routing awal waktu buka localhost/TAMario/public
+//guest
 Route::get('/', [
 	'uses' => 'GuestController@index'
 ]);
@@ -28,9 +29,16 @@ Route::get('/home', [
 Route::get('/story', [
 	'uses' => 'GuestController@story'
 ]);
+//user
 Route::get('/profile', [
 	'uses' => 'UserController@toProfile'
 ]);
+Route::get('/logout', [
+	'uses' => 'UserController@logout'
+]);
+
+
 
 Route::view("/post","post");
 Route::view("/createpost","createpost");
+Route::view("/daftar","daftar");

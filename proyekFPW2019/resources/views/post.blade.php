@@ -1,5 +1,5 @@
 
-@extends('layouts.page')
+@extends(Session::has("namelogin")?"layouts/pageUser":"layouts/page")
 @section('judul_page',"Post | Kaskus")
 @section('isi')
 <style>
