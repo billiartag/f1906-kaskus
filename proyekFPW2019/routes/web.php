@@ -15,8 +15,8 @@ Route::get('/', [
 	'uses' => 'GuestController@index'
 ]);
 
-Route::match(array('GET','POST'),'register',[
-	'uses' => 'GuestController@register'
+Route::match(array('GET','POST'),'daftar',[
+	'uses' => 'GuestController@daftar'
 ]);
 
 Route::get('/home', [
@@ -27,9 +27,6 @@ Route::get('/story', [
 ]);
 Route::get('/dashboard', [
 	'uses' => 'GuestController@dashboard'
-]);
-Route::get('/daftar', [
-	'uses' => 'GuestController@daftar'
 ]);
 Route::get('/profile', [
 	'uses' => 'UserController@toProfile'

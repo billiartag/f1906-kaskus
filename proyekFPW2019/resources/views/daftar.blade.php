@@ -44,9 +44,9 @@
 			{{Form::text("username","",array("class"=>"form-control"))}}<br>
 			{{Form::label("p","Password")}}<br>
 			{{Form::password("password",array("class"=>"form-control"))}}<br>
-			{{Form::label("cp","Confirm Password")}}<br>
-			{{Form::password("cpassword",array("class"=>"form-control"))}}<br>
-			{{Form::submit("Daftar",array("class"=>"form-control btn-primary"))}}
+			{{Form::label("labelemail","Email")}}<br>
+			{{Form::text("email","",array("class"=>"form-control"))}}<br>
+			{{Form::submit("Daftar",array("name"=>"btndaftar", "class"=>"form-control btn-primary"))}}
 	</div>
 	<div class="col-md-3"><div>
 </div>
