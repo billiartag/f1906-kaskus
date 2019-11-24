@@ -13,7 +13,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="nav navbar-nav">
-								  <li><img src="{{ URL::to('/kaskus.png') }}" style='width: 40px;height: 40px;'></li>
+								  <li><img src="{{ URL::to('/kaskus.png') }}" style='width: 40px;height: 40px; border-radius :100px 100px;'></li>
 								  <li><a style="margin-right:10px;margin-bottom:10px;text-size:40px;"><strong>Obrolan Hangat</strong></a></li>
 								</div>
 							</div>
@@ -65,7 +65,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="nav navbar-nav">
-								  <li><img src="{{ URL::to('/kaskus.png') }}" style='width: 40px;height: 40px;'></li>
+								  <li><img src="{{ URL::to('/kaskus.png') }}" style='width: 40px;height: 40px;border-radius :100px 100px;'></li>
 								  <li><a style="margin-right:10px;margin-bottom:10px;text-size:40px;"><strong>Hot Threads</strong></a></li>
 								</div>
 							</div>
