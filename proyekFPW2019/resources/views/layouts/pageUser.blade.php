@@ -45,6 +45,7 @@
 			<li ><p class="navbar-text"><a href="{{url('/createpost	')}}">BUAT THREAD</a></p></li>
 				<li><button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span>	</button></li>
 			<li><a href="{{url('/profile')}}" style="display:inline"><img src="{{URL::to('/profile.jpg')}}" style="height:45px;width:45px"></a></li>
+			<li ><p class="navbar-text"><a href="{{url('/logout')}}">LOGOUT</a></p></li>
 			</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->

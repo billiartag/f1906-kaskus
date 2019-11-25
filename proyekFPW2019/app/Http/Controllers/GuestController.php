@@ -8,6 +8,8 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\User;
+use Session;
+use DB;
 
 class GuestController extends BaseController
 {
@@ -25,14 +27,28 @@ class GuestController extends BaseController
 	
 	public function daftar(Request $request) 
 	{
-		$data['error'] = "semua field harus diisi";
+		$request->validate([
+			"username"=>"required",
+			"password"=>"required",
+			"email"=>"required|email",
+		]);
 		if($request->btndaftar)
 		{
-			
+			//declare
 			$dbuser			= new user(); 
 			$username 		= $request->username; 
 			$password 		= $request->password;
 			$email	 		= $request->email; 
+			
+			//cek ada
+			$allUser=DB::table("users")->where("username",$username)->count();
+
+			//kalau ada
+			if($allUser>0){
+				Session::flash("gagal","Username sudah ada, gunakan username yang lain!");
+			}
+			else{
+			//kalau gaada
 			$nama			= "";
 			$nomor 			= "";
 			$jk_user 		= 0;
@@ -44,16 +60,12 @@ class GuestController extends BaseController
 			$ctr_post		= 0;
 			$join_date		= date('Y-m-d H:i:s');
 			$jabatan_user	= "";
-			if($dbuser->cekuser($username)!=0){
-				$dbuser->insertdata($username,$password,$email,$nama,$nomor,$tgl_lahir_user,$jk_user,$bio_profil,$alamat_user,
-				$negara_user,$provinsi_user,$ctr_post,$join_date,$jabatan_user); 
-				$data['error'] = null;
-			}
-			else{
-				$data ['error'] = "username sudah terpakai";
+			$dbuser->insertdata($username,$password,$email,$nama,$nomor,$tgl_lahir_user,$jk_user,$bio_profil,$alamat_user,
+			$negara_user,$provinsi_user,$ctr_post,$join_date,$jabatan_user); 
+			Session::flash("berhasil","Akun anda berhasil didaftarkan");
 			}
 		}
-		return view("daftar",$data);
+		return view("daftar");
 	}
 
 	public function dashboard(Request $request){
