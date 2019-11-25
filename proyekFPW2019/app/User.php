@@ -38,4 +38,7 @@ class user extends Model
             ->get()->count(); 
         return $query; 
     }
+    public function cekuser($username){
+        return user::where('username','=',$username)->count();
+    }
 }

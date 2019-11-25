@@ -38,7 +38,9 @@
 	<div class="col-md-6 kotak">
 		<p>
 		<h2>Daftar</h2>
-		<p class="text-danger">Semua field harus diisi untuk membuat akun.</p>	
+		@if($error !== null)
+		<p class="text-danger">{{$error}}</p>	
+		@endif
 		</p>
 			{{Form::label("u","Username")}}<br>
 			{{Form::text("username","",array("class"=>"form-control"))}}<br>

@@ -25,8 +25,10 @@ class GuestController extends BaseController
 	
 	public function daftar(Request $request) 
 	{
+		$data['error'] = "semua field harus diisi";
 		if($request->btndaftar)
 		{
+			
 			$dbuser			= new user(); 
 			$username 		= $request->username; 
 			$password 		= $request->password;
@@ -42,10 +44,16 @@ class GuestController extends BaseController
 			$ctr_post		= 0;
 			$join_date		= date('Y-m-d H:i:s');
 			$jabatan_user	= "";
-			$dbuser->insertdata($username,$password,$email,$nama,$nomor,$tgl_lahir_user,$jk_user,$bio_profil,$alamat_user,
-			$negara_user,$provinsi_user,$ctr_post,$join_date,$jabatan_user); 
+			if($dbuser->cekuser($username)!=0){
+				$dbuser->insertdata($username,$password,$email,$nama,$nomor,$tgl_lahir_user,$jk_user,$bio_profil,$alamat_user,
+				$negara_user,$provinsi_user,$ctr_post,$join_date,$jabatan_user); 
+				$data['error'] = null;
+			}
+			else{
+				$data ['error'] = "username sudah terpakai";
+			}
 		}
-		return view("daftar");
+		return view("daftar",$data);
 	}
 
 	public function dashboard(Request $request){
