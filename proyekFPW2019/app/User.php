@@ -4,11 +4,66 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class user extends Model
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+class User extends Authenticatable
 {
     public $table     = 'users';
     public $primaryKey   = 'username';
     public $timestamps = false;
+    
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'username',
+        'password',
+        'nama',
+        'email',
+        'nomor',
+        'jk_user',
+        'tgl_lahir_user',
+        'bio_profil',
+        'alamat_user',
+        'negara_user',
+        'provinsi_user',
+        'ctr_post',
+        'join_date',
+        'jabatan_user',
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+    
+    public function ceklogin($username,$password)
+    {
+        $query = user::select('users.username', 'users.password')
+            ->where('users.username', '=', $username)
+            ->where('users.password', '=', $password)
+            ->get()->count(); 
+        return $query; 
+    }
+    public function cekuser($username){
+        return user::where('username','=',$username)->count();
+    }
     
     public function insertdata($username,$password,$email,$nama,$nomor,$tgl_lahir_user,$jk_user,$bio_profil,$alamat_user,
     $negara_user,$provinsi_user,$ctr_post,$join_date,$jabatan_user)
@@ -29,16 +84,5 @@ class user extends Model
         $baru->join_date        = $join_date;
         $baru->jabatan_user     = $jabatan_user;
         $baru->save();
-    }
-    public function ceklogin($username,$password)
-    {
-        $query = user::select('users.username', 'users.password')
-            ->where('users.username', '=', $username)
-            ->where('users.password', '=', $password)
-            ->get()->count(); 
-        return $query; 
-    }
-    public function cekuser($username){
-        return user::where('username','=',$username)->count();
     }
 }

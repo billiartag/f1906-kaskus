@@ -25,6 +25,14 @@ class GuestController extends BaseController
 		return view("story");
 	}
 	
+	public function toDaftar(){
+		if(Auth::check()){
+			return view("profile");
+		}
+		else{
+			return view("register");
+		}
+	}
 	public function daftar(Request $request) 
 	{
 		$request->validate([

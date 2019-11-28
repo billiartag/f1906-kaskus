@@ -70,7 +70,7 @@
 			<li><a href="#"><strong style="color:white">NEWS</strong></a></li>              
 		</ul>
 	</div>
-    {{ Form::open(array('url' => 'dashboard')) }}
+    {{ Form::open(array('url' => 'login')) }}
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -83,7 +83,7 @@
 					</div>
 					<div class="col-md-6" style="margin-top:40px;">
 						<a style="margin-top:50px;color:black">atau</a>
-					<a style="color:blue" href="{{url('/daftar')}}">Daftar</a>
+					<a style="color:blue" href="{{url('/register')}}">Daftar</a>
 					</div>
 				</div>
 				<div class="modal-body">

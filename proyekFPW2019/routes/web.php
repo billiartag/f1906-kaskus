@@ -37,8 +37,20 @@ Route::get('/logout', [
 	'uses' => 'UserController@logout'
 ]);
 
+Route::get('/createpost', [
+	'uses' => 'UserController@newPost'
+]);
+
+Route::get('/daftar', [
+	'uses' => 'GuestController@toDaftar'
+]);
+
 
 
 Route::view("/post","post");
-Route::view("/createpost","createpost");
-Route::view("/daftar","daftar");
+// Route::view("/createpost","createpost");
+// Route::view("/daftar","daftar");
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
