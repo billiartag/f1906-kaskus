@@ -9,9 +9,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
-    public $table     = 'users';
-    public $primaryKey   = 'username';
-    public $timestamps = false;
+    protected $table     = 'users';
+    protected $primaryKey   = 'username';
+    protected $timestamps = false;
     
     /**
      * The attributes that are mass assignable.

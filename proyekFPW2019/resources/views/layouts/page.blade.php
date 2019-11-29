@@ -43,7 +43,7 @@
 			<ul class="nav navbar-nav" style="margin-top:10px">
 				<li ><p class="navbar-text">BUAT THREAD</p></li>
 				<li><button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span>	</button></li>
-				<li><a href="#" data-toggle="modal" data-target="#exampleModal"><strong>MASUK</strong></a></li>
+				<li><a href="/login"><strong>MASUK</strong></a></li>
 			</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
@@ -70,7 +70,8 @@
 			<li><a href="#"><strong style="color:white">NEWS</strong></a></li>              
 		</ul>
 	</div>
-    {{ Form::open(array('url' => 'login')) }}
+	<form method="POST" action="{{ route('login') }}">
+	@csrf
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -104,7 +105,7 @@
 			</div>
 		</div>
 	</div>
-    {{ Form::close() }}
+	</form>
     @yield("isi") 
 </head>
 <body>

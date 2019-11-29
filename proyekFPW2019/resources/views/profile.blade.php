@@ -30,7 +30,7 @@
     <!-- isi konten -->
     <div class="col-md-8" > 
         <div class="row">
-            <div class="col-md-12" style='border:1px solid black;'>
+            <div class="col-md-12" style='background-color:white;'>
                 <div class="col-md-12" style="height:280px;padding:2%;margin-top:1.5%; background-color:black">
                     <div class="row" >
                         <div class="col-md-12">
@@ -49,13 +49,15 @@
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-1" style="margin-left:20px">
-                            <h4>{{Auth::user()}}</h4> Kaskuser
+                            <h4>{{Auth::user()->nama}}</h4> Kaskuser
                             <p id='followerUser'></p>
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-5">
                             <button class="btn btn-md btn-outline-primary" style='margin:2%;margin-left:30px'>Show QR Code</button>
-                            <button class="btn btn-md btn-outline-primary" style='margin:2%;margin-left:40px'>Edit profile</button>
+                            <form action="/edit">
+                                <button class="btn btn-md btn-outline-primary" style='margin:2%;margin-left:40px'>Edit profile</button>
+                            </form>
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -91,7 +93,7 @@
                     </div>
                 </div>
                 <!-- profil 2 -->
-                <div class="col-md-12" style='border:1px solid black;margin-top:6%;'>
+                <div class="col-md-12" style='background-color:white;margin-top:6%;'>
                     <h3>Agan juga memiliki</h3>
                     <hr>
                         <div class="row">
@@ -112,7 +114,7 @@
                         </div>
                 </div>
                 <!-- profil 3 -->
-                <div class="col-md-12" style='border:1px solid black;margin-top:6%;'>
+                <div class="col-md-12" style='background-color:white;margin-top:6%;'>
                     <h3>Aktif Mejeng di </h3>
                     <hr>
                         <div class="row" style='height:auto;'>

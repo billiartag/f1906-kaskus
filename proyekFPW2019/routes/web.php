@@ -54,3 +54,7 @@ Route::view("/post","post");
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::view('/edit','edit_profile');
+
+Route::post('submit_edit','userController@update_data');
