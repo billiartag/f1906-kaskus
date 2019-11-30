@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\User;
+use App\modelpost;
 use Session;
 use DB;
 
@@ -43,7 +44,7 @@ class GuestController extends BaseController
 		if($request->btndaftar)
 		{
 			//declare
-			$dbuser			= new user(); 
+			$dbuser			= new User(); 
 			$username 		= $request->username; 
 			$password 		= $request->password;
 			$email	 		= $request->email; 
@@ -56,21 +57,21 @@ class GuestController extends BaseController
 				Session::flash("gagal","Username sudah ada, gunakan username yang lain!");
 			}
 			else{
-			//kalau gaada
-			$nama			= "";
-			$nomor 			= "";
-			$jk_user 		= 0;
-			$tgl_lahir_user	= date('Y-m-d H:i:s');
-			$bio_profil		= "";
-			$alamat_user	= "";
-			$negara_user	= "";
-			$provinsi_user	= "";
-			$ctr_post		= 0;
-			$join_date		= date('Y-m-d H:i:s');
-			$jabatan_user	= "";
-			$dbuser->insertdata($username,$password,$email,$nama,$nomor,$tgl_lahir_user,$jk_user,$bio_profil,$alamat_user,
-			$negara_user,$provinsi_user,$ctr_post,$join_date,$jabatan_user); 
-			Session::flash("berhasil","Akun anda berhasil didaftarkan");
+				//kalau gaada
+				$nama			= "";
+				$nomor 			= "";
+				$jk_user 		= 0;
+				$tgl_lahir_user	= date('Y-m-d H:i:s');
+				$bio_profil		= "";
+				$alamat_user	= "";
+				$negara_user	= "";
+				$provinsi_user	= "";
+				$ctr_post		= 0;
+				$join_date		= date('Y-m-d H:i:s');
+				$jabatan_user	= "";
+				$dbuser->insertdata($username,$password,$email,$nama,$nomor,$tgl_lahir_user,$jk_user,$bio_profil,$alamat_user,
+				$negara_user,$provinsi_user,$ctr_post,$join_date,$jabatan_user); 
+				Session::flash("berhasil","Akun anda berhasil didaftarkan");
 			}
 		}
 		return view("daftar");
@@ -79,7 +80,7 @@ class GuestController extends BaseController
 	public function dashboard(Request $request){
 		if($request->btnlogin)
 		{
-			$dbuser			= new user(); 
+			$dbuser			= new User(); 
 			$username 		= $request->txtusername; 
 			$password 		= $request->txtpassword;
 			$jumbar 		= $dbuser->ceklogin($username,$password); 
@@ -97,5 +98,28 @@ class GuestController extends BaseController
 		else {
 			return view("dashboard");
 		}
+	}
+
+	public function createpost(Request $request){
+		if($request->btnpost)
+		{
+			$dbmodelpost 		= new modelpost();
+			$user_poster      	= $request->tuser;
+			$isi_post         	= $request->isipost; 
+
+			$id_post        	= null;
+			$waktu_post      	= date('Y-m-d H:i:s');
+			$id_kategori_post  	= 0;
+			$ctr_cendol       	= 0;
+			$ctr_bata        	= 0;
+			$reply_post       	= 0;
+			
+			$dbmodelpost->buatpost($id_post,$waktu_post,$isi_post,$id_kategori_post,$ctr_cendol,$ctr_bata,$reply_post,$user_poster); 
+			$data['message'] = "berhasil Post anda telah terpublish";
+			return view("dashboard",$data);
+		}else{
+			return view("createpost");
+		}
+				
 	}
 }
