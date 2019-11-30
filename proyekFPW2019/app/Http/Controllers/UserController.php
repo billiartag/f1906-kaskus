@@ -29,16 +29,24 @@ class UserController extends Controller
             "nama" => "required",
             "email" => "required|email",
             "gender" => "required"
+            
         ]);
         $data = [
             "nama" =>$request->input('nama'),
             "email" =>$request->input('email'),
             "jk_user" =>$request->input('gender'),
+            "nomor" => $request->input('nomor'),
+            "tgl_lahir_user" => $request->input('tgl_lahir'),
+            "negara_user" => $request->input('negara'),
+            "provinsi_user" => $request->input('provinsi'),
+            "bio_profil" => $request->input('bio'),
+            "alamat_user" => $request->input('alamat'),
         ];
-
-         \DB::table('Users')->where('username','=',Auth::user()->username)->update($data);
+        $user = new User;
+        //$user->update($data);
+        $user->where('username','=',Auth::user()->username)->update($data);
         //var_dump($data);
-        //return view('edit_profile');
+        return view('profile');
     
         
     }

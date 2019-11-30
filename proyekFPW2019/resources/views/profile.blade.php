@@ -30,6 +30,7 @@
     <!-- isi konten -->
     <div class="col-md-8" > 
         <div class="row">
+            <div class="col-md-12">
             <div class="col-md-12" style='background-color:white;'>
                 <div class="col-md-12" style="height:280px;padding:2%;margin-top:1.5%; background-color:black">
                     <div class="row" >
@@ -48,15 +49,16 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-3"></div>
-                        <div class="col-md-1" style="margin-left:20px">
-                            <h4>{{Auth::user()->nama}}</h4> Kaskuser
+                        <div class="col-md-4" style="margin-left:20px">
+                            <h4>{{Auth::user()->nama}}</h4> <p style='font-style: italic;font-size: 13px;'>Kaskuser</p>
                             <p id='followerUser'></p>
                         </div>
-                        <div class="col-md-2"></div>
-                        <div class="col-md-5">
-                            <button class="btn btn-md btn-outline-primary" style='margin:2%;margin-left:30px'>Show QR Code</button>
+                        <div class="col-md-2">
+                            <button class="btn btn-md btn-info disabled" style='margin:2%;width:100%;height:100%;padding:11%;'>Show QR Code</button>
+                        </div>
+                        <div class="col-md-2">
                             <form action="/edit">
-                                <button class="btn btn-md btn-outline-primary" style='margin:2%;margin-left:40px'>Edit profile</button>
+                                <button class="btn btn-md btn-info" style='margin:2%;height:100%;width:100%;padding:11%;'>Edit profile</button>
                             </form>
                         </div>
                         <div class="col-md-1"></div>
@@ -64,6 +66,7 @@
                 </div>
                 <img src='https://upload.wikimedia.org/wikipedia/commons/c/c4/Surabaya_Montage_2.jpg' id='fotoProfil' class="rounded-circle">
             </div>
+        </div>
         </div>
         <div class="row">
             <div class="col-md-5" style='height:auto;margin-top:3%;'>
