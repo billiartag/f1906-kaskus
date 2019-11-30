@@ -86,4 +86,5 @@ class User extends Authenticatable
         $baru->jabatan_user     = $jabatan_user;
         $baru->save();
     }
+
 }
