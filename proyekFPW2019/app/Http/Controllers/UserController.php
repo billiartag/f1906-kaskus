@@ -36,7 +36,7 @@ class UserController extends Controller
             "jk_user" =>$request->input('gender'),
         ];
 
-        // \DB::table('Users')->where('username','=',Auth::user()->username)->update($data);
+         \DB::table('Users')->where('username','=',Auth::user()->username)->update($data);
         //var_dump($data);
         //return view('edit_profile');
     
