@@ -54,7 +54,7 @@
                                     <img src="" width="25px" height="25px">
                                     <?=$row->user_poster." - ".$user_sekarang->jabatan_user?>
                                 </span>
-                                <a href=""><h4><?=$row->judul_thread?></h4></a>
+                                <a href="<?php echo url("/post/$row->id_thread")?>"><h4><?=$row->judul_thread?></h4></a>
                                 <span>
                                     Cendol: <?=$row->ctr_cendol?>
                                     Viewers: <?= $row->ctr_viewers?>

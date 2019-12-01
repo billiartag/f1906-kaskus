@@ -11,62 +11,68 @@
 |
 */
 // Routing awal waktu buka localhost/TAMario/public
-//guest
+
+//view
 Route::get('/', [
 	'uses' => 'GuestController@index'
 ]);
-
 Route::match(array('GET','POST'),'daftar',[
 	'uses' => 'GuestController@daftar'
 ]);
 Route::match(array('GET','POST'),'dashboard',[
 	'uses' => 'GuestController@dashboard'
 ]);
-
 Route::get('/home', [
 	'uses' => 'GuestController@home'
 ]);
 Route::get('/story', [
 	'uses' => 'GuestController@story'
 ]);
-//user
+Route::view('/edit','edit_profile');
+
+
+//view - user
 Route::get('/profile', [
 	'uses' => 'UserController@toProfile'
+]);
+Route::get('/daftar', [
+	'uses' => 'GuestController@toDaftar'
 ]);
 Route::get('/logout', [
 	'uses' => 'UserController@logout'
 ]);
+
+//show dari DB
+Route::get("kategori/{id_kategori}",
+[
+	'uses' => 'GuestController@showKategori']
+);
+Route::get("post/{id_thread}",
+[
+	'uses' => 'GuestController@showPost']
+);
+
+//insert ke DB
 Route::match(array('GET','POST'),'createpost',[
 	'uses' => 'GuestController@createpost'
+]);
+Route::match(array('GET','POST'),'createpost/{id_thread}/{id_post_balas?}/{kutip?}',[
+	'uses' => 'GuestController@createpostReply'
 ]);
 
 Route::match(array('GET','POST'),'createthread',[
 	'uses' => 'GuestController@createThread'
 ]);
 
-
-Route::get('/daftar', [
-	'uses' => 'GuestController@toDaftar'
-]);
-
-
-Route::get("kategori/{id_kategori}",
-[
-	'uses' => 'GuestController@showKategori']
-);
-
 Route::view("/post","post");
-// Route::view("/createpost","createpost");
-// Route::view("/daftar","daftar");
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::view('/edit','edit_profile');
-
 Route::post('submit_edit','userController@update_data');
 
+//admin
 Route::get("/buatkategori/{nama}/{deskripsi}",[
 	"uses"=>"UserController@buatKategori"
 ]);

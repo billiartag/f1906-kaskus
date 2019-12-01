@@ -116,6 +116,17 @@ class GuestController extends BaseController
 		}
 	}
 
+	public function showPost($id_thread){
+		$semua_post = DB::select("SELECT * FROM POSTS WHERE id_sumber = '$id_thread'");
+		$semua_user = DB::select("SELECT * FROM USERS");
+		$isi_thread = DB::select("SELECT * FROM THREAD_POSTS WHERE ID_THREAD=$id_thread");
+		$data['posts']=$semua_post;
+		$data['users']=$semua_user;
+		$data['isi_thread']=$isi_thread;
+		$data['user_sekarang']=Auth::user();
+		return view("post",$data);
+	}
+
 	public function createpost(Request $request){
 		
 		if($request->btnpost)
@@ -138,8 +149,46 @@ class GuestController extends BaseController
 			$kategori=DB::select("SELECT * FROM KATEGORIS");
 			$data['kategori']=$kategori;
 			return view("createpost",$data);
-		}
-				
+		}		
+	}
+	public function createpostReply(Request $request,$id_thread, $id_post_balas=null,$kutip=null){
+		
+		if($request->btnpost)
+		{
+			$string_kutipan="";
+			//ambil kutipan
+			if($kutip=="true"){
+				$data_kutipan = DB::select("SELECT * FROM POSTS WHERE ID_POST='$id_post_balas'");
+				$isi_kutipan = $data_kutipan[0]->isi_post;
+				$string_kutipan = "<p>Dikutip: ".$isi_kutipan."</p>";
+			}
+
+			$dbmodelpost 		= new modelpost();
+			$user_poster      	= $request->tuser;
+			$isi_post         	= $string_kutipan.$request->isipost; 
+			$id_post        	= null;
+			$waktu_post      	= date('Y-m-d H:i:s');
+			$id_kategori_post  	= $request->forum_id;
+			$ctr_cendol       	= 0;
+			$ctr_bata        	= 0;
+			$reply_post       	= $id_post_balas;
+			$id_sumber          = $id_thread;
+			
+			$dbmodelpost->buatpost($id_post,$waktu_post,$isi_post,$id_kategori_post,$ctr_cendol,$ctr_bata,$reply_post,$user_poster,$id_sumber); 
+			$data['message'] = "berhasil Post anda telah terpublish";
+			return view("dashboard",$data);
+		}else{
+			//ambil data semua kategori yang ada
+			$kategori=DB::select("SELECT * FROM KATEGORIS");
+			$detail_thread = DB::select("SELECT * FROM THREAD_POSTS WHERE ID_THREAD='$id_thread'");
+			$data['kategori']=$kategori;
+			$data['jenis_post']="reply";
+			$data['id_thread']=$id_thread;
+			$data['detail_thread']=$detail_thread;
+			$data['id_post_balas']=$id_post_balas;
+			$data['kutip']="true";
+			return view("createpost",$data);
+		}		
 	}
 
 	public function createThread(Request $request){

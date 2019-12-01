@@ -33,39 +33,40 @@
         <div id="kontainer_kiri" class="col-md-7">            
             <div name="kontainer-thread" class="kotak mx-auto">
                 <div id="poster_thread" class="small d-inline">
+                    <?php 
+                        //get poster detail
+                        $user_poster  = null;
+                        foreach ($users as $row_user) {
+                            if($row_user->username==$posts[0]->user_poster){
+                                $user_poster = $row_user;
+                            }
+                        }    
+                    ?>
                     <p>
                         <img src="https://i.pravatar.cc/50" id="gambar_poster" class="pull-left img-circle">
                         <span class="pull-right">
                             <span id="report_thread"><a href="#"><i class="material-icons">menu</i></a></span>
                         </span>
                         <span>
-                            <span id="nama_poster" class="nama"><a href="#">Nama poster</a></span>
-                            <span id="waktu_post">2019/20/20</span>
+                            <span id="nama_poster" class="nama"><a href="#"><?php echo $user_poster->nama?></a></span>
+                            &nbsp;&nbsp;
+                            <span id="waktu_post"><?=$posts[0]->waktu_post?></span>
                         </span>
                         <br>
                         <span>
-                            <span id="poster_rank">Kaskuser Nuub</span>•
-                            <span id="poster_jumlah">Posts: <a href="#">420</a></span>•
+                            <span id="poster_rank"><?=$user_poster->jabatan_user?></span>•
+                            <span id="poster_jumlah">Posts: <a href="<?=url("profile/$user_poster->username")?>"><?=$user_poster->ctr_post?></a></span>•
                             <span id="poster_karma">2000</span>
                         </span>
                     </p>
                 </div>
                 <hr>
                 <div name="judul_thread">
-                    <p><h4>Ini Judul Thread!</h4></p>
+                    <p><h4><?=$isi_thread[0]->judul_thread?></h4></p>
                 </div>
                 <hr>
                 <div name="isi_thread">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Stuprata per vim Lucretia a regis filio testata civis se ipsa interemit. At, illa, ut vobis placet, partem quandam tuetur, reliquam deserit. In quibus doctissimi illi veteres inesse quiddam caeleste et divinum putaverunt. Itaque hoc frequenter dici solet a vobis, non intellegere nos, quam dicat Epicurus voluptatem. Hoc ille tuus non vult omnibusque ex rebus voluptatem quasi mercedem exigit. Alia quaedam dicent, credo, magna antiquorum esse peccata, quae ille veri investigandi cupidus nullo modo ferre potuerit. Duo Reges: constructio interrete. Non est ista, inquam, Piso, magna dissensio. In contemplatione et cognitione posita rerum, quae quia deorum erat vitae simillima, sapiente visa est dignissima. </p>
-    
-                    <p>Ad corpus diceres pertinere-, sed ea, quae dixi, ad corpusne refers? Quo modo autem optimum, si bonum praeterea nullum est? Hoc non est positum in nostra actione. Si stante, hoc natura videlicet vult, salvam esse se, quod concedimus; Ait enim se, si uratur, Quam hoc suave! dicturum. Huic mori optimum esse propter desperationem sapientiae, illi propter spem vivere. Satis est tibi in te, satis in legibus, satis in mediocribus amicitiis praesidii. Habes, inquam, Cato, formam eorum, de quibus loquor, philosophorum. </p>
-                    <p class="text-center"><img src="https://picsum.photos/400/150" class="img-thumbnail rounded mx-auto"></p>
-                    <p>Prioris generis est docilitas, memoria; Sed plane dicit quod intellegit. Collige omnia, quae soletis: Praesidium amicorum. Qui enim voluptatem ipsam contemnunt, iis licet dicere se acupenserem maenae non anteponere. Scientiam pollicentur, quam non erat mirum sapientiae cupido patria esse cariorem. Sed haec quidem liberius ab eo dicuntur et saepius. </p>
-                    
-                    <p>Et quidem, inquit, vehementer errat; Quia dolori non voluptas contraria est, sed doloris privatio. Age nunc isti doceant, vel tu potius quis enim ista melius? Quo modo autem optimum, si bonum praeterea nullum est? Omnes enim iucundum motum, quo sensus hilaretur. Potius inflammat, ut coercendi magis quam dedocendi esse videantur. </p>
-                    
-                    <p>Etiam beatissimum? Qui convenit? Quid dubitas igitur mutare principia naturae? Quae enim adhuc protulisti, popularia sunt, ego autem a te elegantiora desidero. Quid igitur dubitamus in tota eius natura quaerere quid sit effectum? Aliter autem vobis placet. Tu vero, inquam, ducas licet, si sequetur; Gerendus est mos, modo recte sentiat. An tu me de L. Quamquam id quidem, infinitum est in hac urbe; </p>
-                    
+                    <?=$posts[0]->isi_post?>
                 </div>
                 <div class="post_liker">
                     <span>
@@ -77,48 +78,46 @@
                 </div>
                 <hr>
                 <div class="post_footer">
-                        <div class="interact pull-right">
-                            <a href="">Kutip</a>
-                            <a href="">Balas</a>
+                        <div class="row" style="padding:2%">
+                        <a href='<?=url("/createpost\/").$isi_thread[0]->id_thread."/".$posts[0]->id_post."/true"?>'>Kutip</a>
+                        <a href='<?=url("/createpost\/").$isi_thread[0]->id_thread."/".$posts[0]->id_post?>' class='btn btn-primary'>Balas</a>
                         </div>
-                    <div class="karma">
-                        <span>                                
-                            <a href="#"><i class="material-icons text-success">arrow_upward</i></a>
-                            50
-                            <a href="#"><i class="material-icons text-danger">arrow_downward</i></a>
-                        </span>
-                    </div>
+                    
                 </div>
             </div>
-            <div id="reply_box" class="kotak mx-auto p-3">
-                <span>Reply</span><br>
-                <textarea class="w-100 form-control"></textarea>
-                <input type="button" value="Post" class="btn btn-primary">
-            </div>
             <div name="kontainer-reply" class="kotak mx-auto">
-                <div id="post1" class="">
+                
+            <?php for ($i=1; $i < sizeof($posts); $i++) {      
+                //get poster detail
+                $user_reply  = null;
+                foreach ($users as $row_user) {
+                    if($row_user->username==$posts[$i]->user_poster){
+                        $user_reply = $row_user;
+                    }
+                }    
+                ?>
                     <div id="poster_reply" class="small d-inline">
                         <p>
                             <img src="https://i.pravatar.cc/49" id="gambar_poster" class="pull-left img-circle">
                             <span class="pull-right">
-                                <span id="nomor_reply"><a href="#">#1</a></span>
+                                <span id="nomor_reply"><a href="#"><?=$posts[$i]->id_post?></a></span>
                                 <span id="report_reply"><a href="#" class="pull-right"><i class="material-icons">menu</i></a></span>
                             </span>
                             <span>
-                                <span id="nama_reply" class="nama"><a href="#">Nama poster</a></span>
-                                <span id="waktu_reply">2019/20/20</span>
+                                <span id="nama_reply" class="nama"><a href="#"><?=$posts[$i]->user_poster?></a></span>
+                                <span id="waktu_reply"><?=$posts[$i]->waktu_post?></span>
                             </span>
                             <br>
                             <span>
-                                <span id="reply_rank">Kaskuser Mod</span>•
-                                <span id="reply_jumlah">Posts: <a href="#">9999</a></span>•
-                                <span id="reply_karma">99999</span>
+                                <span id="reply_rank"><?=$user_reply->jabatan_user?></span>•
+                                <span id="reply_jumlah">Posts: <a href="#"><?=$user_reply->ctr_post?></a></span>•
+                                <span id="reply_karma">0</span>
                             </span>
                         </p>
                     </div>
                     <hr>
                     <div class="isi_reply">
-                        <p>anjaiiii</p>
+                        <?=$posts[$i]->isi_post?>
                     </div>
                     <div class="post_liker">
                         <span>
@@ -128,10 +127,10 @@
                     </div>
                     <hr>
                     <div class="post_footer">
-                            <div class="interact pull-right">
-                                <a href="">Kutip</a>
-                                <a href="">Balas</a>
-                            </div>
+                        <div class="interact pull-right">
+                            <a href="">Kutip</a>
+                            <a href="">Balas</a>
+                        </div>
                         <div class="karma">
                             <span>                                
                                 <a href="#"><i class="material-icons text-success">arrow_upward</i></a>
@@ -140,7 +139,9 @@
                             </span>
                         </div>
                     </div>
-                </div>
+                <?php 
+            }
+            ?>
             </div>
         </div>
         <div id="kontainer_kanan" class="col-md-3">

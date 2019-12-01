@@ -2,9 +2,13 @@
 @section('judul_page',"Create Post | Kaskus")
 @section('isi')
 <?php 
-	if($jenis_post==""){
+	if($jenis_post=="reply"){
+		$path = "createpost/".$id_thread."/".$id_post_balas;
+		if($kutip=="true"){
+			$path.="/true";
+		}
 	?>
-	{{ Form::open(array('url' => 'createpost')) }}
+	{{ Form::open(array('url' => $path)) }}
 <?php 
 	}
 else{?>
@@ -40,7 +44,7 @@ else{?>
 					<div class="col-md-8">
 						<div class="col-md-12" style="margin-top:10px;">
 							<font size="3" color="blue"><strong>{{Auth::user()->nama}}</strong></font>
-							<input type="hidden" name="tuser" value="{{Auth::user()->nama}}">
+							<input type="hidden" name="tuser" value="{{Auth::user()->username}}">
 							<a style="color:gray"> Hari ini, <?php $ldate = date('H:i'); echo $ldate?> </a>
 						</div>
 						<div class="col-md-12">
@@ -58,7 +62,14 @@ else{?>
 				<!-- Judul Post -->
 				<div class="form-group row">
 					<div class="col-md-12">
+						<?php
+							if($jenis_post=="thread"){
+							?>
+							
 						<input id="judulpost" type="text" class="form-control" name="judulpost" value="" placeholder="Judul Post" autofocus>
+							<?php 
+							}
+						?>
 					</div>
 				</div>
 			</div>
@@ -96,8 +107,14 @@ else{?>
 						<select name="forum_id" id="forum_id" class="btn btn-secondary dropdown-toggle" style="border-color:gray;width:90%;margin-bottom:20px">
 							<?php 
 								foreach ($kategori as $row) {
-									echo "<option value='$row->id_kategori'>$row->nama_kategori</option>";
-								}	
+									
+									if($jenis_post=="thread"){
+									echo "<option value='$row->id_kategori'>$row->nama_kategori</option>";}
+									else{
+										if($detail_thread[0]->id_kategori_thread==$row->id_kategori){
+										echo "<option value='$row->id_kategori'>$row->nama_kategori</option>";}
+									}
+								}
 							?>
 						</select>
 							<span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" data-select2-id="1" style="width: 268px;">
