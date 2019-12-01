@@ -23,6 +23,7 @@ class CreateThreadPostsTable extends Migration
             $table->string('judul_thread');
             $table->string('user_poster');
             $table->integer('id_post_sumber');
+            $table->integer('ctr_cendol');
         });
     }
 

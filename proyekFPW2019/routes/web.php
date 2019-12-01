@@ -40,6 +40,10 @@ Route::match(array('GET','POST'),'createpost',[
 	'uses' => 'GuestController@createpost'
 ]);
 
+Route::match(array('GET','POST'),'createthread',[
+	'uses' => 'GuestController@createThread'
+]);
+
 
 Route::get('/daftar', [
 	'uses' => 'GuestController@toDaftar'
@@ -62,3 +66,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::view('/edit','edit_profile');
 
 Route::post('submit_edit','userController@update_data');
+
+Route::get("/buatkategori/{nama}/{deskripsi}",[
+	"uses"=>"UserController@buatKategori"
+]);

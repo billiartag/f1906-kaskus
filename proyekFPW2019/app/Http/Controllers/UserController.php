@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Auth;
+use DB;
 use App\User;
 class UserController extends Controller
 {
@@ -46,8 +47,16 @@ class UserController extends Controller
         //$user->update($data);
         $user->where('username','=',Auth::user()->username)->update($data);
         //var_dump($data);
-        return view('profile');
-    
-        
+        return view('profile');       
+    }
+    public function buatKategori($nama,$deskripsi){
+        DB::table("kategoris")->insert([
+            "id_kategori"=>0,
+            "nama_kategori"=>"$nama",
+            "detail_kategori"=>"$deskripsi",
+            "id_user_follow_kategori"=>"-",
+            "ctr_follow_kategori"=>0
+        ]);
+
     }
 }

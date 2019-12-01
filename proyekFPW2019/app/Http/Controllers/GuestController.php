@@ -124,7 +124,7 @@ class GuestController extends BaseController
 			$isi_post         	= $request->isipost; 
 			$id_post        	= null;
 			$waktu_post      	= date('Y-m-d H:i:s');
-			$id_kategori_post  	= 0;
+			$id_kategori_post  	= $request->forum_id;
 			$ctr_cendol       	= 0;
 			$ctr_bata        	= 0;
 			$reply_post       	= 0;
@@ -133,7 +133,55 @@ class GuestController extends BaseController
 			$data['message'] = "berhasil Post anda telah terpublish";
 			return view("dashboard",$data);
 		}else{
-			return view("createpost");
+			//ambil data semua kategori yang ada
+			$kategori=DB::select("SELECT * FROM KATEGORIS");
+			$data['kategori']=$kategori;
+			return view("createpost",$data);
+		}
+				
+	}
+
+	public function createThread(Request $request){
+		if($request->btnpost)
+		{
+			//buat postnya dulu
+			$dbmodelpost 		= new modelpost();
+			$user_poster      	= $request->tuser;
+			$isi_post         	= $request->isipost; 
+			$id_post        	= null;
+			$waktu_post      	= date('Y-m-d H:i:s');
+			$id_kategori_post  	= $request->forum_id;
+			$ctr_cendol       	= 0;
+			$ctr_bata        	= 0;
+			$reply_post       	= 0;
+			
+			$dbmodelpost->buatpost($id_post,$waktu_post,$isi_post,$id_kategori_post,$ctr_cendol,$ctr_bata,$reply_post,$user_poster); 
+
+			//get id post
+			$row_post = DB::select("SELECT * FROM POSTS WHERE ISI_POST='$isi_post' AND USER_POSTER='$user_poster'");
+			
+			//buat threadnya teros
+			DB::table("thread_posts")->insert([
+				"id_thread"=>0,
+				"waktu_post_thread"=>date('Y-m-d H:i:s'),
+				"ctr_reply"=>0,
+				"ctr_viewers"=>0,
+				"id_kategori_thread"=>$request->forum_id,
+				"thread_locked"=>"false",
+				"judul_thread"=>$request->judulpost,
+				"user_poster"=>$request->tuser,
+				"id_post_sumber"=>$row_post[0]->id_post,
+				"ctr_cendol"=>0
+			]);
+
+			$data['message'] = "berhasil Post anda telah terpublish";
+			return view("dashboard",$data);
+		}else{
+			//ambil data semua kategori yang ada
+			$kategori=DB::select("SELECT * FROM KATEGORIS");
+			$data['kategori']=$kategori;
+			$data['jenis_post']="thread";
+			return view("createpost",$data);
 		}
 				
 	}

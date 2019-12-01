@@ -42,7 +42,7 @@
 				</form>
 			</div>
 			<ul class="nav navbar-nav" style="margin-top:10px">
-			<li ><p class="navbar-text"><a href="{{url('/createpost	')}}">BUAT THREAD</a></p></li>
+			<li ><p class="navbar-text"><a href="{{url('/createthread')}}">BUAT THREAD</a></p></li>
 				<li><button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span>	</button></li>
 			<li><a href="{{url('/profile')}}" style="display:inline"><img src="{{URL::to('/profile.jpg')}}" style="height:45px;width:45px"></a></li>
 			<li ><p class="navbar-text"><a href="{{url('/logout')}}">LOGOUT</a></p></li>
@@ -55,7 +55,12 @@
 				<li class="dropdown" style="margin-left:90px">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white"role="button" aria-haspopup="true" aria-expanded="false">Kategori <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Separated link</a></li>
+							<?php 
+								$kategori=DB::select("SELECT * FROM KATEGORIS");
+								foreach ($kategori as $row) {
+									echo "<li><a href='/kategori/$row->id_kategori'>$row->nama_kategori</a></li>";
+								}	
+							?>
 					</ul>
 				</li>
 		</ul>
