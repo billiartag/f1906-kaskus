@@ -84,7 +84,7 @@ class GuestController extends BaseController
 				$provinsi_user	= "";
 				$ctr_post		= 0;
 				$join_date		= date('Y-m-d H:i:s');
-				$jabatan_user	= "";
+				$jabatan_user	= "newbie";
 				$dbuser->insertdata($username,$password,$email,$nama,$nomor,$tgl_lahir_user,$jk_user,$bio_profil,$alamat_user,
 				$negara_user,$provinsi_user,$ctr_post,$join_date,$jabatan_user); 
 				Session::flash("berhasil","Akun anda berhasil didaftarkan");
@@ -117,6 +117,7 @@ class GuestController extends BaseController
 	}
 
 	public function createpost(Request $request){
+		
 		if($request->btnpost)
 		{
 			$dbmodelpost 		= new modelpost();
@@ -183,6 +184,5 @@ class GuestController extends BaseController
 			$data['jenis_post']="thread";
 			return view("createpost",$data);
 		}
-				
 	}
 }
