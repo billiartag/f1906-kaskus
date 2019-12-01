@@ -10,7 +10,7 @@ class modelpost extends Model
     public $primaryKey  = 'id_post';
     public $timestamps  = false;
 
-    public function buatpost($id_post,$waktu_post,$isi_post,$id_kategori_post,$ctr_cendol,$ctr_bata,$reply_post,$user_poster){
+    public function buatpost($id_post,$waktu_post,$isi_post,$id_kategori_post,$ctr_cendol,$ctr_bata,$reply_post,$user_poster,$id_sumber){
         $baru                   = new modelpost();
         $baru->id_post          = $id_post;
         $baru->waktu_post       = $waktu_post;
@@ -20,6 +20,7 @@ class modelpost extends Model
         $baru->ctr_bata         = $ctr_bata;
         $baru->reply_post       = $reply_post;
         $baru->user_poster      = $user_poster;
+        $baru->id_sumber        = $id_sumber;
         $baru->save();
     }
 }

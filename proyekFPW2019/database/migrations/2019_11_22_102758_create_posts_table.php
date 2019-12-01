@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
             $table->integer('ctr_cendol');
             $table->integer('ctr_bata');
             $table->integer('reply_post');
+            $table->integer('id_sumber');
             $table->string('user_poster');
         });
     }
