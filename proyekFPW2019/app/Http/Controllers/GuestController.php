@@ -11,6 +11,7 @@ use App\User;
 use App\modelpost;
 use Session;
 use DB;
+use Auth;
 
 class GuestController extends BaseController
 {
@@ -33,6 +34,21 @@ class GuestController extends BaseController
 		else{
 			return view("register");
 		}
+	}
+	public function showKategori($id_kat){
+		$data['id_kat']=$id_kat;
+		//get detail thread
+		$detail = DB::select("SELECT * FROM KATEGORIS WHERE ID_KATEGORI = $id_kat");
+		//get all thread
+		$threads  =DB::select("SELECT * FROM thread_posts WHERE id_kategori_thread = $id_kat");
+		//get all user
+		$users  =DB::select("SELECT * FROM USERS");
+
+		$data['detail'] = $detail;
+		$data['threads'] = $threads;
+		$data['users'] = $users;
+		//
+		return view("kategorithread",$data);
 	}
 	public function daftar(Request $request) 
 	{
@@ -106,7 +122,6 @@ class GuestController extends BaseController
 			$dbmodelpost 		= new modelpost();
 			$user_poster      	= $request->tuser;
 			$isi_post         	= $request->isipost; 
-
 			$id_post        	= null;
 			$waktu_post      	= date('Y-m-d H:i:s');
 			$id_kategori_post  	= 0;
