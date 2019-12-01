@@ -1,6 +1,7 @@
 @extends('layouts.pageUser')
 @section('judul_page',"Create Post | Kaskus")
 @section('isi')
+{{ Form::open(array('url' => 'createpost')) }}
 <link   href="{{ asset ('css/bootstrap.min.css') }}" rel="stylesheet">
 <link   href="{{ asset ('css/jquery.dataTables.min.css') }}" rel="stylesheet">
 <link   href="{{ asset ('css/mystyle.css') }}" rel="stylesheet" type="text/css">
@@ -18,14 +19,17 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 
 	<div class="container">
-	<form method="POST" action="{{ route('createpost') }}">
 		<div style="width:40%;height:75%;position:absolute;margin-left:5%;background-color:white">
 			<div class="container mt-3">
 			  <div class="media border p-3">
-				<img src="{{ URL::to('/pic.png') }}" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+				<img src="{{ URL::to('/minecraft.jpg') }}" class="mr-3 mt-3 rounded-circle" style="width:60px;height:60px;border-radius :100px 100px;">
 				<div class="media-body">
-				  <h4>John Doe <small><i>Hari ini, 18:00</i></small></h4>
-				</div>
+				
+				
+				<h4>{{Auth::user()->nama}}</h4><i>Hari ini, <?php 
+				$ldate = date('H:i');
+				echo $ldate?></i></small></h4>
+				</div></br>
 			  </div>
 			</div>
 			<!-- Judul Post -->
@@ -57,10 +61,10 @@
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Draft (0) <span class="caret"></span></a>
 			</div>
 			<div><div><div style="margin-bottom:6px"><span>Pilih Kategori</span></div><div data-select2-id="5"><div class="Mt(10px)" data-select2-id="4"><select name="forum_id" id="forum_id" class="btn btn-secondary dropdown-toggle" style="width:90%;margin-bottom:20px">
-				
-				</select><span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" data-select2-id="1" style="width: 268px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-forum_id-container"><span class="select2-selection__rendered" id="select2-forum_id-container" role="textbox" aria-readonly="true" title="Pilih Kategori"></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></div><div id="captcha-newthread" style=""></div><div class="Mt(10px) Bdt(borderSolidLightGrey)"><div class="D(f) Ai(c) Jc(c) Py(20px)"><button type="button" class="btn btn-info" onclick="#"> <span class="">Simpan Draft</span> </button> <button class="btn btn-info" onclick="#"> <span class="">Post</span> </button></div></div></div></div></div>
-	</div>
+			{{Form::submit("POST",array("name"=>"btnpost", "class"=>"form-control btn-danger"))}}	
+				</select><span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" data-select2-id="1" style="width: 268px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-forum_id-container"><span class="select2-selection__rendered" id="select2-forum_id-container" role="textbox" aria-readonly="true" title="Pilih Kategori"></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></div><div id="captcha-newthread" style=""></div><div class="Mt(10px) Bdt(borderSolidLightGrey)"><div class="D(f) Ai(c) Jc(c) Py(20px)"></div></div></div></div></div>
 		</div>
 	</form>
   </div>
+  {{ Form::close() }}
 @endsection

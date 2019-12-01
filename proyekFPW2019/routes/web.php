@@ -36,7 +36,6 @@ Route::get('/profile', [
 Route::get('/logout', [
 	'uses' => 'UserController@logout'
 ]);
-
 Route::match(array('GET','POST'),'createpost',[
 	'uses' => 'GuestController@createpost'
 ]);
