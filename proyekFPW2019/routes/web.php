@@ -39,8 +39,6 @@ Route::get('/logout', [
 Route::match(array('GET','POST'),'createpost',[
 	'uses' => 'GuestController@createpost'
 ]);
-
-
 Route::get('/daftar', [
 	'uses' => 'GuestController@toDaftar'
 ]);
