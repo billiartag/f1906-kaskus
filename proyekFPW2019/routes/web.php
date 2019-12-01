@@ -39,11 +39,17 @@ Route::get('/logout', [
 Route::match(array('GET','POST'),'createpost',[
 	'uses' => 'GuestController@createpost'
 ]);
+
+
 Route::get('/daftar', [
 	'uses' => 'GuestController@toDaftar'
 ]);
 
 
+Route::get("kategori/{id_kategori}",
+[
+	'uses' => 'GuestController@showKategori']
+);
 
 Route::view("/post","post");
 // Route::view("/createpost","createpost");
