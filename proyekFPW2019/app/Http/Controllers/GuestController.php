@@ -117,10 +117,6 @@ class GuestController extends BaseController
 	}
 
 	public function createpost(Request $request){
-
-		$request->validate([
-			"txtrobot"=>"required",
-		]);
 		
 		if($request->btnpost)
 		{
