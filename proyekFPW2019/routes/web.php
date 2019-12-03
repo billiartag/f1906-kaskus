@@ -47,7 +47,7 @@ Route::get("kategori/{id_kategori}",
 [
 	'uses' => 'GuestController@showKategori']
 );
-Route::get("post/{id_thread}",
+Route::get("post/{id_thread}/{id_post?}",
 [
 	'uses' => 'GuestController@showPost']
 );

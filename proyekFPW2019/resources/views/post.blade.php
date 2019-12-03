@@ -1,5 +1,4 @@
-
-@extends(Session::has("namelogin")?"layouts/pageUser":"layouts/page")
+@extends(Auth::check()?"layouts/pageUser":"layouts/page")
 @section('judul_page',"Post | Kaskus")
 @section('isi')
 <style>
@@ -96,21 +95,28 @@
             </div>
             <div name="kontainer-reply" class="kotak mx-auto">
                 
-            <?php for ($i=1; $i < sizeof($posts); $i++) {      
+            <?php 
+            for ($i=1; $i < sizeof($posts); $i++) {      
                 //get poster detail
                 $user_reply  = null;
                 foreach ($users as $row_user) {
                     if($row_user->username==$posts[$i]->user_poster){
-                        $user_reply = $row_user;
+                        if(!isset($id_post)){
+                        $user_reply = $row_user;}
+                        else{
+                            if($posts[$i]->id_post==$id_post){
+                                $user_reply = $row_user;
+                            }
+                        }
                     }
-                }    
+                }if($user_reply!=null){    
                 ?>
                 <div class="per_reply">
                     <div id="poster_reply" class="small d-inline">
                         <p>
                             <img src="https://i.pravatar.cc/49" id="gambar_poster" class="pull-left img-circle">
                             <span class="pull-right">
-                                <span id="nomor_reply"><a href="#"><?=$posts[$i]->id_post?></a></span>
+                                <span id="nomor_reply"><a href="<?=url("/post")."/".$posts[$i]->id_sumber."/".$posts[$i]->id_post?>"><?=$posts[$i]->id_post?></a></span>
                                 <span id="report_reply"><a href="#" class="pull-right"><i class="material-icons">menu</i></a></span>
                             </span>
                             <span>
@@ -138,8 +144,8 @@
                     <hr>
                     <div class="post_footer">
                         <div class="interact pull-right">
-                            <a href="">Kutip</a>
-                            <a href="">Balas</a>
+                            <a href="<?=url("/createpost\/").$posts[$i]->id_sumber."/".$posts[$i]->id_post?>/true   ">Kutip</a>
+                            <a href="<?=url("/createpost\/").$posts[$i]->id_sumber."/".$posts[$i]->id_post?>">Balas</a>
                         </div>
                         <div class="karma">
                             <span>                                
@@ -151,6 +157,7 @@
                     </div>
                     </div>
                 <?php 
+                }
             }
             ?>
             </div>

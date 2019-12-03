@@ -116,7 +116,7 @@ class GuestController extends BaseController
 		}
 	}
 
-	public function showPost($id_thread){
+	public function showPost($id_thread, $id_post=null){
 		$semua_post = DB::select("SELECT * FROM POSTS WHERE id_sumber = '$id_thread'");
 		$semua_user = DB::select("SELECT * FROM USERS");
 		$isi_thread = DB::select("SELECT * FROM THREAD_POSTS WHERE ID_THREAD=$id_thread");
@@ -124,6 +124,9 @@ class GuestController extends BaseController
 		$data['users']=$semua_user;
 		$data['isi_thread']=$isi_thread;
 		$data['user_sekarang']=Auth::user();
+		if($id_post!=null){
+			$data['id_post']=$id_post;
+		}
 		return view("post",$data);
 	}
 
@@ -229,6 +232,7 @@ class GuestController extends BaseController
 
 
 			$data['message'] = "berhasil Post anda telah terpublish";
+			$this->nambahCount($request->tuser);
 			return view("dashboard",$data);
 		}else{
 			//ambil data semua kategori yang ada
@@ -237,5 +241,15 @@ class GuestController extends BaseController
 			$data['jenis_post']="thread";
 			return view("createpost",$data);
 		}
+	}
+
+	public function nambahCount($id_user){
+		//get ctr
+		$ctr = User::find($id_user)->ctr_post;
+
+		//update
+		$user = User::find($id_user);
+		$user->ctr_post = $ctr+1;
+		$user->save();
 	}
 }
