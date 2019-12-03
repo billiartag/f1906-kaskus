@@ -18,6 +18,15 @@
     #poster_thread{
         size: 5pt
     }
+    .reply_kutipan{
+        background-color: cornsilk;
+    }
+    .per_reply{
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 1%;
+        margin:1%;
+    }
     .nama{
         font-weight: bold
     }
@@ -96,6 +105,7 @@
                     }
                 }    
                 ?>
+                <div class="per_reply">
                     <div id="poster_reply" class="small d-inline">
                         <p>
                             <img src="https://i.pravatar.cc/49" id="gambar_poster" class="pull-left img-circle">
@@ -138,6 +148,7 @@
                                 <a href="#"><i class="material-icons text-danger">arrow_downward</i></a>
                             </span>
                         </div>
+                    </div>
                     </div>
                 <?php 
             }

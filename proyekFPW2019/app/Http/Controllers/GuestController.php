@@ -152,16 +152,16 @@ class GuestController extends BaseController
 		}		
 	}
 	public function createpostReply(Request $request,$id_thread, $id_post_balas=null,$kutip=null){
-		
 		if($request->btnpost)
 		{
 			$string_kutipan="";
-			//ambil kutipan
-			if($kutip=="true"){
-				$data_kutipan = DB::select("SELECT * FROM POSTS WHERE ID_POST='$id_post_balas'");
-				$isi_kutipan = $data_kutipan[0]->isi_post;
-				$string_kutipan = "<p>Dikutip: ".$isi_kutipan."</p>";
-			}
+			if($kutip!=null){
+				//ambil kutipan
+				if($kutip=="true"){
+					$data_kutipan = DB::select("SELECT * FROM POSTS WHERE ID_POST='$id_post_balas'");
+					$isi_kutipan = $data_kutipan[0]->isi_post;
+					$string_kutipan = "<div class='reply_kutipan'><p>Dikutip: ".$isi_kutipan."</p></div>";
+				}}
 
 			$dbmodelpost 		= new modelpost();
 			$user_poster      	= $request->tuser;
@@ -186,7 +186,8 @@ class GuestController extends BaseController
 			$data['id_thread']=$id_thread;
 			$data['detail_thread']=$detail_thread;
 			$data['id_post_balas']=$id_post_balas;
-			$data['kutip']="true";
+			if($kutip=="true"){
+				$data['kutip']="true";}
 			return view("createpost",$data);
 		}		
 	}

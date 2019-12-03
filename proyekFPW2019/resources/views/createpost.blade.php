@@ -4,8 +4,10 @@
 <?php 
 	if($jenis_post=="reply"){
 		$path = "createpost/".$id_thread."/".$id_post_balas;
-		if($kutip=="true"){
-			$path.="/true";
+		if(isset($kutip)){	
+			if($kutip=="true"){
+				$path.="/true";
+			}
 		}
 	?>
 	{{ Form::open(array('url' => $path)) }}
