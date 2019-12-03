@@ -66,7 +66,7 @@ class UserController extends Controller
         //$user->update($data);
         $user->where('username','=',Auth::user()->username)->update($data);
         //var_dump($data);
-        return view('profile');       
+        return redirect('profile');  
     }
     public function buatKategori($nama,$deskripsi){
         DB::table("kategoris")->insert([
