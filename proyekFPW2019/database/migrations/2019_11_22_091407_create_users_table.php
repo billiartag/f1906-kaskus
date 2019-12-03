@@ -18,10 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('nama');
             $table->string('email');
-            $table->string('nomor');
+            $table->string('nomor')->nullable();
             $table->integer('jk_user');
             $table->date('tgl_lahir_user');
-            $table->longText('bio_profil');
+            $table->longText('bio_profil')->nullable();
             $table->longText('alamat_user');
             $table->string('negara_user');
             $table->string('provinsi_user');

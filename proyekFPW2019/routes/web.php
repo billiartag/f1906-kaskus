@@ -76,3 +76,8 @@ Route::post('submit_edit','userController@update_data');
 Route::get("/buatkategori/{nama}/{deskripsi}",[
 	"uses"=>"UserController@buatKategori"
 ]);
+
+Route::post('/upload_profile_picture','userController@upload_profile_picture');
+
+
+Route::post('/upload_background_picture','userController@upload_background_picture');

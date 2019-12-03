@@ -24,6 +24,21 @@
         margin-bottom : 2%;
         border-radius :100px 100px;
     }
+    #background_profile{
+        height:280px;
+        padding:2%;
+        margin-top:1.5%; 
+        background-image:url('http://127.0.0.1:8000/storage/{{$src_background}}');
+        background-size:100% 100%;
+    }
+    label{
+        cursor : pointer;
+    }
+    #background_picture{
+        opacity: 0;
+        position: absolute;
+        z-index: -1;
+    }
 </style>
 <div class="row" >
     <div class="col-md-2"></div>
@@ -32,14 +47,19 @@
         <div class="row">
             <div class="col-md-12">
             <div class="col-md-12" style='background-color:white;'>
-                <div class="col-md-12" style="height:280px;padding:2%;margin-top:1.5%; background-color:black">
+                <div class="col-md-12" id='background_profile'>
                     <div class="row" >
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-10">
                                 </div>
                                 <div class="col-md-2">
-                                    <button class='btn btn-sm btn-outline-primary'>Ubah Background</button>
+                                    <form id='ubah_background' action="/upload_background_picture" enctype="multipart/form-data" method='post'>
+                                        @csrf
+                                        <label for="background_picture" class='btn btn-warning'>ubah background</label>
+                                        <input class='btn btn-sm btn-outline-primary' type="file" name='background_picture' id='background_picture'><br>
+                                        <!-- <input type="submit" value='submit' class='btn btn-info'> -->
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -64,14 +84,15 @@
                         <div class="col-md-1"></div>
                     </div>
                 </div>
-                <img src='https://upload.wikimedia.org/wikipedia/commons/c/c4/Surabaya_Montage_2.jpg' id='fotoProfil' class="rounded-circle">
+                <img src='http://127.0.0.1:8000/storage/{{$src_profil}}' id='fotoProfil' class="rounded-circle">
+                <!-- <img src='{{Storage::url($src_profil)}}' id='fotoProfil' class="rounded-circle"> -->
             </div>
         </div>
         </div>
         <div class="row">
             <div class="col-md-5" style='height:auto;margin-top:3%;'>
                 <!-- profil 1 -->
-                <div class="col-md-12" style='border:1px solid black;'>
+                <div class="col-md-12" style='background-color:white;'>
                     <div class="row">
                         <div class="col-md-12">
                             <br><br>
@@ -131,8 +152,9 @@
                 </div>
             </div>
             <div class="col-md-7" style='height:500px;margin-top:3%;'>
-                <div class="col-md-12" style='background-color:black;height:100%;'>
-                    
+                <div class="col-md-12 text-center" style='background-color:white;height:100%;'>
+                    <h1>Aktivitas anda</h1>
+                    <hr>
                 </div>
                 <!-- isi threads -->
             </div>
@@ -142,4 +164,9 @@
     </div>
     <div class="col-md-2"></div>
 </div>
+<script>
+    document.getElementById("background_picture").onchange = function(){
+        document.getElementById("ubah_background").submit();
+    }
+</script>
 @endsection

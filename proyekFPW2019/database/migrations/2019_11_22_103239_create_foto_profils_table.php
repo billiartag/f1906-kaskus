@@ -17,6 +17,7 @@ class CreateFotoProfilsTable extends Migration
             $table->mediumIncrements('id_foto');
             $table->string('id_profil_foto');
             $table->string('source_foto');
+            $table->string("source_foto_background");
         });
     }
 

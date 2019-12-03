@@ -74,14 +74,14 @@ class GuestController extends BaseController
 			}
 			else{
 				//kalau gaada
-				$nama			= "";
-				$nomor 			= "";
+				$nama			= "-";
+				$nomor 			= "-";
 				$jk_user 		= 0;
 				$tgl_lahir_user	= date('Y-m-d H:i:s');
-				$bio_profil		= "";
-				$alamat_user	= "";
-				$negara_user	= "";
-				$provinsi_user	= "";
+				$bio_profil		= "-";
+				$alamat_user	= "-";
+				$negara_user	= "-";
+				$provinsi_user	= "-";
 				$ctr_post		= 0;
 				$join_date		= date('Y-m-d H:i:s');
 				$jabatan_user	= "newbie";

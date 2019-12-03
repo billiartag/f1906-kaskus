@@ -6,6 +6,7 @@
         <div class="col-md-3"></div>
         <div class="col-md-6" style='background-color:white;padding-left:5%;padding-right:5%;padding-top:2%;padding-bottom:2%;'>
             <h1>Edit Profile</h1>
+            <hr>
             <form method='post' action='/submit_edit'>
             @csrf
                 Username <br>
@@ -36,7 +37,7 @@
 
 
                 Biodata <br>
-                <textarea name="bio" id="bio" cols="90" rows="10"></textarea>
+                <textarea name="bio" id="bio" cols="90" rows="10" value='{{Auth::user()->bio_profil}}'></textarea>
                 <br><br>
                 <input type="submit" class='btn btn-primary'value='accept' id='accept'> 
                 @foreach ($errors->all() as $error)
@@ -47,6 +48,35 @@
             <a href="{{url('/profile')}}" class='btn btn-danger'>cancel</a>
         </div>
         <div class="col-md-3"></div>
-    </div>
+        </div>
+        <!-- change profile pict -->
+        <div class="row" style='margin-top:3%;'>
+            <div class="col-md-3"></div>
+            <div class="col-md-6" style='background-color:white;padding-left:5%;padding-right:5%;padding-top:2%;padding-bottom:2%;'>
+                <h1>Change Profile Picture</h1>
+                <hr>
+                <form action="/upload_profile_picture" enctype="multipart/form-data" method='post'>
+                    @csrf
+                    <input  type="file" name='profile_picture' id='profile_picture'><br>
+                    <input type="submit" value='submit' class='btn btn-info'>
+                </form>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <!-- change background picture [deprecated] -->
+        <!-- <div class="row" style='margin-top:3%;'>
+            <div class="col-md-3"></div>
+            <div class="col-md-6" style='background-color:white;padding-left:5%;padding-right:5%;padding-top:2%;padding-bottom:2%;'>
+                <h1>Change Background Picture</h1>
+                <hr>
+                <form action="/upload_background_picture" enctype="multipart/form-data" method='post'>
+                    @csrf
+                    <input type="file" name='background_picture'><br>
+                    <input type="submit" value='submit' class='btn btn-info'>
+                </form>
+            </div>
+            <div class="col-md-3"></div>
+        </div> -->
+    
 
 @endsection
