@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\User;
 use App\modelpost;
+use App\foto_profil;
+use App\thread_post;
 use Session;
 use DB;
 use Auth;
@@ -50,8 +52,7 @@ class GuestController extends BaseController
 		//
 		return view("kategorithread",$data);
 	}
-	public function daftar(Request $request) 
-	{
+	public function daftar(Request $request) {
 		$request->validate([
 			"username"=>"required",
 			"password"=>"required",
@@ -120,6 +121,7 @@ class GuestController extends BaseController
 		$semua_post = DB::select("SELECT * FROM POSTS WHERE id_sumber = '$id_thread'");
 		$semua_user = DB::select("SELECT * FROM USERS");
 		$isi_thread = DB::select("SELECT * FROM THREAD_POSTS WHERE ID_THREAD=$id_thread");
+
 		$data['posts']=$semua_post;
 		$data['users']=$semua_user;
 		$data['isi_thread']=$isi_thread;
@@ -127,6 +129,13 @@ class GuestController extends BaseController
 		if($id_post!=null){
 			$data['id_post']=$id_post;
 		}
+		//get ctr
+		$ctr = thread_post::find($id_thread)->ctr_viewers;
+		//update
+		$thread = thread_post::find($id_thread);
+		$thread->ctr_viewers = $ctr+1;
+		$thread->save();
+
 		return view("post",$data);
 	}
 
@@ -138,7 +147,7 @@ class GuestController extends BaseController
 			$user_poster      	= $request->tuser;
 			$isi_post         	= $request->isipost; 
 			$id_post        	= null;
-			$waktu_post      	= date('Y-m-d H:i:s');
+			$waktu_post      	= date('Y-m-d');
 			$id_kategori_post  	= $request->forum_id;
 			$ctr_cendol       	= 0;
 			$ctr_bata        	= 0;
@@ -146,7 +155,12 @@ class GuestController extends BaseController
 			
 			$dbmodelpost->buatpost($id_post,$waktu_post,$isi_post,$id_kategori_post,$ctr_cendol,$ctr_bata,$reply_post,$user_poster); 
 			$data['message'] = "berhasil Post anda telah terpublish";
-			return view("dashboard",$data);
+			$this->nambahCount($request->tuser);
+			$this->nambahReply($id_thread);
+
+			//get id thread
+			// $pst = App\thread_post::where(["wakktu_post_thread"=>$waktu_post, "judul_thread"=>])
+			return redirect("post/$id_thread");
 		}else{
 			//ambil data semua kategori yang ada
 			$kategori=DB::select("SELECT * FROM KATEGORIS");
@@ -163,7 +177,7 @@ class GuestController extends BaseController
 				if($kutip=="true"){
 					$data_kutipan = DB::select("SELECT * FROM POSTS WHERE ID_POST='$id_post_balas'");
 					$isi_kutipan = $data_kutipan[0]->isi_post;
-					$string_kutipan = "<div class='reply_kutipan'><p>Dikutip: ".$isi_kutipan."</p></div>";
+					$string_kutipan = "<div class='reply_kutipan'><p>Dikutip dari <a href='".url("/post/$id_thread/$id_post_balas")."'>Post #$id_post_balas</a>: ".$isi_kutipan."</p></div>";
 				}}
 
 			$dbmodelpost 		= new modelpost();
@@ -179,7 +193,9 @@ class GuestController extends BaseController
 			
 			$dbmodelpost->buatpost($id_post,$waktu_post,$isi_post,$id_kategori_post,$ctr_cendol,$ctr_bata,$reply_post,$user_poster,$id_sumber); 
 			$data['message'] = "berhasil Post anda telah terpublish";
-			return view("dashboard",$data);
+			$this->nambahCount($request->tuser);
+			$this->nambahReply($id_thread);
+			return redirect("post/$id_thread");
 		}else{
 			//ambil data semua kategori yang ada
 			$kategori=DB::select("SELECT * FROM KATEGORIS");
@@ -233,7 +249,7 @@ class GuestController extends BaseController
 
 			$data['message'] = "berhasil Post anda telah terpublish";
 			$this->nambahCount($request->tuser);
-			return view("dashboard",$data);
+			return redirect("post/".$row_post[0]->id_thread);
 		}else{
 			//ambil data semua kategori yang ada
 			$kategori=DB::select("SELECT * FROM KATEGORIS");
@@ -251,5 +267,14 @@ class GuestController extends BaseController
 		$user = User::find($id_user);
 		$user->ctr_post = $ctr+1;
 		$user->save();
+	}
+	public  function nambahReply($id_thread){
+
+		//get ctr
+		$ctr = thread_post::find($id_thread)->ctr_reply;
+		//update
+		$thread = thread_post::find($id_thread);
+		$thread->ctr_reply = $ctr+1;
+		$thread->save();
 	}
 }

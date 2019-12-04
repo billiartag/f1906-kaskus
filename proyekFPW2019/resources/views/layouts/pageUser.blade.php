@@ -44,7 +44,21 @@
 			<ul class="nav navbar-nav" style="margin-top:10px">
 			<li ><p class="navbar-text"><a href="{{url('/createthread')}}">BUAT THREAD</a></p></li>
 				<li><button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span>	</button></li>
-			<li><a href="{{url('/profile')}}" style="display:inline"><img src="{{URL::to('/profile.jpg')}}" style="height:45px;width:45px"></a></li>
+			<?php 
+				$eloq = App\foto_profil::where("id_profil_foto",Auth::user()->username);
+				if($eloq->count()>0)
+				{
+					$arr=$eloq->get();
+					$foto = url("/storage\/").$arr[0]->source_foto;
+					if($arr[0]->source_foto==""){
+						$foto = url("/storage\/")."default_profile_picture.png";
+					}
+				}
+				else{
+					$foto = url("/storage\/")."default_profile_picture.png";
+				}
+			?>	
+			<li><a href="{{url('/profile')}}" style="display:inline"><img src="{{$foto}}" style="height:45px;width:45px" class='img-circle'></a></li>
 			<li ><p class="navbar-text"><a href="{{url('/logout')}}">LOGOUT</a></p></li>
 			</ul>
 			</div><!-- /.navbar-collapse -->
@@ -65,16 +79,14 @@
 				</li>
 		</ul>
 		<ul class="nav navbar-nav" style="color:white;">
-			<li><a href="#" style="margin-right:10px;margin-left:25px; "><strong style="color:white">STORY</strong></a></li>
-			<li><a href="#" style="margin-right:10px;"><strong style="color:white">HOBBY</strong></a></li>
-			<li><a href="#" style="margin-right:10px;"><strong style="color:white">GAMES</strong></a></li>
-			<li><a href="#" style="margin-right:10px;"><strong style="color:white">ENTERTAINMENT</strong></a></li>
-			<li><a href="#" style="margin-right:10px;"><strong style="color:white">FEMALE</strong></a></li>
-			<li><a href="#" style="margin-right:10px;"><strong style="color:white">TECH</strong></a></li>
-			<li><a href="#" style="margin-right:10px;"><strong style="color:white">AUTOMOTIVE</strong></a></li>
-			<li><a href="#" style="margin-right:10px;"><strong style="color:white">SPORTS</strong></a></li>
-			<li><a href="#" style="margin-right:10px;"><strong style="color:white">FOOD & TRAVEL</strong></a></li>
-			<li><a href="#"><strong style="color:white">NEWS</strong></a></li>              
+			<?php 
+				$kategori = App\kategori::select("nama_kategori","id_kategori")->orderBy("nama_kategori","asc")->take(5)->get();
+				foreach ($kategori as $row) {
+					?>
+						<li><a href="<?=url("/kategori\/").$row->id_kategori?>" style="margin-right:10px;"><strong style="color:white"><?=$row->nama_kategori?></strong></a></li>
+					<?php 
+				}	
+			?>
 		</ul>
 	</div>
     {{ Form::close() }}

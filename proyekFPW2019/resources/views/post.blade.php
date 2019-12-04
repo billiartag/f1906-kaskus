@@ -19,9 +19,13 @@
     }
     .reply_kutipan{
         background-color: cornsilk;
+        padding:2% 1%;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin:1%; 
     }
     .per_reply{
-        border: 1px solid black;
+        border: 1px solid gray;
         border-radius: 5px;
         padding: 1%;
         margin:1%;
@@ -35,9 +39,17 @@
     img{
         margin-right: 5px;
     }
+    .pp{
+        width: 30px;
+        height: 30px;
+    }
+    .pp_besar{
+        width: 50px;
+        height: 50px;
+    }
 </style>
-    <div id="kontainer-besar" class="row container">
-        <div class="col-md-2"></div>
+    <div id="kontainer-besar" class="container">
+        <div class="col-md-1"></div>
         <div id="kontainer_kiri" class="col-md-7">            
             <div name="kontainer-thread" class="kotak mx-auto">
                 <div id="poster_thread" class="small d-inline">
@@ -51,7 +63,21 @@
                         }    
                     ?>
                     <p>
-                        <img src="https://i.pravatar.cc/50" id="gambar_poster" class="pull-left img-circle">
+                        <?php 
+                            $eloq = App\foto_profil::where("id_profil_foto",$user_poster->username);
+                            if($eloq->count()>0)
+                            {
+                                $arr=$eloq->get();
+                                $foto = url("/storage\/").$arr[0]->source_foto;
+                                if($arr[0]->source_foto==""){
+                                    $foto = url("/storage\/")."default_profile_picture.png";
+                                }
+                            }
+                            else{
+                                $foto = url("/storage\/")."default_profile_picture.png";
+                            }
+                        ?>
+                        <img src="<?=$foto?>" id="gambar_poster" class="pull-left img-circle pp_besar">
                         <span class="pull-right">
                             <span id="report_thread"><a href="#"><i class="material-icons">menu</i></a></span>
                         </span>
@@ -114,7 +140,16 @@
                 <div class="per_reply">
                     <div id="poster_reply" class="small d-inline">
                         <p>
-                            <img src="https://i.pravatar.cc/49" id="gambar_poster" class="pull-left img-circle">
+                            <?php 
+                                $path = App\foto_profil::where("id_profil_foto",$user_reply->username)->get();
+                                if($path[0]->source_foto==""){
+                                    $foto = url("/storage\/")."default_profile_picture.png";
+                                }
+                                else{
+                                    $foto = url("/storage\/").$path[0]->source_foto;
+                                }
+                            ?>
+                            <img src="<?=$foto?>" id="gambar_poster" class="pull-left img-circle pp">
                             <span class="pull-right">
                                 <span id="nomor_reply"><a href="<?=url("/post")."/".$posts[$i]->id_sumber."/".$posts[$i]->id_post?>"><?=$posts[$i]->id_post?></a></span>
                                 <span id="report_reply"><a href="#" class="pull-right"><i class="material-icons">menu</i></a></span>
@@ -165,12 +200,23 @@
         <div id="kontainer_kanan" class="col-md-3">
             <div id="kontainer_kategori" class="kotak">
                 <span>
-                    <i class="material-icons pull-left">emoji_food_beverage</i>
-                    <h4>The Lounge</h4>
-                </span>
-                <p>
-                    Forum bagi Kaskuser untuk berbagi gosip, gambar, foto, dan video yang seru, lucu, serta unik.
-                </p>
+                    <?php 
+                        $isi_kategori= App\thread_post::all();
+                        // echo $posts[0]->id_kategori_post;
+                        foreach ($isi_kategori as $row) {
+                            if($row->id_kategori==$posts[0]->id_kategori_post){
+                                ?>
+                                    <i class="material-icons pull-left">emoji_food_beverage</i>
+                                    <h4><?=$row->nama_kategori?></h4>
+                                    </span>
+                                    <p>
+                                        <?=$row->detail_kategori?>
+                                    </p>
+                                <?php
+                                break;
+                            }
+                        }    
+                    ?>
                 <input type="button" class="btn btn-warning" value="Subscribe">
                 <br><br>
                 <input type="button" class="btn btn-primary form-control" value="Buat Thread Sekarang">
