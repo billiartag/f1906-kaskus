@@ -8,6 +8,8 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 use DB;
+use App\post;
+use App\thread_post;
 use App\User;
 class UserController extends Controller
 {
@@ -15,7 +17,36 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
-    public function toProfile(){
+    public function toProfile($page_number=0){
+        //get jumlah followers, post, thread
+        $post = new post;
+        $thread = new thread_post;
+        
+        $isi_post = $post->where('user_poster','=',Auth::user()->username)->count();
+        if($isi_post!=0){
+            $posts = $post->where('user_poster','=',Auth::user()->username)->get();
+            $ctr_post = 0;
+            $ctr_thread = 0;
+            $data['post'] = $post->where('user_poster','=',Auth::user()->username)->skip($page_number*5)->take(5)->get();
+            $data['thread'] = $thread->where('user_poster','=',Auth::user()->username)->get();
+            foreach($posts as $row){
+                if($row['reply_post']==0){
+                    $ctr_thread++;
+                }
+                else{
+                    $ctr_post++;
+                }
+            }
+            $data['isi_post'] = $ctr_post;
+            $data['isi_thread'] = $ctr_thread;
+            
+        }
+        else{
+            $data['isi_post'] = $isi_post;
+            $data['isi_thread'] = 0;
+        }
+
+        //get foto profil dan background
         $foto = new foto_profil;
         $src = $foto->where('id_profil_foto','=',Auth::user()->username)->get('source_foto');
         if($foto->where('id_profil_foto','=',Auth::user()->username)->count()!=0){
@@ -62,6 +93,13 @@ class UserController extends Controller
             "bio_profil" => $request->input('bio'),
             "alamat_user" => $request->input('alamat'),
         ];
+        if($data['nomor']==null){
+            $data['nomor'] = "";
+        }
+        if($data['bio_profil']==null){
+            $data['bio_profil'] = "";
+        }
+
         $user = new User;
         //$user->update($data);
         $user->where('username','=',Auth::user()->username)->update($data);

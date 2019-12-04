@@ -81,3 +81,7 @@ Route::post('/upload_profile_picture','userController@upload_profile_picture');
 
 
 Route::post('/upload_background_picture','userController@upload_background_picture');
+
+Route::get('/profile/{page_number}', [
+	'uses' => 'UserController@toProfile'
+]);

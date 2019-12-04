@@ -39,6 +39,12 @@
         position: absolute;
         z-index: -1;
     }
+    #konten_my_post{
+        margin : 5%;
+    }
+    .reply_kutipan{
+        display : none;
+    }
 </style>
 <div class="row" >
     <div class="col-md-2"></div>
@@ -99,17 +105,17 @@
                             <hr>
                             <div class="row">
                                 <div class="col-md-3 text-center">
-                                    <p id="jumlah" style="color:black">10</p>
+                                    <p id="jumlah" style="color:black">{{$isi_post}}</p>
                                     <p>Posts</p>
                                 </div>
                                 <div class="col-md-1"></div>
                                 <div class="col-md-3 text-center">
-                                    <p id="jumlah" style="color:black">10</p>
+                                    <p id="jumlah" style="color:black">0</p>
                                     <p>Mengikuti</p>
                                 </div>
                                 <div class="col-md-1"></div>
                                 <div class="col-md-3 text-center">
-                                    <p id="jumlah" style="color:black">10</p>
+                                    <p id="jumlah" style="color:black">0</p>
                                     <p>Pengikut</p>
                                 </div>
                             </div>
@@ -122,17 +128,17 @@
                     <hr>
                         <div class="row">
                             <div class="col-md-3 text-center">
-                                <p id="jumlah" style="color:black">10</p>
+                                <p id="jumlah" style="color:black">{{$isi_thread}}</p>
                                 <p>Thread</p>
                             </div>
                             <div class="col-md-1"></div>
                             <div class="col-md-3 text-center">
-                                <p id="jumlah" style="color:black">10</p>
+                                <p id="jumlah" style="color:black">0</p>
                                 <p>Video</p>
                             </div>
                             <div class="col-md-1"></div>
                             <div class="col-md-3 text-center">
-                                <p id="jumlah" style="color:black">10</p>
+                                <p id="jumlah" style="color:black">0</p>
                                 <p>Lapak</p>
                             </div>
                         </div>
@@ -153,10 +159,41 @@
             </div>
             <div class="col-md-7" style='height:500px;margin-top:3%;'>
                 <div class="col-md-12 text-center" style='background-color:white;height:100%;'>
+                <!-- isi threads -->
                     <h1>Aktivitas anda</h1>
                     <hr>
+                    <div>
+                    @if($isi_post!=0||$isi_thread!=0)
+                        @foreach($post as $row)
+                            @if($row['reply_post']==0)
+                                <div class="row" id='konten_my_post'>
+                                    <div class="col-md-12" style='border:1px solid black;'>
+                                        @foreach($thread as $rowthread)
+                                            @if($rowthread['id_thread']==$row['id_sumber'])
+                                                <h3><?=$rowthread['judul_thread']?></h3>
+                                                <hr>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @else
+                                 <div class="row" id='konten_my_post'>
+                                    <div class="col-md-12" style='border:1px solid black;'>
+                                        <?=$row['isi_post']?>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+                    @endif
+                    </div>
                 </div>
-                <!-- isi threads -->
+                @if($isi_post!=0||$isi_thread!=0)
+                    <ul class="pagination">
+                        @for($i=0;$i<($isi_post+$isi_thread)/5;$i++)
+                            <li><a href="{{url('/profile/'.$i)}}">{{$i+1}}</a></li>
+                        @endfor
+                    </ul>
+                @endif
             </div>
 
         </div>
