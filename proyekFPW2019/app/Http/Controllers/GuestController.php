@@ -122,10 +122,25 @@ class GuestController extends BaseController
 		$semua_user = DB::select("SELECT * FROM USERS");
 		$isi_thread = DB::select("SELECT * FROM THREAD_POSTS WHERE ID_THREAD=$id_thread");
 
+		$hot=DB::table("thread_posts")
+		->join("kategoris","thread_posts.id_kategori_thread","=","kategoris.id_kategori")
+		->orderBy("thread_posts.CTR_REPLY","DESC")
+		->select("thread_posts.judul_thread as judul","thread_posts.id_kategori_thread as id","kategoris.nama_kategori as nama","thread_posts.id_thread as id_thread")
+		->limit(5)
+		->get();
+		$rekom=DB::table("thread_posts")
+		->join("kategoris","thread_posts.id_kategori_thread","=","kategoris.id_kategori")
+		->orderBy("thread_posts.CTR_VIEWERS","DESC")
+		->select("thread_posts.judul_thread as judul","thread_posts.id_kategori_thread as id","kategoris.nama_kategori as nama","thread_posts.id_thread as id_thread")
+		->limit(5)
+		->get();
+
 		$data['posts']=$semua_post;
 		$data['users']=$semua_user;
 		$data['isi_thread']=$isi_thread;
 		$data['user_sekarang']=Auth::user();
+		$data['hot']=$hot;
+		$data['rekom']=$rekom;
 		if($id_post!=null){
 			$data['id_post']=$id_post;
 		}
@@ -162,7 +177,9 @@ class GuestController extends BaseController
 			// $pst = App\thread_post::where(["wakktu_post_thread"=>$waktu_post, "judul_thread"=>])
 			return redirect("post/$id_thread");
 		}else{
+			
 			//ambil data semua kategori yang ada
+			
 			$kategori=DB::select("SELECT * FROM KATEGORIS");
 			$data['kategori']=$kategori;
 			return view("createpost",$data);
@@ -210,8 +227,7 @@ class GuestController extends BaseController
 			return view("createpost",$data);
 		}		
 	}
-
-	public function createThread(Request $request){
+	public function createThread(Request $request,$id_kat=null) {
 		if($request->btnpost)
 		{
 
@@ -254,6 +270,9 @@ class GuestController extends BaseController
 			//ambil data semua kategori yang ada
 			$kategori=DB::select("SELECT * FROM KATEGORIS");
 			$data['kategori']=$kategori;
+			if($id_kat!=null){
+				$data['id_kat']=$id_kat;
+			}
 			$data['jenis_post']="thread";
 			return view("createpost",$data);
 		}

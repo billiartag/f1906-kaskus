@@ -47,6 +47,10 @@
         width: 50px;
         height: 50px;
     }
+    .sidepost{
+        margin:10px;
+        padding:5px;
+    }
 </style>
     <div id="kontainer-besar" class="container">
         <div class="col-md-1"></div>
@@ -201,7 +205,7 @@
             <div id="kontainer_kategori" class="kotak">
                 <span>
                     <?php 
-                        $isi_kategori= App\thread_post::all();
+                        $isi_kategori= DB::select("SELECT * FROM KATEGORIS");
                         // echo $posts[0]->id_kategori_post;
                         foreach ($isi_kategori as $row) {
                             if($row->id_kategori==$posts[0]->id_kategori_post){
@@ -226,50 +230,42 @@
                     <i class="material-icons pull-left">thumb_up</i>
                     <h4>Thread Rekomendasi</h4>
                 </span>
-                <div class="post_rekomen">
-                    <img src="https://picsum.photos/60" class="pull-right">
-                    <p>Judul rekomendasi</p>
-                    <a href="#">The Lounge</a>  
-                    <br>   
-                </div><hr>
-                <div class="post_rekomen">
-                    <img src="https://picsum.photos/61" class="pull-right">
-                    <p>Judul rekomendasi</p>
-                    <a href="#">Komputer</a>  
-                    <br>   
-                </div><hr>
-                <div class="post_rekomen">
-                    <img src="https://picsum.photos/59" class="pull-right">
-                    <p>Judul rekomendasi</p>
-                    <a href="#">The Lounge</a>  
-                    <br>   
-                </div>
+                <?php 
+                    foreach ($hot as $row) {
+                        # code...
+                        ?>
+                        <div class="post_rekomen sidepost">
+                            <a href="<?=url("post/$row->id_thread")?>"><h4><?=$row->judul?></h4></a>
+                            <a href="<?=url("/kategori/$row->id")?>"><?=$row->nama?></a>  
+                            <br>   
+                        </div>
+                        <hr>
+                        <?php
+                    }
+                
+                ?>
             </div>
             <div id="kontainer_hot" class="kotak">
                 <span>
-                    <i class="material-icons pull-left">fireplace</i>
+                    <i class="material-icons pull-left">whatshot</i>
                     <h4>Thread Hot!</h4>
                 </span>
-                <div class="post_hot">
-                    <img src="https://picsum.photos/60" class="pull-right">
-                    <p>Judul hot1</p>
-                    <a href="#">The Lounge</a>  
-                    <br>   
-                </div><hr>
-                <div class="post_hot">
-                    <img src="https://picsum.photos/61" class="pull-right">
-                    <p>Judul hot2</p>
-                    <a href="#">Surabaya</a>  
-                    <br>   
-                </div><hr>
-                <div class="post_hot">
-                    <img src="https://picsum.photos/59" class="pull-right">
-                    <p>Judul hot3</p>
-                    <a href="#">Jakarta</a>  
-                    <br>   
-                </div>
+                <?php 
+                    foreach ($rekom as $row) {
+                        ?>
+                        <div class="post_hot sidepost">
+                                <a href="<?=url("post/$row->id_thread")?>"><h4><?=$row->judul?></h4></a>
+                                <a href="<?=url("/kategori/$row->id")?>"><?=$row->nama?></a>  
+                                <br>   
+                        </div>
+                        <hr>
+
+                        <?php
+                    }
+                
+                ?>
             </div>
-            <div id="kontainer_moderator" class="kotak">
+            {{-- <div id="kontainer_moderator" class="kotak">
                 <h4>Moderator</h4>
                 <span class="kategori_mod">
                     <img src="https://picsum.photos/15" class="img-rounded">
@@ -283,7 +279,7 @@
                     <img src="https://picsum.photos/13" class="img-rounded">
                     Amaaank
                 </span>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection

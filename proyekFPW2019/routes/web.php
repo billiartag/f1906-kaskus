@@ -58,9 +58,9 @@ Route::match(array('GET','POST'),'createpost',[
 ]);
 Route::match(array('GET','POST'),'createpost/{id_thread}/{id_post_balas?}/{kutip?}',[
 	'uses' => 'GuestController@createpostReply'
-]);
+])->middleware('auth');;
 
-Route::match(array('GET','POST'),'createthread',[
+Route::match(array('GET','POST'),'createthread/{id_kategori?}',[
 	'uses' => 'GuestController@createThread'
 ]);
 

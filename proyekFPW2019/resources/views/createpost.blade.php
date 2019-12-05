@@ -111,10 +111,18 @@ else{?>
 								foreach ($kategori as $row) {
 									
 									if($jenis_post=="thread"){
-									echo "<option value='$row->id_kategori'>$row->nama_kategori</option>";}
+										if(isset($id_kat)){
+											if($row->id_kategori==$id_kat){
+												echo "<option value='$row->id_kategori'>$row->nama_kategori</option>";
+												break;
+											}
+										}
+										else{
+										echo "<option value='$row->id_kategori'>$row->nama_kategori</option>";}}
 									else{
 										if($detail_thread[0]->id_kategori_thread==$row->id_kategori){
-										echo "<option value='$row->id_kategori'>$row->nama_kategori</option>";}
+										echo "<option value='$row->id_kategori'>$row->nama_kategori</option>";
+										break;}
 									}
 								}
 							?>

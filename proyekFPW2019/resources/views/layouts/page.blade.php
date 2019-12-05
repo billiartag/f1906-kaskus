@@ -53,21 +53,24 @@
 				<li class="dropdown" style="margin-left:90px">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white"role="button" aria-haspopup="true" aria-expanded="false">Kategori <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Separated link</a></li>
+						<?php 
+							$kategori=DB::select("SELECT * FROM KATEGORIS");
+							foreach ($kategori as $row) {
+								echo "<li><a href='/kategori/$row->id_kategori'>$row->nama_kategori</a></li>";
+							}	
+						?>
 					</ul>
 				</li>
 		</ul>
 		<ul class="nav navbar-nav" style="color:white;">
-			<li><a href="#" style="margin-right:10px;margin-left:25px; "><strong style="color:white">STORY</strong></a></li>
-			<li><a href="#" style="margin-right:10px;"><strong style="color:white">HOBBY</strong></a></li>
-			<li><a href="#" style="margin-right:10px;"><strong style="color:white">GAMES</strong></a></li>
-			<li><a href="#" style="margin-right:10px;"><strong style="color:white">ENTERTAINMENT</strong></a></li>
-			<li><a href="#" style="margin-right:10px;"><strong style="color:white">FEMALE</strong></a></li>
-			<li><a href="#" style="margin-right:10px;"><strong style="color:white">TECH</strong></a></li>
-			<li><a href="#" style="margin-right:10px;"><strong style="color:white">AUTOMOTIVE</strong></a></li>
-			<li><a href="#" style="margin-right:10px;"><strong style="color:white">SPORTS</strong></a></li>
-			<li><a href="#" style="margin-right:10px;"><strong style="color:white">FOOD & TRAVEL</strong></a></li>
-			<li><a href="#"><strong style="color:white">NEWS</strong></a></li>              
+			<?php 
+				$kategori = App\kategori::select("nama_kategori","id_kategori")->orderBy("nama_kategori","asc")->take(5)->get();
+				foreach ($kategori as $row) {
+					?>
+						<li><a href="<?=url("/kategori\/").$row->id_kategori?>" style="margin-right:10px;"><strong style="color:white"><?=$row->nama_kategori?></strong></a></li>
+					<?php 
+				}	
+			?>
 		</ul>
 	</div>
 	<form method="POST" action="{{ route('login') }}">

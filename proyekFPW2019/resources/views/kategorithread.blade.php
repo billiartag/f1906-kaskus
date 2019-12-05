@@ -85,7 +85,7 @@
         <div class="col-md-1"></div>
         <div id="ctr_kanan" class="col-md-4">
             <div id="create_post" class="kotak">
-
+                <a class="form-control btn-primary" href="<?=url("/createpost/$id_kategori")?>">Buat Thread</a>
             </div>
         </div>
 
