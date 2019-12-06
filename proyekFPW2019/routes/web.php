@@ -86,4 +86,4 @@ Route::get('/profile/{page_number}', [
 	'uses' => 'UserController@toProfile'
 ]);
 
-Route::post('/profile','UserController@_follow');
+Route::post('/follow','UserController@_follow');

@@ -165,6 +165,7 @@ class GuestController extends BaseController
 		$thread->ctr_viewers = $ctr+1;
 		$thread->save();
 
+
 		return view("post",$data);
 	}
 
