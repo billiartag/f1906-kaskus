@@ -11,7 +11,6 @@ use App\User;
 use App\modelpost;
 use App\foto_profil;
 use App\thread_post;
-use App\post;
 use Session;
 use DB;
 use Auth;
@@ -180,8 +179,8 @@ class GuestController extends BaseController
 			$id_post        	= null;
 			$waktu_post      	= date('Y-m-d');
 			$id_kategori_post  	= $request->forum_id;
-			$ctr_cendol       	= "";
-			$ctr_bata        	= "";
+			$ctr_cendol       	= 0;
+			$ctr_bata        	= 0;
 			$reply_post       	= 0;
 			
 			$dbmodelpost->buatpost($id_post,$waktu_post,$isi_post,$id_kategori_post,$ctr_cendol,$ctr_bata,$reply_post,$user_poster); 
@@ -219,8 +218,8 @@ class GuestController extends BaseController
 			$id_post        	= null;
 			$waktu_post      	= date('Y-m-d H:i:s');
 			$id_kategori_post  	= $request->forum_id;
-			$ctr_cendol       	= "";
-			$ctr_bata        	= "";
+			$ctr_cendol       	= 0;
+			$ctr_bata        	= 0;
 			$reply_post       	= $id_post_balas;
 			$id_sumber          = $id_thread;
 			
@@ -258,8 +257,7 @@ class GuestController extends BaseController
 				"thread_locked"=>"false",
 				"judul_thread"=>$request->judulpost,
 				"user_poster"=>$request->tuser,
-				"ctr_cendol"=>"",
-				"ctr_bata"=>"",
+				"ctr_cendol"=>0
 			]);
 
 			//get id thread
@@ -273,8 +271,8 @@ class GuestController extends BaseController
 			$waktu_post      	= date('Y-m-d');
 			$id_kategori_post  	= $request->forum_id;
 			$id_sumber 			= $row_post[0]->id_thread;
-			$ctr_cendol       	= "";
-			$ctr_bata        	= "";
+			$ctr_cendol       	= 0;
+			$ctr_bata        	= 0;
 			$reply_post       	= 0;
 			
 			$dbmodelpost->buatpost($id_post,$waktu_post,$isi_post,$id_kategori_post,$ctr_cendol,$ctr_bata,$reply_post,$user_poster,$id_sumber); 
@@ -312,204 +310,5 @@ class GuestController extends BaseController
 		$thread = thread_post::find($id_thread);
 		$thread->ctr_reply = $ctr+1;
 		$thread->save();
-	}
-	public function vote($id_post, $jenis_vote,$id_user){
-		$get_post = post::find($id_post);
-		//explode
-		$ada_cendol = 0;
-		$ada_bata = 0;
-		$exp_cendol = explode(",",$get_post->ctr_cendol);
-		for ($i=0; $i < sizeof($exp_cendol) ; $i++) { 
-			echo $exp_cendol[$i];
-			if($exp_cendol[$i]==$id_user){
-				$ada_cendol =1;
-			}
-		}
-		$exp_bata = explode(",",$get_post->ctr_bata);
-		for ($i=0; $i < sizeof($exp_bata) ; $i++) { 
-			if($exp_bata[$i]==$id_user){
-				$ada_bata =1;
-			}
-		}
-		if($jenis_vote == "bata"){
-			$list_baru = "";
-			if($ada_bata==1){
-				//de-bata
-				//lek ada isine
-				if(sizeof($exp_bata)>0){
-					for ($i=0; $i < sizeof($exp_bata); $i++) { 
-						if($exp_bata[$i]!=$id_user){
-							if($i!=sizeof($exp_bata)-1){
-								//ada koma
-								$list_baru.=$exp_bata[$i].",";
-							}
-							else{
-								//tanpakoma
-								$list_baru.=$exp_bata[$i];
-							}
-						}
-					}
-				}
-			}
-			else{
-				//nge-bata
-				//lek ada isine
-				if($get_post->ctr_bata!=""){
-					for ($i=0; $i < sizeof($exp_bata); $i++) { 
-							$list_baru.=$exp_bata[$i].",";
-					}
-					$list_baru.=$id_user;
-				}
-				else if($get_post->ctr_bata==""){
-					//isi kosong
-					$list_baru = $id_user;
-				}
-			}
-			//update thread
-			$get_post->ctr_bata = $list_baru;
-			$get_post->save();
-			//kalau replypostnya 0, update threadnya
-			if($get_post->reply_post == 0) {
-				$id_thread = $get_post->id_sumber;
-				$get_thread = thread_post::find($id_thread);
-				////
-				$thread_bata = 0;
-				$exp_threadbata = explode(",",$get_thread->ctr_bata);
-					
-				for ($i=0; $i < sizeof($exp_threadbata) ; $i++) { 
-					if($exp_threadbata[$i]==$id_user){
-						$thread_bata =1;
-					}
-				}
-				echo $thread_bata;
-				print_r($exp_threadbata)	;
-				$thread_list="";
-				if($thread_bata==1){
-					//de-bata
-					//lek ada isine
-					if(sizeof($exp_threadbata)>0){
-						for ($i=0; $i < sizeof($exp_threadbata); $i++) { 
-							if($exp_threadbata[$i]!=$id_user){
-								if($i!=sizeof($exp_threadbata)-1){
-									//ada koma
-									$thread_list.=$exp_threadbata[$i].",";
-								}
-								else{
-									//tanpakoma
-									$thread_list.=$exp_threadbata[$i];
-								}
-							}
-						}
-					}
-				}
-				else{
-					//nge-bata
-					//lek ada isine
-					if($get_thread->ctr_bata!=""){
-						for ($i=0; $i < sizeof($exp_threadbata); $i++) { 
-								$thread_list.=$exp_threadbata[$i].",";
-						}
-						$thread_list.=$id_user;
-					}
-					else{
-						//isi kosong
-						$thread_list = $id_user;
-					}
-				}
-				//update thread
-				$get_thread->ctr_bata = $thread_list;
-				$get_thread->save();
-			}
-		}
-		else{
-			$list_baru = "";
-			if($ada_cendol==1){
-				//de-bata
-				//lek ada isine
-				if(sizeof($exp_cendol)>0){
-					for ($i=0; $i < sizeof($exp_cendol); $i++) { 
-						if($exp_cendol[$i]!=$id_user){
-							if($i!=sizeof($exp_cendol)-1){
-								//ada koma
-								$list_baru.=$exp_cendol[$i].",";
-							}
-							else{
-								//tanpakoma
-								$list_baru.=$exp_cendol[$i];
-							}
-						}
-					}
-				}
-			}
-			else{
-				//nge-bata
-				//lek ada isine
-				if($get_post->ctr_cendol!=""){
-					for ($i=0; $i < sizeof($exp_cendol); $i++) { 
-							$list_baru.=$exp_cendol[$i].",";
-					}
-					$list_baru.=$id_user;
-				}
-				else if($get_post->ctr_cendol==""){
-					//isi kosong
-					$list_baru = $id_user;
-				}
-			}
-			//update thread
-			$get_post->ctr_cendol = $list_baru;
-			$get_post->save();
-			//kalau replypostnya 0, update threadnya
-			if($get_post->reply_post == 0) {
-				$id_thread = $get_post->id_sumber;
-				$get_thread = thread_post::find($id_thread);
-				////
-				$thread_cendol = 0;
-				$exp_threadcendol = explode(",",$get_thread->ctr_cendol);
-					
-				for ($i=0; $i < sizeof($exp_threadcendol) ; $i++) { 
-					if($exp_threadcendol[$i]==$id_user){
-						$thread_cendol =1;
-					}
-				}
-				$thread_list="";
-				if($thread_cendol==1){
-					//de-bata
-					//lek ada isine
-					if(sizeof($exp_threadcendol)>0){
-						for ($i=0; $i < sizeof($exp_threadcendol); $i++) { 
-							if($exp_threadcendol[$i]!=$id_user){
-								if($i!=sizeof($exp_threadcendol)-1){
-									//ada koma
-									$thread_list.=$exp_threadcendol[$i].",";
-								}
-								else{
-									//tanpakoma
-									$thread_list.=$exp_threadcendol[$i];
-								}
-							}
-						}
-					}
-				}
-				else{
-					//nge-bata
-					//lek ada isine
-					if($get_thread->ctr_cendol!=""){
-						for ($i=0; $i < sizeof($exp_threadcendol); $i++) { 
-								$thread_list.=$exp_threadcendol[$i].",";
-						}
-						$thread_list.=$id_user;
-					}
-					else{
-						//isi kosong
-						$thread_list = $id_user;
-					}
-				}
-				//update thread
-				$get_thread->ctr_cendol = $thread_list;
-				$get_thread->save();
-			}
-
-		}
-		return redirect("post/".$get_post->id_sumber);
 	}
 }

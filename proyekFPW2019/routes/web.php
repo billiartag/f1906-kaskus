@@ -63,10 +63,6 @@ Route::match(array('GET','POST'),'createpost/{id_thread}/{id_post_balas?}/{kutip
 Route::match(array('GET','POST'),'createthread/{id_kategori?}',[
 	'uses' => 'GuestController@createThread'
 ])->middleware('auth');
-//cendol bata
-Route::match(array('GET','POST'),'vote/{id_post}/{jenis_vote}/{id_user}',[
-	'uses' => 'GuestController@vote'
-]);
 
 Route::view("/post","post");
 
