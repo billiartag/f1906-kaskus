@@ -85,3 +85,5 @@ Route::post('/upload_background_picture','userController@upload_background_pictu
 Route::get('/profile/{page_number}', [
 	'uses' => 'UserController@toProfile'
 ]);
+
+Route::post('/profile','UserController@_follow');

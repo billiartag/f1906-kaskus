@@ -10,7 +10,9 @@ use Auth;
 use DB;
 use App\post;
 use App\thread_post;
+use App\kategori;
 use App\User;
+use App\follow;
 class UserController extends Controller
 {
     public function __construct()
@@ -21,6 +23,7 @@ class UserController extends Controller
         //get jumlah followers, post, thread
         $post = new post;
         $thread = new thread_post;
+        $kategori = new kategori;
         
         $isi_post = $post->where('user_poster','=',Auth::user()->username)->count();
         if($isi_post!=0){
@@ -29,6 +32,11 @@ class UserController extends Controller
             $ctr_thread = 0;
             $data['post'] = $post->where('user_poster','=',Auth::user()->username)->skip($page_number*5)->take(5)->get();
             $data['thread'] = $thread->where('user_poster','=',Auth::user()->username)->get();
+            $kategoris = $kategori->get();
+            foreach($kategoris as $row){
+                $data['kategori'][$row['id_kategori']] = $row['nama_kategori'];
+            }
+            // var_dump($data['kategori']);
             foreach($posts as $row){
                 if($row['reply_post']==0){
                     $ctr_thread++;
@@ -153,5 +161,20 @@ class UserController extends Controller
             $profil_pict->save();
         }
         return redirect('/profile');
+    }
+    public function _follow(Request $request){
+        $user = $request->user;
+        $user_following = $request->user_following;
+        $follow = new follow;
+        $follow->id_user = $user;
+        $follow->id_following = $user_following;
+        $saved = $follow->save;
+        $hasil = 0;
+        if($saved){
+            $hasil = 1;
+        }
+        
+        return $hasil;
+
     }
 }

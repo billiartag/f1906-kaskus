@@ -141,6 +141,9 @@
                     }
                 }if($user_reply!=null){    
                 ?>
+
+
+
                 <div class="per_reply">
                     <div id="poster_reply" class="small d-inline">
                         <p>
@@ -159,7 +162,7 @@
                                 <span id="report_reply"><a href="#" class="pull-right"><i class="material-icons">menu</i></a></span>
                             </span>
                             <span>
-                                <span id="nama_reply" class="nama"><a href="#"><?=$posts[$i]->user_poster?></a></span>
+                                <span id="nama_reply" class="nama"><a href="#" data-toggle="modal" data-target="#<?=$posts[$i]->user_poster?>_modal"><?=$posts[$i]->user_poster?></a></span>
                                 <span id="waktu_reply"><?=$posts[$i]->waktu_post?></span>
                             </span>
                             <br>
@@ -195,6 +198,58 @@
                         </div>
                     </div>
                     </div>
+
+
+                
+                <!-- Buat Modal untuk profil -->
+                <div class="modal" id="<?=$posts[$i]->user_poster?>_modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <center>
+                            <img src="<?=$foto?>" id="gambar_poster" style='width:150px;height:150px;' class="pull-center img-circle">
+                            
+                            <span><h2 class="modal-title"><?=$posts[$i]->user_poster?>
+                            
+                            @if($posts[$i]->user_poster != Auth::user()->username)
+                                <?php if(DB::table('follows')->where("id_user",'=',Auth::user()->username)->where('id_following','=',$posts[$i]->user_poster)->count()==0){ ?>
+                                    <span>
+                                        <button class='btn btn-sm btn-default' onclick=''>
+                                            <i class="material-icons">person_add</i>
+                                        </button>
+                                    </span>
+                                <?php }else{ ?> 
+                                    <span>
+                                        <i class="material-icons">check</i>
+                                    </span>
+                                <?php } ?>
+                            @endif
+                            </h2></span>
+                            </center>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                
+                            </div>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> -->
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal end -->
+
+
                 <?php 
                 }
             }
@@ -282,4 +337,35 @@
             </div> --}}
         </div>
     </div>
+
+    <script type='text/javascript'>
+        function follow(user,user_following){
+            // //buat @csrf
+            // $.ajaxSetup({
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     }
+            // });
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                "url" : "<?=url('/follow')?>",
+                "method" : "post",
+                "data" : {
+                    _token : CSRF_TOKEN,
+                    "user" : user,
+                    "user_following" : user_following,
+                },
+                success : function(a){
+                    if(a==1){
+                        window.reload();
+                    }
+                    else{
+                        alert("gagal!");
+                    }
+                }
+            });
+        }
+    </script>
+    
+
 @endsection
