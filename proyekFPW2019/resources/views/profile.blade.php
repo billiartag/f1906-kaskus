@@ -115,12 +115,12 @@
                                 </div>
                                 <div class="col-md-1"></div>
                                 <div class="col-md-3 text-center">
-                                    <p id="jumlah" style="color:black">0</p>
+                                    <p id="jumlah" style="color:black">{{$count_following}}</p>
                                     <p>Mengikuti</p>
                                 </div>
                                 <div class="col-md-1"></div>
                                 <div class="col-md-3 text-center">
-                                    <p id="jumlah" style="color:black">0</p>
+                                    <p id="jumlah" style="color:black">{{$count_followers}}</p>
                                     <p>Pengikut</p>
                                 </div>
                             </div>
