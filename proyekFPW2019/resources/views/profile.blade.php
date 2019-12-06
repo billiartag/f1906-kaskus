@@ -45,6 +45,11 @@
     .reply_kutipan{
         display : none;
     }
+    #pengirim{
+        font-size:15pt;
+        margin : 1%;
+    }
+    
 </style>
 <div class="row" >
     <div class="col-md-2"></div>
@@ -168,8 +173,19 @@
                             @if($row['reply_post']==0)
                                 <div class="row" id='konten_my_post'>
                                     <div class="col-md-12" style='border:1px solid black;'>
+                                    
                                         @foreach($thread as $rowthread)
                                             @if($rowthread['id_thread']==$row['id_sumber'])
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <p id='pengirim'>{{Auth::user()->nama}}</p>
+                                                    </div>
+                                                    <div class="col-md-8"></div>
+                                                    <div class="col-md-2">
+                                                        <span id='kategori'>{{ $kategori[$rowthread['id_kategori_thread']] }}</span>
+                                                    </div>
+                                                </div>
+                                                <hr>
                                                 <h3><?=$rowthread['judul_thread']?></h3>
                                                 <hr>
                                             @endif
@@ -178,8 +194,19 @@
                                 </div>
                             @else
                                  <div class="row" id='konten_my_post'>
-                                    <div class="col-md-12" style='border:1px solid black;'>
+                                    <div class="col-md-12" style='border:3px solid grey;'>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <p id='pengirim'>{{Auth::user()->nama}}</p>
+                                            </div>
+                                            <div class="col-md-8"></div>
+                                            <div class="col-md-2">
+                                                <span id='kategori'>{{ $kategori[$rowthread['id_kategori_thread']] }}</span>
+                                            </div>
+                                        </div>
+                                        <hr>
                                         <?=$row['isi_post']?>
+                                        <hr>
                                     </div>
                                 </div>
                             @endif
