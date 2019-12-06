@@ -87,3 +87,9 @@ Route::get('/profile/{page_number}', [
 ]);
 
 Route::post('/follow','UserController@_follow');
+
+//cendol bata
+Route::match(array('GET','POST'),'vote/{id_post}/{jenis_vote}/{id_user}',[
+		'uses' => 'GuestController@vote'
+	]);
+	 

@@ -131,14 +131,14 @@
                                 $ctr_b = ($batas[0]=="")?0:sizeof($batas);
                                 $login = false;
                                 if(Auth::check()){
-                                    for ($i=0; $i < sizeof($cendols) ; $i++) { 
-                                        if($cendols[$i]==Auth::user()->username){
+                                    for ($j=0; $j < sizeof($cendols) ; $j++) { 
+                                        if($cendols[$j]==Auth::user()->username){
                                             $dicendol=true;
                                             break;
                                         }
                                     }
-                                    for ($i=0; $i < sizeof($batas) ; $i++) { 
-                                        if($batas[$i]==Auth::user()->username){
+                                    for ($j=0; $j < sizeof($batas) ; $j++) { 
+                                        if($batas[$j]==Auth::user()->username){
                                             $dibata=true;
                                             break;
                                         }
@@ -183,7 +183,7 @@
                         <p>
                             <?php 
                                 $path = App\foto_profil::where("id_profil_foto",$user_reply->username)->get();
-                                if($path[0]->source_foto==""){
+                                if(sizeof($path)==0){
                                     $foto = url("/storage\/")."default_profile_picture.png";
                                 }
                                 else{
@@ -233,18 +233,18 @@
                                     
                                     $dicendol=false;
                                     $dibata=false;
+                                    $login-false;
 
                                     if(Auth::check()){
-                                        $exp_cendol = explode(",",$posts[$i]->ctr_cendol);
-                                        for ($i=0; $i < sizeof($exp_cendol) ; $i++) { 
-                                            if($exp_cendol[$i]==Auth::user()->username){
+                                        for ($j=0; $j< sizeof($cendols) ; $j++) { 
+                                            if($cendols[$j]==Auth::user()->username){
                                                 $dicendol=true;
                                                 break;
                                             }
                                         }
-                                        $exp_bata = explode(",",$posts[$i]->ctr_bata);
-                                        for ($i=0; $i < sizeof($exp_bata) ; $i++) { 
-                                            if($exp_bata[$i]==Auth::user()->username){
+                                        $batas = explode(",",$posts[$i]->ctr_bata);
+                                        for ($j=0; $j < sizeof($batas) ; $j++) { 
+                                            if($batas[$j]==Auth::user()->username){
                                                 $dibata=true;
                                                 break;
                                             }
