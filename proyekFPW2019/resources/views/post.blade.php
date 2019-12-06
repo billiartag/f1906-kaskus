@@ -251,18 +251,15 @@
                                                         $thread_search_model = DB::table('thread_posts')->where('id_thread','=',$row_modal->id_sumber)->get();
                                                     ?> 
                                                     @if($row_modal->reply_post == 0)
-                                                        @foreach($thread_search_model as $thread_model_row)
-                                                            <p style='font-weight:bold;'>{{ $thread_model_row->judul_thread }}</p>
-                                                        @endforeach
+                                                        <p style='font-weight:bold;'>{{ $thread_search_model[0]->judul_thread }}</p>
+                                                            
 
                                                     @else
-                                                        @foreach($thread_search_model as $thread_model_row)
-                                                                <span class='badge'>
-                                                                    <i class="material-icons md-18">reply</i>        
-                                                                    <span>Membalas Thread {{ $thread_model_row->user_poster }}</span>
-                                                                </span>
+                                                        <span class='badge'>
+                                                            <i class="material-icons md-18">reply</i>        
+                                                            <span>Membalas Thread {{ $thread_search_model[0]->user_poster }}</span>
+                                                        </span>
                                                             
-                                                        @endforeach
                                                           
                                                         <p><?= $row_modal->isi_post ?></p>
                                                         

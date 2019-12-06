@@ -109,18 +109,19 @@
                             <br><br>
                             <hr>
                             <div class="row">
-                                <div class="col-md-3 text-center">
+                                <div class="col-md-3 text-center btn" style='cursor:default;'>
                                     <p id="jumlah" style="color:black">{{$isi_post}}</p>
                                     <p>Posts</p>
                                 </div>
                                 <div class="col-md-1"></div>
-                                <div class="col-md-3 text-center">
-                                    <p id="jumlah" style="color:black">{{$count_following}}</p>
+                                <div class="col-md-3 text-center btn" data-toggle="modal" data-target="#myModalFollowers">
+                                    
+                                    <p id="jumlah" style="color:black">{{($count_following)}}</p>
                                     <p>Mengikuti</p>
                                 </div>
                                 <div class="col-md-1"></div>
-                                <div class="col-md-3 text-center">
-                                    <p id="jumlah" style="color:black">{{$count_followers}}</p>
+                                <div class="col-md-3 text-center btn" data-toggle="modal" data-target="#myModalFollowings">
+                                    <p id="jumlah" style="color:black">{{($count_followers)}}</p>
                                     <p>Pengikut</p>
                                 </div>
                             </div>
@@ -228,6 +229,101 @@
     </div>
     <div class="col-md-2"></div>
 </div>
+
+
+
+        <!-- The Modal for Followings  -->
+        <div class="modal" id="myModalFollowings">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">User yang Mengikuti anda</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            @if($count_followers!=0)
+                                @foreach($followers as $row)
+                                    <?php
+                                        $nama = DB::table('users')->where('username','=',$row->id_user)->get();
+                                        
+                                    ?>
+                                    @foreach($nama as $row_nama)
+                                        {{ $row_nama->nama }}
+                                        <hr>
+                                    @endforeach
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> -->
+                </div>
+
+                </div>
+            </div>
+        </div>
+        
+        <!-- The Modal for Followings -->
+        <div class="modal" id="myModalFollowers">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">User yang anda ikuti</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            @if($count_following!=0)
+                                @foreach($following as $row)
+                                    <?php
+                                        $nama = DB::table('users')->where('username','=',$row->id_following)->get();
+                                        
+                                    ?>
+                                    @foreach($nama as $row_nama)
+                                        {{ $row_nama->nama }}
+                                        <hr>
+                                    @endforeach
+                                
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="col-md-1"></div>
+
+                    </div>
+
+
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> -->
+                </div>
+
+                </div>
+            </div>
+        </div>
+
+
 <script>
     document.getElementById("background_picture").onchange = function(){
         document.getElementById("ubah_background").submit();

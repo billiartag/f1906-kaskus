@@ -26,6 +26,14 @@ class UserController extends Controller
         $kategori = new kategori;
         $follow = new follow;
         
+        $data['followers'] = $follow->where('id_following','=',Auth::user()->username)->get();
+        $data['following'] = $follow->where('id_user','=',Auth::user()->username)->get();
+        
+        $data['count_followers'] = $follow->where('id_following','=',Auth::user()->username)->count();
+        $data['count_following'] = $follow->where('id_user','=',Auth::user()->username)->count();
+            
+
+
         $isi_post = $post->where('user_poster','=',Auth::user()->username)->count();
         if($isi_post!=0){
             $posts = $post->where('user_poster','=',Auth::user()->username)->get();
@@ -33,8 +41,8 @@ class UserController extends Controller
             $ctr_thread = 0;
             $data['post'] = $post->where('user_poster','=',Auth::user()->username)->skip($page_number*5)->take(5)->get();
             $data['thread'] = $thread->where('user_poster','=',Auth::user()->username)->get();
-            $data['count_followers'] = $follow->where('id_following','=',Auth::user()->username)->count();
-            $data['count_following'] = $follow->where('id_user','=',Auth::user()->username)->count();
+
+            
 
             $kategoris = $kategori->get();
             foreach($kategoris as $row){
