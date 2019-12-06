@@ -110,6 +110,14 @@
                 <div name="isi_thread">
                     <?=$posts[0]->isi_post?>
                 </div>
+                <div class="post_liker">
+                    <span>
+                        <img src="https://i.pravatar.cc/20" class="img-circle">
+                        <img src="https://i.pravatar.cc/21" class="img-circle">
+                        <img src="https://i.pravatar.cc/19" class="img-circle">
+                        <span>Liked this</span>
+                    </span>
+                </div>
                 <hr>
                 <div class="post_footer">
                     <div class="karma">
@@ -146,7 +154,7 @@
                     <div class="row" style="padding:2%">
                         <a href='<?=url("/createpost\/").$isi_thread[0]->id_thread."/".$posts[0]->id_post."/true"?>' style="margin-right:1%" class="btn btn-info">Kutip</a>
                         <a href='<?=url("/createpost\/").$isi_thread[0]->id_thread."/".$posts[0]->id_post?>' class='btn btn-primary'>Balas</a>
-                    </div>                    
+                        </div>                    
                 </div>
             </div>
             <div name="kontainer-reply" class="kotak mx-auto">
@@ -175,14 +183,11 @@
                         <p>
                             <?php 
                                 $path = App\foto_profil::where("id_profil_foto",$user_reply->username)->get();
-                                if(sizeof($path)==0){
+                                if($path[0]->source_foto==""){
                                     $foto = url("/storage\/")."default_profile_picture.png";
                                 }
                                 else{
-                                    if($path[0]->source_foto==""){   
-                                        $foto = url("/storage\/")."default_profile_picture.png";
-                                    }
-                                    else{$foto = url("/storage\/").$path[0]->source_foto;}
+                                    $foto = url("/storage\/").$path[0]->source_foto;
                                 }
                             ?>
                             <img src="<?=$foto?>" id="gambar_poster" class="pull-left img-circle pp">
@@ -305,18 +310,15 @@
                                                         $thread_search_model = DB::table('thread_posts')->where('id_thread','=',$row_modal->id_sumber)->get();
                                                     ?> 
                                                     @if($row_modal->reply_post == 0)
-                                                        @foreach($thread_search_model as $thread_model_row)
-                                                            <p style='font-weight:bold;'>{{ $thread_model_row->judul_thread }}</p>
-                                                        @endforeach
+                                                        <p style='font-weight:bold;'>{{ $thread_search_model[0]->judul_thread }}</p>
+                                                            
 
                                                     @else
-                                                        @foreach($thread_search_model as $thread_model_row)
-                                                                <span class='badge'>
-                                                                    <i class="material-icons md-18">reply</i>        
-                                                                    <span>Membalas Thread {{ $thread_model_row->user_poster }}</span>
-                                                                </span>
+                                                        <span class='badge'>
+                                                            <i class="material-icons md-18">reply</i>        
+                                                            <span>Membalas Thread {{ $thread_search_model[0]->user_poster }}</span>
+                                                        </span>
                                                             
-                                                        @endforeach
                                                           
                                                         <p><?= $row_modal->isi_post ?></p>
                                                         
