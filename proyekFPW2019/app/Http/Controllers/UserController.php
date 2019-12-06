@@ -163,18 +163,14 @@ class UserController extends Controller
         return redirect('/profile');
     }
     public function _follow(Request $request){
-        $user = $request->user;
-        $user_following = $request->user_following;
+        $user = $request->input('user');
+        $user_following = $request->input("user_following");
         $follow = new follow;
         $follow->id_user = $user;
         $follow->id_following = $user_following;
+        $follow->save();
         $saved = $follow->save;
-        $hasil = 0;
-        if($saved){
-            $hasil = 1;
-        }
-        
-        return $hasil;
+        return $saved;
 
     }
 }

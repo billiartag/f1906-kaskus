@@ -52,6 +52,9 @@
         margin:10px;
         padding:5px;
     }
+    #konten_model_post{
+        margin: 2%;
+    }
 </style>
     <div id="kontainer-besar" class="container">
         <div class="col-md-1"></div>
@@ -245,27 +248,63 @@
                             <img src="<?=$foto?>" id="gambar_poster" style='width:150px;height:150px;' class="pull-center img-circle">
                             
                             <span><h2 class="modal-title"><?=$posts[$i]->user_poster?>
-                            
-                            @if($posts[$i]->user_poster != Auth::user()->username)
-                                <?php if(DB::table('follows')->where("id_user",'=',Auth::user()->username)->where('id_following','=',$posts[$i]->user_poster)->count()==0){ ?>
-                                    <span>
-                                        <button class='btn btn-sm btn-default' onclick=''>
-                                            <i class="material-icons">person_add</i>
-                                        </button>
-                                    </span>
-                                <?php }else{ ?> 
-                                    <span>
-                                        <i class="material-icons">check</i>
-                                    </span>
-                                <?php } ?>
-                            @endif
+                            @auth
+                                @if($posts[$i]->user_poster != Auth::user()->username)
+                                    <?php if(DB::table('follows')->where("id_user",'=',Auth::user()->username)->where('id_following','=',$posts[$i]->user_poster)->count()==0){ ?>
+                                        <span>
+                                            <button class='btn btn-sm btn-default' onclick='follow("{{ Auth::user()->username }}","{{ $posts[$i]->user_poster }}")'>
+                                                <i class="material-icons">person_add</i>
+                                            </button>
+                                        </span>
+                                    <?php }else{ ?> 
+                                        <span>
+                                            <i class="material-icons" style='color:green;'>check</i>
+                                        </span>
+                                    <?php } ?>
+                                @endif
+                            @endauth
                             </h2></span>
                             </center>
                         </div>
 
                         <!-- Modal body -->
                         <div class="modal-body">
-                            <div class="row">
+                            <div class="row" style='height:350px;'>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-10 bg-primary" style='height:350px;overflow:auto;'>
+                                    <?php $post_user_clicked = DB::table('posts')->where('user_poster','=',$posts[$i]->user_poster)->get();  ?>
+                                    @foreach($post_user_clicked as $row_modal)
+                                        <div class='row' style='margin:2%;border:1px solid black;background-color:white;color:black;'>
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-10">
+                                                <div id="konten_model_post">
+                                                    <p class='pull-right small'>{{ $row_modal->waktu_post }}</p>
+                                                    <?php  
+                                                        $thread_search_model = DB::table('thread_posts')->where('id_thread','=',$row_modal->id_sumber)->get();
+                                                    ?> 
+                                                    @if($row_modal->reply_post == 0)
+                                                        @foreach($thread_search_model as $thread_model_row)
+                                                            <p style='font-weight:bold;'>{{ $thread_model_row->judul_thread }}</p>
+                                                        @endforeach
+
+                                                    @else
+                                                        @foreach($thread_search_model as $thread_model_row)
+                                                                <span class='badge'>
+                                                                    <i class="material-icons md-18">reply</i>        
+                                                                    <span>Membalas Thread {{ $thread_model_row->user_poster }}</span>
+                                                                </span>
+                                                            
+                                                        @endforeach
+                                                          
+                                                        <p><?= $row_modal->isi_post ?></p>
+                                                        
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1"></div>
+                                        </div>
+                                    @endforeach 
+                                </div>
                                 <div class="col-md-1"></div>
                                 
                             </div>
@@ -378,22 +417,16 @@
             //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             //     }
             // });
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 "url" : "<?=url('/follow')?>",
                 "method" : "post",
                 "data" : {
-                    _token : CSRF_TOKEN,
+                    "_token" : "{{ csrf_token() }}",
                     "user" : user,
                     "user_following" : user_following,
                 },
                 success : function(a){
-                    if(a==1){
-                        window.reload();
-                    }
-                    else{
-                        alert("gagal!");
-                    }
+                    window.location.reload();
                 }
             });
         }
