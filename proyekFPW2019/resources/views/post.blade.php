@@ -123,24 +123,24 @@
                                 $ctr_b = ($batas[0]=="")?0:sizeof($batas);
                                 $login = false;
                                 if(Auth::check()){
-                                    $exp_cendol = explode(",",$posts[0]->ctr_cendol);
-                                    for ($i=0; $i < sizeof($exp_cendol) ; $i++) { 
-                                        if($exp_cendol[$i]==Auth::user()->username){
+                                    for ($i=0; $i < sizeof($cendols) ; $i++) { 
+                                        if($cendols[$i]==Auth::user()->username){
                                             $dicendol=true;
+                                            break;
                                         }
                                     }
-                                    $exp_bata = explode(",",$posts[0]->ctr_bata);
-                                    for ($i=0; $i < sizeof($exp_bata) ; $i++) { 
-                                        if($exp_bata[$i]==Auth::user()->username){
+                                    for ($i=0; $i < sizeof($batas) ; $i++) { 
+                                        if($batas[$i]==Auth::user()->username){
                                             $dibata=true;
+                                            break;
                                         }
                                     }
                                     $login=true;
                                 }
                             ?>                                                      
-                            <a href="<?php if($login){ echo url("/vote\/").$posts[0]->id_post."/cendol/".Auth::user()->username;}?>"><i class="material-icons text-success" <?php if($dicendol){echo "style='background-color:#c6f68d;border-radius:4px'";}?>>arrow_upward</i></a>
+                            <a href="<?php if($login){ if(!$dibata){echo url("/vote\/").$posts[0]->id_post."/cendol/".Auth::user()->username;}}?>"><i class="material-icons text-success" <?php if($dicendol){echo "style='background-color:#c6f68d;border-radius:4px'";}?>>arrow_upward</i></a>
                             <?php echo ($ctr_c-$ctr_b)?>
-                            <a href="<?php if($login){echo url("/vote\/").$posts[0]->id_post."/bata/".Auth::user()->username;}?>"  <?php if($dicendol){echo "style='background-color:#EF5350;border-radius:4px'";}?>><i class="material-icons text-danger">arrow_downward</i></a>
+                            <a href="<?php if($login){if(!$dicendol){echo url("/vote\/").$posts[0]->id_post."/bata/".Auth::user()->username;}}?>"  ><i class="material-icons text-danger" <?php if($dibata){echo "style='background-color:#EF5350;border-radius:4px'";}?>>arrow_downward</i></a>
                         </span>
                     </div>
                     <div class="row" style="padding:2%">
@@ -206,12 +206,12 @@
                     <div class="isi_reply">
                         <?=$posts[$i]->isi_post?>
                     </div>
-                    <div class="post_liker">
+                    {{-- <div class="post_liker">
                         <span>
                             <img src="https://i.pravatar.cc/22" class="img-circle">
                             <span>Liked this</span>
                         </span>
-                    </div>
+                    </div> --}}
                     <hr>
                     <div class="post_footer">
                         <div class="interact pull-right">
@@ -225,10 +225,32 @@
                                     $batas = explode(",",$posts[$i]->ctr_bata);
                                     $ctr_c = ($cendols[0]=="")?0:sizeof($cendols);
                                     $ctr_b = ($batas[0]=="")?0:sizeof($batas);
-                                ?>                            
-                                <a href="<?php if($login){echo url("/vote\/").$posts[0]->id_post."/cendol/".Auth::user()->username;}?>"><i class="material-icons text-success">arrow_upward</i></a>
+                                    
+                                    $dicendol=false;
+                                    $dibata=false;
+
+                                    if(Auth::check()){
+                                        $exp_cendol = explode(",",$posts[$i]->ctr_cendol);
+                                        for ($i=0; $i < sizeof($exp_cendol) ; $i++) { 
+                                            if($exp_cendol[$i]==Auth::user()->username){
+                                                $dicendol=true;
+                                                break;
+                                            }
+                                        }
+                                        $exp_bata = explode(",",$posts[$i]->ctr_bata);
+                                        for ($i=0; $i < sizeof($exp_bata) ; $i++) { 
+                                            if($exp_bata[$i]==Auth::user()->username){
+                                                $dibata=true;
+                                                break;
+                                            }
+                                        }
+                                        $login=true;
+                                    }
+                                ?>                                                            
+                                <a href="<?php if($login){ if(!$dibata){echo url("/vote\/").$posts[$i]->id_post."/cendol/".Auth::user()->username;}}?>"><i class="material-icons text-success" <?php if($dicendol){echo "style='background-color:#c6f68d;border-radius:4px'";}?>>arrow_upward</i></a>
                                 <?php echo ($ctr_c-$ctr_b)?>
-                                <a href="<?php if($login){echo url("/vote\/").$posts[$i]->id_post."/bata/".Auth::user()->username;}?>"><i class="material-icons text-danger">arrow_downward</i></a>
+                                <a href="<?php if($login){if(!$dicendol){echo url("/vote\/").$posts[$i]->id_post."/bata/".Auth::user()->username;}}?>"  ><i class="material-icons text-danger" <?php if($dibata){echo "style='background-color:#EF5350;border-radius:4px'";}?>>arrow_downward</i></a>
+                                
                             </span>
                         </div>
                     </div>
