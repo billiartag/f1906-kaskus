@@ -110,20 +110,43 @@
                 <div name="isi_thread">
                     <?=$posts[0]->isi_post?>
                 </div>
-                <div class="post_liker">
-                    <span>
-                        <img src="https://i.pravatar.cc/20" class="img-circle">
-                        <img src="https://i.pravatar.cc/21" class="img-circle">
-                        <img src="https://i.pravatar.cc/19" class="img-circle">
-                        <span>Liked this</span>
-                    </span>
-                </div>
                 <hr>
                 <div class="post_footer">
-                        <div class="row" style="padding:2%">
+                    <div class="karma">
+                        <span>   
+                            <?php 
+                                $dicendol=false;
+                                $dibata=false;
+                                $cendols = explode(",",$posts[0]->ctr_cendol);
+                                $batas = explode(",",$posts[0]->ctr_bata);
+                                $ctr_c = ($cendols[0]=="")?0:sizeof($cendols);
+                                $ctr_b = ($batas[0]=="")?0:sizeof($batas);
+                                $login = false;
+                                if(Auth::check()){
+                                    $exp_cendol = explode(",",$posts[0]->ctr_cendol);
+                                    for ($i=0; $i < sizeof($exp_cendol) ; $i++) { 
+                                        if($exp_cendol[$i]==Auth::user()->username){
+                                            $dicendol=true;
+                                        }
+                                    }
+                                    $exp_bata = explode(",",$posts[0]->ctr_bata);
+                                    for ($i=0; $i < sizeof($exp_bata) ; $i++) { 
+                                        if($exp_bata[$i]==Auth::user()->username){
+                                            $dibata=true;
+                                        }
+                                    }
+                                    $login=true;
+                                }
+                            ?>                                                      
+                            <a href="<?php if($login){ echo url("/vote\/").$posts[0]->id_post."/cendol/".Auth::user()->username;}?>"><i class="material-icons text-success" <?php if($dicendol){echo "style='background-color:#c6f68d;border-radius:4px'";}?>>arrow_upward</i></a>
+                            <?php echo ($ctr_c-$ctr_b)?>
+                            <a href="<?php if($login){echo url("/vote\/").$posts[0]->id_post."/bata/".Auth::user()->username;}?>"  <?php if($dicendol){echo "style='background-color:#EF5350;border-radius:4px'";}?>><i class="material-icons text-danger">arrow_downward</i></a>
+                        </span>
+                    </div>
+                    <div class="row" style="padding:2%">
                         <a href='<?=url("/createpost\/").$isi_thread[0]->id_thread."/".$posts[0]->id_post."/true"?>' style="margin-right:1%" class="btn btn-info">Kutip</a>
                         <a href='<?=url("/createpost\/").$isi_thread[0]->id_thread."/".$posts[0]->id_post?>' class='btn btn-primary'>Balas</a>
-                        </div>                    
+                    </div>                    
                 </div>
             </div>
             <div name="kontainer-reply" class="kotak mx-auto">
@@ -152,11 +175,14 @@
                         <p>
                             <?php 
                                 $path = App\foto_profil::where("id_profil_foto",$user_reply->username)->get();
-                                if($path[0]->source_foto==""){
+                                if(sizeof($path)==0){
                                     $foto = url("/storage\/")."default_profile_picture.png";
                                 }
                                 else{
-                                    $foto = url("/storage\/").$path[0]->source_foto;
+                                    if($path[0]->source_foto==""){   
+                                        $foto = url("/storage\/")."default_profile_picture.png";
+                                    }
+                                    else{$foto = url("/storage\/").$path[0]->source_foto;}
                                 }
                             ?>
                             <img src="<?=$foto?>" id="gambar_poster" class="pull-left img-circle pp">
@@ -193,10 +219,16 @@
                             <a href="<?=url("/createpost\/").$posts[$i]->id_sumber."/".$posts[$i]->id_post?>" class='btn btn-primary' style='margin-right:5px'>Balas</a>
                         </div>
                         <div class="karma">
-                            <span>                                
-                                <a href="#"><i class="material-icons text-success">arrow_upward</i></a>
-                                10
-                                <a href="#"><i class="material-icons text-danger">arrow_downward</i></a>
+                            <span>              
+                                <?php 
+                                    $cendols = explode(",",$posts[$i]->ctr_cendol);
+                                    $batas = explode(",",$posts[$i]->ctr_bata);
+                                    $ctr_c = ($cendols[0]=="")?0:sizeof($cendols);
+                                    $ctr_b = ($batas[0]=="")?0:sizeof($batas);
+                                ?>                            
+                                <a href="<?php if($login){echo url("/vote\/").$posts[0]->id_post."/cendol/".Auth::user()->username;}?>"><i class="material-icons text-success">arrow_upward</i></a>
+                                <?php echo ($ctr_c-$ctr_b)?>
+                                <a href="<?php if($login){echo url("/vote\/").$posts[$i]->id_post."/bata/".Auth::user()->username;}?>"><i class="material-icons text-danger">arrow_downward</i></a>
                             </span>
                         </div>
                     </div>
