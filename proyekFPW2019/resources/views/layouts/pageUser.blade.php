@@ -25,13 +25,8 @@
     <nav class="navbar navbar-default" style="background-color:white">
 		<div class="container-fluid">
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1;">
-			<ul class="nav navbar-nav" style="margin-top:10px">
+			<ul class="nav navbar-nav col-md-5" style="margin-top:10px">
                 <li ><a href="{{ url('/') }}"style="display:inline"><img src="{{ URL::to('/kaskus.png') }}" style='width: 200px;height: 45px;'></a></li>
-				<li ><a href="#" ><strong>Forum</strong></a></li>
-				<li><a href="#"><strong>TV</strong></a></li>
-				<li><a href="#"><strong>Podcast</strong></a></li>
-				<li><a href="#"><strong>Kapten</strong></a></li>
-				<li><a href="#"><strong>Jual Beli</strong></a></li>
 			</ul>
 			
 			<div class="col-md-3">

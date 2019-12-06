@@ -27,7 +27,8 @@
     .per_reply{
         border: 1px solid gray;
         border-radius: 5px;
-        padding: 1%;
+        padding: 2%;
+        padding-bottom: 3%;
         margin:1%;
     }
     .nama{
@@ -117,10 +118,9 @@
                 <hr>
                 <div class="post_footer">
                         <div class="row" style="padding:2%">
-                        <a href='<?=url("/createpost\/").$isi_thread[0]->id_thread."/".$posts[0]->id_post."/true"?>'>Kutip</a>
+                        <a href='<?=url("/createpost\/").$isi_thread[0]->id_thread."/".$posts[0]->id_post."/true"?>' style="margin-right:1%" class="btn btn-info">Kutip</a>
                         <a href='<?=url("/createpost\/").$isi_thread[0]->id_thread."/".$posts[0]->id_post?>' class='btn btn-primary'>Balas</a>
-                        </div>
-                    
+                        </div>                    
                 </div>
             </div>
             <div name="kontainer-reply" class="kotak mx-auto">
@@ -183,8 +183,8 @@
                     <hr>
                     <div class="post_footer">
                         <div class="interact pull-right">
-                            <a href="<?=url("/createpost\/").$posts[$i]->id_sumber."/".$posts[$i]->id_post?>/true   ">Kutip</a>
-                            <a href="<?=url("/createpost\/").$posts[$i]->id_sumber."/".$posts[$i]->id_post?>">Balas</a>
+                            <a href="<?=url("/createpost\/").$posts[$i]->id_sumber."/".$posts[$i]->id_post?>/true" class='btn btn-info' style='margin-right:5px'>Kutip</a>
+                            <a href="<?=url("/createpost\/").$posts[$i]->id_sumber."/".$posts[$i]->id_post?>" class='btn btn-primary' style='margin-right:5px'>Balas</a>
                         </div>
                         <div class="karma">
                             <span>                                

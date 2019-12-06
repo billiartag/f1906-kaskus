@@ -113,7 +113,21 @@ class GuestController extends BaseController
 			}
 		}
 		else {
-			return view("dashboard");
+			$thread = DB::table("thread_posts")->orderBy("thread_posts.waktu_post_thread","desc")
+			->join("kategoris","thread_posts.id_kategori_thread","=","kategoris.id_kategori")
+			->join("users","thread_posts.user_poster","=","users.username")
+			->select("thread_posts.judul_thread as judul","thread_posts.id_kategori_thread as id","kategoris.nama_kategori as nama_kategori","thread_posts.id_thread as id_thread","users.nama as nama","users.jabatan_user as jabatan")
+			->limit(10)
+			->get();
+			$hot = DB::table("thread_posts")->orderBy("thread_posts.CTR_reply","desc")
+			->join("kategoris","thread_posts.id_kategori_thread","=","kategoris.id_kategori")
+			->join("users","thread_posts.user_poster","=","users.username")
+			->select("thread_posts.judul_thread as judul","thread_posts.id_kategori_thread as id","kategoris.nama_kategori as nama_kategori","thread_posts.id_thread as id_thread","users.nama as nama","users.jabatan_user as jabatan")
+			->limit(10)
+			->get();
+			$data['thread']=$thread;
+			$data['hot']=$hot;
+			return view("dashboard",$data);
 		}
 	}
 

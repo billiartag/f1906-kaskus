@@ -18,8 +18,8 @@ class CreatePostsTable extends Migration
             $table->date('waktu_post');
             $table->text('isi_post');
             $table->integer('id_kategori_post');
-            $table->integer('ctr_cendol');
-            $table->integer('ctr_bata');
+            $table->text('ctr_cendol');
+            $table->text('ctr_bata');
             $table->integer('reply_post');
             $table->integer('id_sumber');
             $table->string('user_poster');

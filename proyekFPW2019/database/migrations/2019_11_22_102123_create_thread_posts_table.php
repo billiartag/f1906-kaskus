@@ -22,7 +22,8 @@ class CreateThreadPostsTable extends Migration
             $table->string('thread_locked');
             $table->string('judul_thread');
             $table->string('user_poster');
-            $table->integer('ctr_cendol');
+            $table->text('ctr_cendol');
+            $table->text('ctr_bata');
         });
     }
 
