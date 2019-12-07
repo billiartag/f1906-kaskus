@@ -31,6 +31,21 @@ class UserController extends Controller
         
         $data['count_followers'] = $follow->where('id_following','=',Auth::user()->username)->count();
         $data['count_following'] = $follow->where('id_user','=',Auth::user()->username)->count();
+
+        $data_post = $post->where('user_poster','=',Auth::user()->username)->get();
+        $data['mejeng'] = array();
+        foreach($data_post as $row){
+            $cek = true;
+            for($i=0;$i< count($data['mejeng']);$i++){
+                if($data['mejeng'][$i] == $row['id_kategori_post']){
+                    $cek = false;
+                }
+            }
+            if($cek){
+                array_push($data['mejeng'],$row['id_kategori_post']);
+            }
+             
+        }
             
 
 
@@ -39,7 +54,7 @@ class UserController extends Controller
             $posts = $post->where('user_poster','=',Auth::user()->username)->get();
             $ctr_post = 0;
             $ctr_thread = 0;
-            $data['post'] = $post->where('user_poster','=',Auth::user()->username)->skip($page_number*5)->take(5)->get();
+            $data['post'] = $post->where('user_poster','=',Auth::user()->username)->skip($page_number*3)->take(3)->get();
             $data['thread'] = $thread->where('user_poster','=',Auth::user()->username)->get();
 
             
@@ -85,6 +100,7 @@ class UserController extends Controller
             $data['src_profil'] = "default_profile_picture.png";
             $data['src_background'] = "default_background.jpg";
         } 
+        
         return view("profile",$data);
     }
     public function newPost(){
@@ -93,7 +109,7 @@ class UserController extends Controller
     }
     public function logout(){
         Auth::logout();
-        return view("dashboard");
+        return redirect("/");
     }
     public function update_data(Request $request){
         $request->validate([

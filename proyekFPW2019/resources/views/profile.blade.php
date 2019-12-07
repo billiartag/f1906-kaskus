@@ -24,6 +24,12 @@
         margin-bottom : 2%;
         border-radius :100px 100px;
     }
+    #fotoProfil_kecil{
+        width:30px;
+        height:30px;
+        margin: 1%;
+        margin-left : -5%;
+    }
     #background_profile{
         height:280px;
         padding:2%;
@@ -39,15 +45,31 @@
         position: absolute;
         z-index: -1;
     }
+
+    #penampung_konten_my_post{
+        margin : 1% 2% 1% 2%;
+        height : auto;
+    }
     #konten_my_post{
-        margin : 5%;
+        margin : 0;
+        height : auto;
     }
     .reply_kutipan{
         display : none;
     }
     #pengirim{
-        font-size:15pt;
-        margin : 1%;
+        font-size:13pt;
+        vertical-align: middle;
+        margin-left:2%;
+    }
+    #waktu_kirim{
+        font-style: italic;
+        margin-top:6%;
+        margin-left:-9%;
+    }
+    #kategori{
+        font-size: 8pt;
+        color : blue;
     }
     
 </style>
@@ -153,71 +175,97 @@
                 <div class="col-md-12" style='background-color:white;margin-top:6%;'>
                     <h3>Aktif Mejeng di </h3>
                     <hr>
-                        <div class="row" style='height:auto;'>
-                            <div class="col-md-3" style='height:auto;'>
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Surabaya_Montage_2.jpg" class="rounded-circle" id='gambarMejeng'>
+                        @foreach($mejeng as $row_mejeng)
+                            <div class="row" style='height:auto;'>
+                                <div class="col-md-12 align-middle" style='height:50px;'>
+                                    
+                                    <a class='btn btn-default' style='width:100%;' href='{{ url("kategori/$row_mejeng") }}'> {{$kategori[$row_mejeng]}} </a>
                                 </div>
-                            <div class="col-md-9 align-middle" style='height:50px;'>
-                                <h4>Surabaya</h4>
                             </div>
-                        </div>
+                        @endforeach
                 </div>
             </div>
-            <div class="col-md-7" style='height:500px;margin-top:3%;'>
+            <div class="col-md-7" style='height:auto; margin-top:3%;'>
                 <div class="col-md-12 text-center" style='background-color:white;height:100%;'>
                 <!-- isi threads -->
                     <h1>Aktivitas anda</h1>
                     <hr>
                     <div>
+                        
+                    <div class="row">
+                        <div class="col-md-12" style='background-color:#e9ebee;height:8px;'></div>
+                    </div>
                     @if($isi_post!=0||$isi_thread!=0)
                         @foreach($post as $row)
                             @if($row['reply_post']==0)
-                                <div class="row" id='konten_my_post'>
-                                    <div class="col-md-12" style='border:1px solid black;'>
-                                    
+                                <div class="row" id='penampung_konten_my_post'>
+                                    <div class="col-md-12" id='konten_my_post'>
                                         @foreach($thread as $rowthread)
                                             @if($rowthread['id_thread']==$row['id_sumber'])
                                                 <div class="row">
-                                                    <div class="col-md-2">
-                                                        <p id='pengirim'>{{Auth::user()->nama}}</p>
+                                                    <div class="col-md-10">
+                                                        <img src='http://127.0.0.1:8000/storage/{{$src_profil}}' id='fotoProfil_kecil' class="rounded-circle pull-left">
+                                                        <p id='pengirim' class='pull-left'>{{Auth::user()->nama}} </p>
+                                                        <p id='waktu_kirim' class='small pull-left'>{{ $row['waktu_post'] }}</p>
+                                                        
                                                     </div>
-                                                    <div class="col-md-8"></div>
                                                     <div class="col-md-2">
                                                         <span id='kategori'>{{ $kategori[$rowthread['id_kategori_thread']] }}</span>
                                                     </div>
                                                 </div>
+
                                                 <hr>
                                                 <h3><?=$rowthread['judul_thread']?></h3>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <p><?=$row['isi_post']?></p>
+                                                    </div>
+                                                </div>
+                                                
                                                 <hr>
+
                                             @endif
                                         @endforeach
                                     </div>
                                 </div>
                             @else
-                                 <div class="row" id='konten_my_post'>
-                                    <div class="col-md-12" style='border:3px solid grey;'>
-                                        <div class="row">
-                                            <div class="col-md-2">
-                                                <p id='pengirim'>{{Auth::user()->nama}}</p>
-                                            </div>
-                                            <div class="col-md-8"></div>
-                                            <div class="col-md-2">
-                                                <span id='kategori'>{{ $kategori[$rowthread['id_kategori_thread']] }}</span>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <?=$row['isi_post']?>
+                                <div class="row" id='penampung_konten_my_post'>
+                                    <div class="col-md-12" id='konten_my_post'>
+                                        <div class="row">   
+                                                    <div class="col-md-10">
+                                                        <img src='http://127.0.0.1:8000/storage/{{$src_profil}}' id='fotoProfil_kecil' class="rounded-circle pull-left">
+                                                        <p id='pengirim' class='pull-left'>{{Auth::user()->nama}} </p>
+                                                        <p id='waktu_kirim' class='small pull-left'>{{ $row['waktu_post'] }}</p>
+                                                        
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <a id='kategori' href='{{ url("kategori/$row[id_kategori_post]") }}'>{{ $kategori[$row['id_kategori_post']] }}</a>
+                                                    </div>
+                                                </div>
+                                                <?php
+                                                    $thread_search = DB::table('thread_posts')->where('id_thread','=',$row['id_sumber'])->get();
+                                                ?>
+                                                <hr>
+                                                <span class='badge pull-left'>
+                                                    <!-- <i class="material-icons md-18">reply</i>         -->
+                                                    <span style='font-style:italic;'>Membalas Thread {{ $thread_search[0]->user_poster }}</span>
+                                                </span><br><br>
+                                                <?=$row['isi_post']?>
+                                            
                                         <hr>
                                     </div>
                                 </div>
                             @endif
+                                <div class="row">
+                                    <div class="col-md-12" style='background-color:#e9ebee;height:8px;'></div>
+                                </div>
                         @endforeach
                     @endif
                     </div>
                 </div>
                 @if($isi_post!=0||$isi_thread!=0)
                     <ul class="pagination">
-                        @for($i=0;$i<($isi_post+$isi_thread)/5;$i++)
+                        @for($i=0;$i<($isi_post+$isi_thread)/3;$i++)
                             <li><a href="{{url('/profile/'.$i)}}">{{$i+1}}</a></li>
                         @endfor
                     </ul>
