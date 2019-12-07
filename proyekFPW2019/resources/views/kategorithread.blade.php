@@ -70,7 +70,23 @@
                                 </span>
                                 <a href="<?php echo url("/post/$row->id_thread")?>"><h4><?=$row->judul_thread?></h4></a>
                                 <span >
-                                    <i class="material-icons">local_drink</i>Cendol: <?=$row->ctr_cendol?>
+                                    <?php 
+                                        $cendols = explode(",",$row->ctr_cendol);
+                                        $batas = explode(",",$row->ctr_bata);
+                                        $ctr_c = ($cendols[0]=="")?0:sizeof($cendols);
+                                        $ctr_b = ($batas[0]=="")?0:sizeof($batas);
+                                        $total = $ctr_c-$ctr_b;
+                                        if($total>=0){
+                                            ?>
+                                                <i class="material-icons">local_drink</i>Cendol: <?=$total?>
+                                            <?php
+                                        }   
+                                        else{
+                                            ?>
+                                                <i class="material-icons">thumb_down</i>Bata: <?=$total?>
+                                            <?php
+                                        } 
+                                    ?>
                                     <i class="material-icons" style="margin-left:5px;">remove_red_eye</i>Viewers: <?= $row->ctr_viewers?>
                                     <i class="material-icons" style="margin-left:5px;">reply_all</i>Reply: <?= $row->ctr_reply?>
                                 </span>
