@@ -13,6 +13,7 @@ use App\thread_post;
 use App\kategori;
 use App\User;
 use App\follow;
+use App\jabatan;
 class UserController extends Controller
 {
     public function __construct()
@@ -150,6 +151,14 @@ class UserController extends Controller
             "id_user_follow_kategori"=>"-",
             "ctr_follow_kategori"=>0
         ]);
+
+    }
+    public function buatJabatan($nama,$minimum){
+        $temp = new jabatan;
+        $temp->id_jabatan = 0;
+        $temp->gelar_jabatan = "$nama";
+        $temp->minimum_jabatan = $minimum;
+        $temp->save();
 
     }
     public function upload_profile_picture(Request $request){

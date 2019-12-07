@@ -58,11 +58,11 @@ Route::match(array('GET','POST'),'createpost',[
 ]);
 Route::match(array('GET','POST'),'createpost/{id_thread}/{id_post_balas?}/{kutip?}',[
 	'uses' => 'GuestController@createpostReply'
-])->middleware('auth');
+])->middleware('auth',"checkPostCount");
 
 Route::match(array('GET','POST'),'createthread/{id_kategori?}',[
 	'uses' => 'GuestController@createThread'
-])->middleware('auth');
+])->middleware('auth',"checkPostCount");
 
 Route::view("/post","post");
 
@@ -75,6 +75,10 @@ Route::post('submit_edit','userController@update_data');
 //admin
 Route::get("/buatkategori/{nama}/{deskripsi}",[
 	"uses"=>"UserController@buatKategori"
+]);
+
+Route::get("/buatjabatan/{nama}/{deskripsi}",[
+	"uses"=>"UserController@buatJabatan"
 ]);
 
 Route::post('/upload_profile_picture','userController@upload_profile_picture');
