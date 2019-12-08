@@ -302,6 +302,26 @@
                                         $nama = DB::table('users')->where('username','=',$row->id_user)->get();
                                         
                                     ?>
+
+                                    <!-- get profile picture -->
+                                    <?php 
+                                        $eloq = App\foto_profil::where("id_profil_foto",$row->id_user);
+                                        if($eloq->count()>0)
+                                        {
+                                            $arr=$eloq->get();
+                                            $foto = url("/storage\/").$arr[0]->source_foto;
+                                            if($arr[0]->source_foto==""){
+                                                $foto = url("/storage\/")."default_profile_picture.png";
+                                            }
+                                        }
+                                        else{
+                                            $foto = url("/storage\/")."default_profile_picture.png";
+                                        }
+                                    ?>
+                                    <img src="<?=$foto?>" id="gambar_poster" class="pull-left img-circle" style='width:15px;height:15px'>
+
+
+
                                     @foreach($nama as $row_nama)
                                         {{ $row_nama->nama }}
                                         <hr>
@@ -342,15 +362,36 @@
                         <div class="col-md-10">
                             @if($count_following!=0)
                                 @foreach($following as $row)
+                                        <div class="row btn" style='width:100%;'>
                                     <?php
                                         $nama = DB::table('users')->where('username','=',$row->id_following)->get();
                                         
                                     ?>
+
+                                    <!-- get profile picture -->
+                                    <?php 
+                                        $eloq = App\foto_profil::where("id_profil_foto",$row->id_following);
+                                        if($eloq->count()>0)
+                                        {
+                                            $arr=$eloq->get();
+                                            $foto = url("/storage\/").$arr[0]->source_foto;
+                                            if($arr[0]->source_foto==""){
+                                                $foto = url("/storage\/")."default_profile_picture.png";
+                                            }
+                                        }
+                                        else{
+                                            $foto = url("/storage\/")."default_profile_picture.png";
+                                        }
+                                    ?>
+                                    <img src="<?=$foto?>" id="gambar_poster" class="pull-left img-circle" style='width:15px;height:15px'>
+
                                     @foreach($nama as $row_nama)
+                                    
                                         {{ $row_nama->nama }}
-                                        <hr>
+                                        
                                     @endforeach
-                                
+                                    </div>
+                                    <br>
                                 @endforeach
                             @endif
                         </div>
