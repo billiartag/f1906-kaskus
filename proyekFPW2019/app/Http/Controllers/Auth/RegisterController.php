@@ -76,7 +76,7 @@ class RegisterController extends Controller
             'provinsi_user' => "-",
             'ctr_post' => 0,
             'join_date' =>   date('Y-m-d H:i:s'),
-            'jabatan_user' => "-",
+            'jabatan_user' => 1,
         ]);
     }
 }

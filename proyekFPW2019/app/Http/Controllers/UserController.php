@@ -39,7 +39,7 @@ class UserController extends Controller
             $data['jabatan'][$row_jabatan->id_jabatan] = $row_jabatan->gelar_jabatan;
         }
         
-        $data_post = $post->where('user_poster','=',Auth::user()->username)->orderBy('waktu_post','desc')->get();
+        $data_post = $post->where('user_poster','=',Auth::user()->username)->orderBy('id_post','desc')->get();
         $data['mejeng'] = array();
         foreach($data_post as $row){
             $cek = true;
@@ -107,7 +107,7 @@ class UserController extends Controller
             $data['src_profil'] = "default_profile_picture.png";
             $data['src_background'] = "default_background.jpg";
         } 
-        
+        //var_dump($data['jabatan']);
         return view("profile",$data);
     }
     public function newPost(){
