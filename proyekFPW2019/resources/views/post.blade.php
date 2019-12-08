@@ -286,11 +286,11 @@
                                 @endif
                             @endauth
                             </h2></span>
-                            <?php $get_user = DB::table('users')->where('username','=',$posts[$i]->user_poster)->get();?>
+                             <?php //$get_user = DB::table('users')->where('username','=',$posts[$i]->user_poster)->get();?>
                             
-                            <?php $data_jabatan = DB::table('jabatans')->where('id_jabatan','=',$get_user[0]->jabatan_user)->get(); ?>
+                            <?php //$data_jabatan = DB::table('jabatans')->where('id_jabatan','=',$get_user[0]->jabatan_user)->get(); ?>
                             
-                            <p class='small' style='font-style:italic;'>{{ $data_jabatan[0]->gelar_jabatan }}</p>
+                            <!-- <p class='small' style='font-style:italic;'> //$data_jabatan[0]->gelar_jabatan </p> --> 
                             </center>
                         </div>
 
