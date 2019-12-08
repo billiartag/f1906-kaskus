@@ -97,9 +97,8 @@
                         </span>
                         <br>
                         <span>
-                            <span id="poster_rank"><?=$user_poster->jabatan_user?></span>•
-                            <span id="poster_jumlah">Posts: <a href="<?=url("profile/$user_poster->username")?>"><?=$user_poster->ctr_post?></a></span>•
-                            <span id="poster_karma">2000</span>
+                            <span id="poster_rank"><?=$user_poster->jabatan_user?></span> • 
+                            <span id="poster_jumlah">Posts: <a><?=$user_poster->ctr_post?></a></span>
                         </span>
                     </p>
                 </div>
@@ -194,9 +193,8 @@
                             </span>
                             <br>
                             <span>
-                                <span id="reply_rank"><?=$user_reply->jabatan_user?></span>•
-                                <span id="reply_jumlah">Posts: <a href="#"><?=$user_reply->ctr_post?></a></span>•
-                                <span id="reply_karma">0</span>
+                                <span id="reply_rank"><?=$user_reply->jabatan_user?></span> • 
+                                <span id="reply_jumlah">Posts: <a ><?=$user_reply->ctr_post?></a></span>
                             </span>
                         </p>
                     </div>
@@ -371,7 +369,6 @@
                             }
                         }    
                     ?>
-                <input type="button" class="btn btn-warning" value="Subscribe">
                 <br><br>
                 <a class="btn btn-primary form-control" href="<?=url('/createthread\/').$posts[0]->id_kategori_post?>">Buat Thread Sekarang</a>
             </div>

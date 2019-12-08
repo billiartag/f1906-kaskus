@@ -7,7 +7,7 @@
 			<div class="col-md-12" style='border: 1px solid black;'><img src="{{ URL::to('/iklan.gif') }}" style='width: 100%; height: 300px;'></div>
 		</div>
 		<div class="row" style="margin-top:20px">
-			<div class="col-md-8">
+			<div class="col-md-7">
 				<div class="row">
 					<div class="col-md-12" >
 						<div class="row">
@@ -97,10 +97,10 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-4">
-			<div class="row" style="background-color:white; margin:2%">
-				<a class="btn btn-primary" style="width: 90%;margin:5%;padding:10px;" role="button" href="<?=url("/createthread")?>">Buat Thread Sekarang</a>
-			</div>
+	</div>
+	<div class="col-md-4">
+		<div class="row" style="background-color:white; margin:2%">
+			<a class="btn btn-primary" style="width: 90%;margin:5%;padding:10px;" role="button" href="<?=url("/createthread")?>">Buat Thread Sekarang</a>
 		</div>
 	</div>
 {{ Form::close() }}	
