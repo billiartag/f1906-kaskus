@@ -30,6 +30,7 @@
         padding: 2%;
         padding-bottom: 3%;
         margin:1%;
+        margin-top:2%;
     }
     .nama{
         font-weight: bold
@@ -87,7 +88,7 @@
                         ?>
                         <img src="<?=$foto?>" id="gambar_poster" class="pull-left img-circle pp_besar">
                         <span class="pull-right">
-                            <span id="report_thread"><a href="#"><i class="material-icons">menu</i></a></span>
+                            {{-- <span id="report_thread"><a href="#"><i class="material-icons">menu</i></a></span> --}}
                         </span>
                         <span>
                             <span id="nama_poster" class="nama"><a href="#"><?php echo $user_poster->nama?></a></span>
@@ -109,14 +110,6 @@
                 <hr>
                 <div name="isi_thread">
                     <?=$posts[0]->isi_post?>
-                </div>
-                <div class="post_liker">
-                    <span>
-                        <img src="https://i.pravatar.cc/20" class="img-circle">
-                        <img src="https://i.pravatar.cc/21" class="img-circle">
-                        <img src="https://i.pravatar.cc/19" class="img-circle">
-                        <span>Liked this</span>
-                    </span>
                 </div>
                 <hr>
                 <div class="post_footer">
@@ -192,8 +185,8 @@
                             ?>
                             <img src="<?=$foto?>" id="gambar_poster" class="pull-left img-circle pp">
                             <span class="pull-right">
-                                <span id="nomor_reply"><a href="<?=url("/post")."/".$posts[$i]->id_sumber."/".$posts[$i]->id_post?>"><?=$posts[$i]->id_post?></a></span>
-                                <span id="report_reply"><a href="#" class="pull-right"><i class="material-icons">menu</i></a></span>
+                                <span id="nomor_reply"><a href="<?=url("/post")."/".$posts[$i]->id_sumber."/".$posts[$i]->id_post?>">#<?=$posts[$i]->id_post?></a></span>
+                                {{-- <span id="report_reply"><a href="#" class="pull-right"><i class="material-icons">menu</i></a></span> --}}
                             </span>
                             <span>
                                 <span id="nama_reply" class="nama"><a href="#" data-toggle="modal" data-target="#<?=$posts[$i]->user_poster?>_modal"><?=$posts[$i]->user_poster?></a></span>
@@ -373,7 +366,7 @@
                     ?>
                 <input type="button" class="btn btn-warning" value="Subscribe">
                 <br><br>
-                <input type="button" class="btn btn-primary form-control" value="Buat Thread Sekarang">
+                <a class="btn btn-primary form-control" href="<?=url('/createthread\/').$posts[0]->id_kategori_post?>">Buat Thread Sekarang</a>
             </div>
             <div id="kontainer_rekomendasi" class="kotak">
                 <span>
@@ -415,21 +408,6 @@
                 
                 ?>
             </div>
-            {{-- <div id="kontainer_moderator" class="kotak">
-                <h4>Moderator</h4>
-                <span class="kategori_mod">
-                    <img src="https://picsum.photos/15" class="img-rounded">
-                    Admin
-                </span>
-                <span class="kategori_mod">
-                    <img src="https://picsum.photos/14" class="img-rounded">
-                    Peter
-                </span>
-                <span class="kategori_mod">
-                    <img src="https://picsum.photos/13" class="img-rounded">
-                    Amaaank
-                </span>
-            </div> --}}
         </div>
     </div>
 
