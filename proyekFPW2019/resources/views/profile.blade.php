@@ -103,7 +103,7 @@
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-4" style="margin-left:20px">
-                            <h4>{{Auth::user()->nama}}</h4> <p style='font-style: italic;font-size: 13px;'>Kaskuser</p>
+                            <h4>{{Auth::user()->nama}}</h4> <p style='font-style: italic;font-size: 13px;'>{{$jabatan[Auth::user()->jabatan_user]}}</p>
                             <p id='followerUser'></p>
                         </div>
                         <div class="col-md-2">
@@ -298,6 +298,7 @@
                         <div class="col-md-10">
                             @if($count_followers!=0)
                                 @foreach($followers as $row)
+                                    <div class="row btn" style='width:100%;'>
                                     <?php
                                         $nama = DB::table('users')->where('username','=',$row->id_user)->get();
                                         
@@ -324,7 +325,8 @@
 
                                     @foreach($nama as $row_nama)
                                         {{ $row_nama->nama }}
-                                        <hr>
+                                        </div>
+                                        <br>
                                     @endforeach
                                 @endforeach
                             @endif
@@ -362,7 +364,7 @@
                         <div class="col-md-10">
                             @if($count_following!=0)
                                 @foreach($following as $row)
-                                        <div class="row btn" style='width:100%;'>
+                                    <div class="row btn" style='width:100%;'>
                                     <?php
                                         $nama = DB::table('users')->where('username','=',$row->id_following)->get();
                                         

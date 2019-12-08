@@ -262,12 +262,14 @@
                         <div class="modal-content">
 
                         <!-- Modal Header -->
-                        <div class="modal-header">
+                        <div class="modal-header bg-info">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <center>
                             <img src="<?=$foto?>" id="gambar_poster" style='width:150px;height:150px;' class="pull-center img-circle">
                             
                             <span><h2 class="modal-title"><?=$posts[$i]->user_poster?>
+                            
+
                             @auth
                                 @if($posts[$i]->user_poster != Auth::user()->username)
                                     <?php if(DB::table('follows')->where("id_user",'=',Auth::user()->username)->where('id_following','=',$posts[$i]->user_poster)->count()==0){ ?>
@@ -284,14 +286,19 @@
                                 @endif
                             @endauth
                             </h2></span>
+                            <?php $get_user = DB::table('users')->where('username','=',$posts[$i]->user_poster)->get();?>
+                            
+                            <?php $data_jabatan = DB::table('jabatans')->where('id_jabatan','=',$get_user[0]->jabatan_user)->get(); ?>
+                            
+                            <p class='small' style='font-style:italic;'>{{ $data_jabatan[0]->gelar_jabatan }}</p>
                             </center>
                         </div>
 
                         <!-- Modal body -->
-                        <div class="modal-body">
+                        <div class="modal-body bg-info">
                             <div class="row" style='height:350px;'>
                                 <div class="col-md-1"></div>
-                                <div class="col-md-10 bg-primary" style='height:350px;overflow:auto;'>
+                                <div class="col-md-10 bg-info" style='height:350px;overflow:auto;'>
                                     <?php $post_user_clicked = DB::table('posts')->where('user_poster','=',$posts[$i]->user_poster)->get();  ?>
                                     @foreach($post_user_clicked as $row_modal)
                                         <div class='row' style='margin:2%;border:1px solid black;background-color:white;color:black;'>
@@ -328,7 +335,7 @@
                         </div>
 
                         <!-- Modal footer -->
-                        <div class="modal-footer">
+                        <div class="modal-footer bg-info">
                             <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> -->
                         </div>
                         </div>

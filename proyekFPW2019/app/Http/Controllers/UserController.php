@@ -26,6 +26,7 @@ class UserController extends Controller
         $thread = new thread_post;
         $kategori = new kategori;
         $follow = new follow;
+        $jabatan = new jabatan;
         
         $data['followers'] = $follow->where('id_following','=',Auth::user()->username)->get();
         $data['following'] = $follow->where('id_user','=',Auth::user()->username)->get();
@@ -33,7 +34,12 @@ class UserController extends Controller
         $data['count_followers'] = $follow->where('id_following','=',Auth::user()->username)->count();
         $data['count_following'] = $follow->where('id_user','=',Auth::user()->username)->count();
 
-        $data_post = $post->where('user_poster','=',Auth::user()->username)->get();
+        $data_jabatan = $jabatan->get();
+        foreach($data_jabatan as $row_jabatan){
+            $data['jabatan'][$row_jabatan->id_jabatan] = $row_jabatan->gelar_jabatan;
+        }
+        
+        $data_post = $post->where('user_poster','=',Auth::user()->username)->orderBy('waktu_post','desc')->get();
         $data['mejeng'] = array();
         foreach($data_post as $row){
             $cek = true;
