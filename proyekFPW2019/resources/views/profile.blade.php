@@ -103,7 +103,7 @@
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-4" style="margin-left:20px">
-                            <h4>{{Auth::user()->nama}}</h4> <p style='font-style: italic;font-size: 13px;'>{{$jabatan[Auth::user()->jabatan_user]}}</p>
+                            <h4>{{Auth::user()->nama}}</h4> <p style='font-style: italic;font-size: 13px;'>{{Auth::user()->jabatan_user}}</p>
                             <p id='followerUser'></p>
                         </div>
                         <div class="col-md-2">

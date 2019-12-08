@@ -86,7 +86,7 @@ class GuestController extends BaseController
 				$provinsi_user	= "-";
 				$ctr_post		= 0;
 				$join_date		= date('Y-m-d H:i:s');
-				$jabatan_user	= "newbie";
+				$jabatan_user	= "-";
 				$dbuser->insertdata($username,$password,$email,$nama,$nomor,$tgl_lahir_user,$jk_user,$bio_profil,$alamat_user,
 				$negara_user,$provinsi_user,$ctr_post,$join_date,$jabatan_user); 
 				Session::flash("berhasil","Akun anda berhasil didaftarkan");
