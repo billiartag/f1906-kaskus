@@ -30,15 +30,10 @@
 			</ul>
 			
 			<div class="col-md-3">
-				<form class="navbar-form navbar-left">
-					<div class="form-group"style="margin-top:15px">
-					<input type="text" class="form-control" placeholder="Search">
-					</div>
-				</form>
 			</div>
 			<ul class="nav navbar-nav" style="margin-top:10px">
 			<li ><p class="navbar-text"><a href="{{url('/createthread')}}">BUAT THREAD</a></p></li>
-				<li><button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span>	</button></li>
+				<li>&nbsp;</li>
 			<?php 
 				$eloq = App\foto_profil::where("id_profil_foto",Auth::user()->username);
 				if($eloq->count()>0)

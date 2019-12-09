@@ -25,20 +25,23 @@
 		<div class="container-fluid">
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1;">
 				<ul class="nav navbar-nav col-md-5" style="margin-top:10px">
-						 <li ><a href="{{ url('/') }}"style="display:inline"><img src="{{ URL::to('/kaskus.png') }}" style='width: 200px;height: 45px;'></a></li>
 				</ul>
 				
 			<div class="col-md-3">
-				<form class="navbar-form navbar-left">
+				<form class="">
 					<div class="form-group"style="margin-top:15px">
-					<input type="text" class="form-control" placeholder="Search">
+						<ul class="nav navbar-nav ">
+								 <li ><a href="{{ url('/') }}"style="display:inline"><img src="{{ URL::to('/kaskus.png') }}" style='width: 200px;height: 45px;'></a></li>
+						</ul>
+					{{-- <input type="text" class="form-control" placeholder="Search"> --}}
 					</div>
 				</form>
 			</div>
+			<div class="col-md-2"></div>
 			<ul class="nav navbar-nav" style="margin-top:10px">
-				<li ><p class="navbar-text">BUAT THREAD</p></li>
-				<li><button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span>	</button></li>
-				<li><a href="/login"><strong>MASUK</strong></a></li>
+				<li ><p class="navbar-text"></p></li>
+				{{-- <li><button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span>	</button></li> --}}
+				<li><a href="{{url("/login")}}"><strong>MASUK</strong></a></li>
 			</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->

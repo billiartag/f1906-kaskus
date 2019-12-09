@@ -38,11 +38,11 @@
 															</div>
 														</div>
 														<div class="col-md-2">
-															<a style="margin-right:10px;margin-bottom:10px;text-size:40px;">Profile</a>
+															{{-- <a style="margin-right:10px;margin-bottom:10px;text-size:40px;">Profile</a> --}}
 														</div>
 													</div>
 													<p>
-													<a style="margin-right:10px;margin-bottom:10px;text-size:40px;margin-left:%;" href="<?=url("/post/$row->id_thread")?>"><strong><h4><?=$row->judul?></h4></strong></a>
+													<a style="margin:10px 5%;text-size:40px;" href="<?=url("/post/$row->id_thread")?>"><strong><h4><?=$row->judul?></h4></strong></a>
 													</p>
 											</div>
 											</div>
